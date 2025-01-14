@@ -1,0 +1,182 @@
+[
+  {
+    "university_name": "Harvard University",
+    "university_logo": "https://i.ibb.co.com/tsBFFnN/Harvard-University-Logo1.webp",
+    "university_img": "https://i.ibb.co.com/JC0dH9S/Harvard-University1.jpg",
+    "scholarship_category": "Graduate",
+    "university_location": {
+      "country": "United States",
+      "city": "Cambridge"
+    },
+    "application_deadline": "2025-03-15",
+    "subject_name": "Computer Science",
+    "scholarship_description": "The Harvard Graduate Scholarship for Computer Science is a prestigious award designed to assist talented graduate students who demonstrate exceptional academic abilities in the field of computer science. The scholarship supports students pursuing a Master’s degree and covers part of their tuition and living expenses while they engage in cutting-edge research and development at Harvard University.",
+    "stipend": "$30,000 per year",
+    "post_date": "2025-01-01",
+    "service_charge": "$50",
+    "application_fees": "$75",
+    "apply_scholarship_button": "https://apply.harvard.edu"
+  },
+  {
+    "university_name": "London School of Economics and Political Science (LSE)",
+    "university_logo": "https://i.ibb.co.com/MsWHfJt/London-School-of-Economics-and-Political-Science-LSE-logo1.png",
+    "university_img": "https://i.ibb.co.com/fnHBszh/London-School-of-Economics-and-Political-Science-LSE-1.jpg",
+    "scholarship_category": "Postgraduate",
+    "university_location": {
+      "country": "United Kingdom",
+      "city": "London"
+    },
+    "application_deadline": "2025-06-15",
+    "subject_name": "Economics",
+    "scholarship_description": "The LSE Postgraduate Economics Scholarship offers financial assistance to students pursuing a Master’s in Economics. The scholarship aims to support individuals who are committed to studying and advancing the field of economics, particularly those interested in research, public policy, and financial economics. This award helps recipients focus on their academic goals without the financial burden, providing a stipend to cover their living expenses and part of the tuition fees.",
+    "stipend": "$20,000 per year",
+    "post_date": "2025-01-13",
+    "service_charge": "$60",
+    "application_fees": "$110",
+    "apply_scholarship_button": "https://apply.lse.ac.uk"
+  },
+  {
+    "university_name": "Massachusetts Institute of Technology (MIT)",
+    "university_logo": "https://i.ibb.co.com/bWYwJ7n/Massachusetts-Institute-of-Technology-MIT-logo1.jpg",
+    "university_img": "https://i.ibb.co.com/NjwY9pj/Massachusetts-Institute-of-Technology-MIT-1.jpg",
+    "scholarship_category": "Graduate",
+    "university_location": {
+      "country": "United States",
+      "city": "Cambridge"
+    },
+    "application_deadline": "2025-02-20",
+    "subject_name": "Engineering",
+    "scholarship_description": "MIT's Engineering Graduate Scholarship provides a generous financial award to students pursuing an advanced degree in Engineering, with a particular focus on Robotics and AI. The scholarship aims to foster innovation and research in emerging technologies by helping students with their tuition fees and living expenses while contributing to MIT’s global reputation as a leader in engineering education.",
+    "stipend": "$35,000 per year",
+    "post_date": "2025-01-12",
+    "service_charge": "$55",
+    "application_fees": "$80",
+    "apply_scholarship_button": "https://apply.mit.edu"
+  },
+  {
+    "university_name": "Princeton University",
+    "university_logo": "https://i.ibb.co.com/T0Ycbfz/Princeton-University-logo1.png",
+    "university_img": "https://i.ibb.co.com/5BwpW7C/Princeton-University1.webp",
+    "scholarship_category": "Undergraduate",
+    "university_location": {
+      "country": "United States",
+      "city": "Princeton"
+    },
+    "application_deadline": "2025-04-15",
+    "subject_name": "Physics",
+    "scholarship_description": "The Princeton University Physics Scholarship is designed for highly motivated undergraduate students pursuing a degree in Physics. This scholarship supports students who show exceptional promise in the study of physical sciences and are eager to contribute to the ongoing advancements in the field. The scholarship helps reduce the financial burden, providing recipients with a stipend to cover part of their tuition and living costs.",
+    "stipend": "$15,000 per year",
+    "post_date": "2025-01-11",
+    "service_charge": "$40",
+    "application_fees": "$70",
+    "apply_scholarship_button": "https://apply.princeton.edu"
+  },
+  {
+    "university_name": "Stanford University",
+    "university_logo": "https://i.ibb.co.com/wsWFcvr/Stanford-University-logo1.png",
+    "university_img": "https://i.ibb.co.com/MhFzfVM/Stanford-University1.jpg",
+    "scholarship_category": "Undergraduate",
+    "university_location": {
+      "country": "United States",
+      "city": "Stanford"
+    },
+    "application_deadline": "2025-04-30",
+    "subject_name": "Business Administration",
+    "scholarship_description": "Stanford University's Undergraduate Business Administration Scholarship is a merit-based financial award designed for incoming undergraduate students pursuing a degree in Business Administration. The scholarship seeks to support students with an entrepreneurial spirit, who aspire to contribute to business and economics on a global scale. It covers tuition fees and provides a stipend to help students focus on their studies without financial concerns.",
+    "stipend": "$20,000 per year",
+    "post_date": "2025-01-10",
+    "service_charge": "$40",
+    "application_fees": "$100",
+    "apply_scholarship_button": "https://apply.stanford.edu"
+  },
+  {
+    "university_name": "University of Melbourne",
+    "university_logo": "https://i.ibb.co.com/17cp6cB/University-of-Melbourne-logo1.png",
+    "university_img": "https://i.ibb.co.com/jGXhjPc/University-of-Melbourne1.jpg",
+    "scholarship_category": "Postgraduate",
+    "university_location": {
+      "country": "Australia",
+      "city": "Melbourne"
+    },
+    "application_deadline": "2025-07-01",
+    "subject_name": "Physics",
+    "scholarship_description": "The University of Melbourne offers a postgraduate scholarship to students pursuing a Master’s in Physics. This scholarship is aimed at encouraging research in the fields of quantum mechanics, astrophysics, and nuclear physics. The award covers tuition fees and provides a stipend to support the living expenses of students throughout their academic journey.",
+    "stipend": "$22,000 per year",
+    "post_date": "2025-01-08",
+    "service_charge": "$65",
+    "application_fees": "$110",
+    "apply_scholarship_button": "https://apply.unimelb.edu.au"
+  },
+  {
+    "university_name": "University of Oxford",
+    "university_logo": "https://i.ibb.co.com/VqMM9Yp/University-of-Oxford-logo1.png",
+    "university_img": "https://i.ibb.co.com/ZzGHzyV/University-of-Oxford-1.jpg",
+    "scholarship_category": "Postgraduate",
+    "university_location": {
+      "country": "United Kingdom",
+      "city": "Oxford"
+    },
+    "application_deadline": "2025-06-01",
+    "subject_name": "Law",
+    "scholarship_description": "The Oxford Law Scholarship is aimed at postgraduate students enrolled in the Master of Law program at the University of Oxford. This scholarship is designed to assist talented law students who wish to contribute to legal research and practice globally. It provides full tuition coverage and a stipend to support students while they advance their legal studies.",
+    "stipend": "$25,000 per year",
+    "post_date": "2025-01-05",
+    "service_charge": "$60",
+    "application_fees": "$120",
+    "apply_scholarship_button": "https://apply.ox.ac.uk"
+  },
+  {
+    "university_name": "University of Tokyo",
+    "university_logo": "https://i.ibb.co.com/g6YcBS7/University-of-Tokyo-logo1.png",
+    "university_img": "https://i.ibb.co.com/Sr9mgvN/University-of-Tokyo1.jpg",
+    "scholarship_category": "Graduate",
+    "university_location": {
+      "country": "Japan",
+      "city": "Tokyo"
+    },
+    "application_deadline": "2025-05-10",
+    "subject_name": "Biotechnology",
+    "scholarship_description": "The University of Tokyo offers scholarships for graduate students pursuing research in the rapidly advancing field of Biotechnology. This scholarship supports students who are dedicated to making significant contributions to healthcare, agriculture, and environmental science. The financial award covers tuition fees and provides a stipend for living expenses.",
+    "stipend": "$23,000 per year",
+    "post_date": "2025-01-15",
+    "service_charge": "$55",
+    "application_fees": "$95",
+    "apply_scholarship_button": "https://apply.u-tokyo.ac.jp"
+  },
+  {
+    "university_name": "University of Toronto",
+    "university_logo": "https://i.ibb.co.com/9Wvpy1y/University-of-Toronto-logo1.webp",
+    "university_img": "https://i.ibb.co.com/wMCQSbh/University-of-Toronto1.jpg",
+    "scholarship_category": "Undergraduate",
+    "university_location": {
+      "country": "Canada",
+      "city": "Toronto"
+    },
+    "application_deadline": "2025-05-30",
+    "subject_name": "Environmental Science",
+    "scholarship_description": "The University of Toronto offers an undergraduate scholarship to students pursuing a degree in Environmental Science. This scholarship aims to support students who are passionate about sustainability and wish to contribute to tackling global environmental challenges. The scholarship covers tuition and provides a stipend for living expenses.",
+    "stipend": "$18,000 per year",
+    "post_date": "2025-01-03",
+    "service_charge": "$50",
+    "application_fees": "$90",
+    "apply_scholarship_button": "https://apply.utoronto.ca"
+  },
+  {
+    "university_name": "ETH Zurich",
+    "university_logo": "https://i.ibb.co.com/2YXgjwp/ETH-Zurich-logo1.png",
+    "university_img": "https://i.ibb.co.com/9nnDrgx/ETH-Zurich1.jpg",
+    "scholarship_category": "Graduate",
+    "university_location": {
+      "country": "Switzerland",
+      "city": "Zurich"
+    },
+    "application_deadline": "2025-03-25",
+    "subject_name": "Data Science",
+    "scholarship_description": "ETH Zurich provides a graduate scholarship for students in Data Science, specializing in AI and Machine Learning. The scholarship seeks to support future leaders in the field of Data Science who aim to push the boundaries of artificial intelligence and data analytics. The award includes tuition coverage and a stipend to help students manage their living expenses during the course of their studies.",
+    "stipend": "$28,000 per year",
+    "post_date": "2025-01-06",
+    "service_charge": "$50",
+    "application_fees": "$85",
+    "apply_scholarship_button": "https://apply.ethz.ch"
+  }
+]

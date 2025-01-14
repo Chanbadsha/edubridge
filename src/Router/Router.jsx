@@ -1,11 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../Layout/MainLayout/MainLayout";
-import Scholarships from "../Pages/HomePage/Scholarships/Scholarships/Scholarships";
+
 import Login from "../Pages/AuthPage/Login/Login";
 import Register from "../Pages/AuthPage/Register/Register";
 import PrivateRoute from "./PrivateRoute";
 import Home from "../Pages/HomePage/Home/Home";
 import Dashboard from "../Pages/DashboardPage/Dashboard/Dashboard";
+import Scholarships from "../Pages/ScholarshipsPage/Scholarships/Scholarships";
 
 const router = createBrowserRouter([
   {
