@@ -2,20 +2,66 @@ import Lottie from "lottie-react";
 import useAuth from "../../../Hooks/useAuth";
 import registerLottie from "../../../assets/Lottie/registerLottie.json";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
 import bgImg from "../../../assets/Auth/authentication.png";
-
+import Loader from "../../../Components/Loader/Loader";
+import toast from "react-hot-toast";
+import createLottie from "../../../assets/Lottie/acoountCreateSuccessLottie.json";
 const Register = () => {
-  const { isDarkMode } = useAuth();
+  const {
+    isDarkMode,
+    loading,
+    googleLogin,
+    setLoading,
+    updateUserProfile,
+    createUser,
+  } = useAuth();
 
+  if (loading) {
+    return <Loader />;
+  }
+  const location = useLocation();
+  const { from } = location?.state || { from: { pathname: "/" } };
+  const navigate = useNavigate();
+  // Create User
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
-  const handlegoogleLogin = () => {};
+  const onSubmit = (data) => {
+    console.log(data);
+    createUser(data.email, data.password)
+      .then(() => {
+        updateUserProfile(data.name, data?.photoUrl).then((result) => {
+          toast.success("Account Create Successful!");
+          navigate(from);
+          setLoading(false);
+        });
+      })
+      .catch((error) => {
+        setLoading(false);
+        toast.error(error.message);
+      });
+  };
+
+  // Social Login
+  const handlegoogleLogin = () => {
+    googleLogin()
+      .then((result) => {
+        console.log(result);
+        setLoading(false);
+        navigate(from);
+        toast.success("Google Login successful!");
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+        toast.error("Google Login failed. Please try again.");
+      });
+  };
 
   return (
     <div
@@ -118,7 +164,7 @@ const Register = () => {
               <div className="form-control">
                 <label className="label">
                   <span
-                    className={`label-text  font-medium ${
+                    className={`label-text font-medium ${
                       isDarkMode ? "text-textBlack" : "text-textLight"
                     }`}
                   >
@@ -129,15 +175,26 @@ const Register = () => {
                   type="password"
                   placeholder="Enter your password"
                   className="input input-bordered w-full rounded-lg focus:ring-2 focus:ring-blue-500"
-                  {...register("password", { required: true, minLength: 6 })}
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters",
+                    },
+                  })}
                 />
+                {errors.password && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.password.message}
+                  </p>
+                )}
               </div>
 
               {/* Confirm Password */}
-              <div className="form-control">
+              <div className="form-control mt-4">
                 <label className="label">
                   <span
-                    className={`label-text  font-medium ${
+                    className={`label-text font-medium ${
                       isDarkMode ? "text-textBlack" : "text-textLight"
                     }`}
                   >
@@ -148,8 +205,21 @@ const Register = () => {
                   type="password"
                   placeholder="Re-enter your password"
                   className="input input-bordered w-full rounded-lg focus:ring-2 focus:ring-blue-500"
-                  {...register("confirmPassword", { required: true })}
+                  {...register("confirmPassword", {
+                    required: "Confirm Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Confirm Password must be at least 6 characters",
+                    },
+                    validate: (value) =>
+                      value === watch("password") || "Passwords do not match",
+                  })}
                 />
+                {errors.confirmPassword && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.confirmPassword.message}
+                  </p>
+                )}
               </div>
 
               {/* Register Button */}

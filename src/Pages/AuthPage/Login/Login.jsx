@@ -2,20 +2,52 @@ import Lottie from "lottie-react";
 import useAuth from "../../../Hooks/useAuth";
 import loginLottie from "../../../assets/Lottie/loginLottie.json";
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
 import bgImg from "../../../assets/Auth/authentication.png";
+import toast from "react-hot-toast";
+import Loader from "../../../Components/Loader/Loader";
 
 const Login = () => {
-  const { isDarkMode } = useAuth();
+  const { isDarkMode, googleLogin, setLoading, loading, loginUser } = useAuth();
+  if (loading) {
+    return <Loader />;
+  }
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { from } = location?.state || { from: { pathname: "/" } };
 
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => console.log(data);
-  const handlegoogleLogin = () => {};
+  const onSubmit = (data) => {
+    loginUser(data.email, data.password)
+      .then(() => {
+        navigate(from);
+        toast.success("Login successful!");
+        setLoading(false);
+      })
+      .catch((error) => {
+        console.log(error.message);
+        toast.error("Login failed. Please try again.");
+        setLoading(false);
+      });
+  };
+  const handlegoogleLogin = () => {
+    googleLogin()
+      .then(() => {
+        setLoading(false);
+        navigate(from);
+        toast.success("Google Login successful!");
+      })
+      .catch((error) => {
+        console.error(error);
+        setLoading(false);
+        toast.error("Google Login failed. Please try again.");
+      });
+  };
 
   return (
     <div
@@ -108,8 +140,19 @@ const Login = () => {
                   type="password"
                   placeholder="Enter your password"
                   className="input text-textLight input-bordered w-full rounded-lg focus:ring-2 focus:ring-blue-500"
-                  {...register("password", { required: true, minLength: 6 })}
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Password must be at least 6 characters",
+                    },
+                  })}
                 />
+                {errors.password && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.password.message}
+                  </p>
+                )}
               </div>
 
               {/* Confirm Password */}

@@ -1,11 +1,13 @@
 import { useState } from "react";
 import logo from "../../assets/Logo/logo.jpeg";
+import logoAvatar from "../../assets/Logo/profile.png";
 import useAuth from "../../Hooks/useAuth";
 import { Link, NavLink } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const HeaderNav = () => {
   // State for dark mode
-  const { isDarkMode, setIsDarkMode } = useAuth();
+  const { isDarkMode, setIsDarkMode, user, userLogOut } = useAuth();
   const toggleTheme = () => {
     setIsDarkMode((prevMode) => !prevMode); // Toggle between light/dark mode
   };
@@ -47,6 +49,7 @@ const HeaderNav = () => {
           About Us
         </NavLink>
       </li>
+
       <li className="list-none">
         <NavLink to="/contact" className={`${NavLinkStyles}`}>
           Contact Us
@@ -55,6 +58,12 @@ const HeaderNav = () => {
     </>
   );
 
+  // Handle Log Out
+  const handleLogOut = () => {
+    userLogOut().then(() => {
+      toast.success("Successfully Log Out");
+    });
+  };
   return (
     <div
       className={`fixed top-0 left-0 w-full z-50 shadow-sm bg-${
@@ -141,16 +150,59 @@ const HeaderNav = () => {
 
           {/* Button */}
           <div>
-            <Link
-              to="/register"
-              className={`btn btn-outline ${
-                isDarkMode
-                  ? "bg-backgroundBlack text-textBlack"
-                  : "bg-backgroundLight text-textLight"
-              }`}
-            >
-              Login
-            </Link>
+            {user ? (
+              <>
+                <details
+                  className={` dropdown dropdown-end  ${
+                    isDarkMode
+                      ? "bg-backgroundBlack text-textBlack"
+                      : "bg-backgroundLight text-textLight"
+                  }`}
+                >
+                  <summary
+                    className={` btn px-0 py-0 rounded-full m-1 font-bold  ${
+                      isDarkMode
+                        ? "bg-backgroundBlack hover:bg-accentBlack text-textBlack"
+                        : "bg-backgroundLight text-textLight"
+                    }`}
+                  >
+                    <img
+                      className="rounded-full h-12 w-12"
+                      src={user?.photoURL || logoAvatar}
+                      alt={user?.displayName}
+                    />
+                  </summary>
+                  <ul
+                    className={`menu dropdown-content  rounded-box z-[1] w-52 p-2 shadow ${
+                      isDarkMode
+                        ? "bg-backgroundBlack text-textBlack"
+                        : "bg-backgroundLight text-textLight"
+                    }`}
+                  >
+                    <li>
+                      <a>Dashboard</a>
+                    </li>
+                    <li>
+                      <a onClick={handleLogOut}>Logout</a>
+                    </li>
+                  </ul>
+                </details>
+              </>
+            ) : (
+              <>
+                {" "}
+                <Link
+                  to="/register"
+                  className={`btn btn-outline ${
+                    isDarkMode
+                      ? "bg-backgroundBlack text-textBlack"
+                      : "bg-backgroundLight text-textLight"
+                  }`}
+                >
+                  Login
+                </Link>
+              </>
+            )}
           </div>
         </div>
       </div>

@@ -3,6 +3,7 @@ import MainLayout from "../Layout/MainLayout/MainLayout";
 import Scholarships from "../Pages/HomePage/Scholarships/Scholarships/Scholarships";
 import Login from "../Pages/AuthPage/Login/Login";
 import Register from "../Pages/AuthPage/Register/Register";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -11,7 +12,11 @@ const router = createBrowserRouter([
     children: [
       {
         path: "scholarships",
-        element: <Scholarships></Scholarships>,
+        element: (
+          <PrivateRoute>
+            <Scholarships></Scholarships>
+          </PrivateRoute>
+        ),
       },
       {
         path: "login",
