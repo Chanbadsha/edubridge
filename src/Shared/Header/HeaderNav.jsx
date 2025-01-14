@@ -1,7 +1,7 @@
 import { useState } from "react";
 import logo from "../../assets/Logo/logo.jpeg";
 import useAuth from "../../Hooks/useAuth";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 const HeaderNav = () => {
   // State for dark mode
@@ -9,30 +9,29 @@ const HeaderNav = () => {
   const toggleTheme = () => {
     setIsDarkMode((prevMode) => !prevMode); // Toggle between light/dark mode
   };
+  const NavLinkStyles = isDarkMode
+    ? "text-textBlack font-bold hover:text-accentLight text-[17px]  bg-backgroundBlack"
+    : "text-textLight font-bold hover:text-accentLight hover:bg-transparent text-[17px] bg-backgroundLight";
 
   const navOptions = (
     <>
-      <li>
-        <NavLink
-          to="/"
-          className={`text-${isDarkMode ? "textBlack" : "textLight"} bg-${
-            isDarkMode ? "backgroundBlack" : "backgroundLight"
-          }`}
-        >
+      <li className="list-none">
+        <NavLink to="/" className={`  ${NavLinkStyles}`}>
           Home
         </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/all-scholarship"
-          className={`text-${isDarkMode ? "textBlack" : "textLight"} bg-${
-            isDarkMode ? "backgroundBlack" : "backgroundLight"
-          }`}
-        >
-          All Scholarship
+
+      <li className="list-none">
+        <NavLink to="/scholarships" className={` ${NavLinkStyles}`}>
+          Scholarships
         </NavLink>
       </li>
-      <li>
+      <li className="list-none">
+        <NavLink to="/universities" className={`${NavLinkStyles}`}>
+          Universities
+        </NavLink>
+      </li>
+      {/* <li>
         <NavLink
           to="/dashboard"
           className={`text-${isDarkMode ? "textBlack" : "textLight"} bg-${
@@ -41,15 +40,16 @@ const HeaderNav = () => {
         >
           Dashboard
         </NavLink>
+      </li> */}
+
+      <li className="list-none">
+        <NavLink to="/about" className={`${NavLinkStyles}`}>
+          About Us
+        </NavLink>
       </li>
-      <li>
-        <NavLink
-          to="/about"
-          className={`text-${isDarkMode ? "textBlack" : "textLight"} bg-${
-            isDarkMode ? "backgroundBlack" : "backgroundLight"
-          }`}
-        >
-          About
+      <li className="list-none">
+        <NavLink to="/contact" className={`${NavLinkStyles}`}>
+          Contact Us
         </NavLink>
       </li>
     </>
@@ -57,7 +57,7 @@ const HeaderNav = () => {
 
   return (
     <div
-      className={`shadow-sm bg-${
+      className={`fixed top-0 left-0 w-full z-50 shadow-sm bg-${
         isDarkMode ? "backgroundBlack" : "backgroundLight"
       } text-${isDarkMode ? "textBlack" : "textLight"}`}
     >
@@ -141,7 +141,8 @@ const HeaderNav = () => {
 
           {/* Button */}
           <div>
-            <a
+            <Link
+              to="/register"
               className={`btn btn-outline ${
                 isDarkMode
                   ? "bg-backgroundBlack text-textBlack"
@@ -149,7 +150,7 @@ const HeaderNav = () => {
               }`}
             >
               Login
-            </a>
+            </Link>
           </div>
         </div>
       </div>
