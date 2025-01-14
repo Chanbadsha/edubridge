@@ -1,0 +1,37 @@
+[
+  {
+    "title": "Search from 10,000+ Scholarships Worldwide!",
+    "subtitle": "Unlock Endless Possibilities and Achieve Your Dreams with Global Opportunities.",
+    "image_url": "https://i.ibb.co.com/6W5N1VV/slider1.jpg",
+    "cta_text": "Start Searching",
+    "cta_url": "/scholarships"
+  },
+  {
+    "title": "Personalized Recommendations Just for You!",
+    "subtitle": "Find Scholarships Perfectly Tailored to Your Goals and Aspirations.",
+    "image_url": "https://i.ibb.co.com/HgZm8kp/recomandation.jpg",
+    "cta_text": "Discover Opportunities",
+    "cta_url": "https://example.com/recommendations"
+  },
+  {
+    "title": "Application Made Simple",
+    "subtitle": "Seamlessly Apply to Scholarships with Just One Click—Save Time and Effort!",
+    "image_url": "https://i.ibb.co.com/NjmBmjS/apply.jpg",
+    "cta_text": "Apply Now",
+    "cta_url": "https://example.com/apply"
+  },
+  {
+    "title": "Track Your Scholarship Progress",
+    "subtitle": "Stay Updated and In Control of Your Applications at Every Step of the Way.",
+    "image_url": "https://i.ibb.co.com/k9q6GbZ/trackprogress.jpg",
+    "cta_text": "View Dashboard",
+    "cta_url": "/dashboard"
+  },
+  {
+    "title": "Expert Guidance and Support",
+    "subtitle": "Our Team is Here to Help You Succeed—Every Step of the Way.",
+    "image_url": "https://i.ibb.co.com/0XXTxtK/image.png",
+    "cta_text": "Get Support",
+    "cta_url": "https://example.com/support"
+  }
+]

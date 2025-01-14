@@ -4,12 +4,18 @@ import Scholarships from "../Pages/HomePage/Scholarships/Scholarships/Scholarshi
 import Login from "../Pages/AuthPage/Login/Login";
 import Register from "../Pages/AuthPage/Register/Register";
 import PrivateRoute from "./PrivateRoute";
+import Home from "../Pages/HomePage/Home/Home";
+import Dashboard from "../Pages/DashboardPage/Dashboard/Dashboard";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
     children: [
+      {
+        path: "/",
+        element: <Home />,
+      },
       {
         path: "scholarships",
         element: (
@@ -27,6 +33,10 @@ const router = createBrowserRouter([
         element: <Register></Register>,
       },
     ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
   },
 ]);
 

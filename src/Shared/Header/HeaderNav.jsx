@@ -180,7 +180,7 @@ const HeaderNav = () => {
                     }`}
                   >
                     <li>
-                      <a>Dashboard</a>
+                      <Link to="/dashboard">Dashboard</Link>
                     </li>
                     <li>
                       <a onClick={handleLogOut}>Logout</a>
