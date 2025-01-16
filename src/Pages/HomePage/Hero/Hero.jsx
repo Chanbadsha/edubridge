@@ -20,7 +20,7 @@ const Hero = () => {
       setSliderData(data);
     });
   }, []);
-  console.log(sliderData);
+
   return (
     <div>
       <Swiper

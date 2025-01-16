@@ -9,6 +9,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import auth from "../Firebase/firebase.config";
+import axios from "axios";
 
 export const AuthContext = createContext();
 
@@ -63,6 +64,7 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
+
       } else {
         setUser(null);
       }

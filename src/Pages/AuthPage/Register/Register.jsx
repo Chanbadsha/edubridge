@@ -7,7 +7,7 @@ import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
 import bgImg from "../../../assets/Auth/authentication.png";
 import Loader from "../../../Components/Loader/Loader";
 import toast from "react-hot-toast";
-import createLottie from "../../../assets/Lottie/acoountCreateSuccessLottie.json";
+import useAxiosPublic from "../../../Hooks/Axios/AxiosPublic/useAxiosPublic";
 const Register = () => {
   const {
     isDarkMode,
@@ -22,6 +22,7 @@ const Register = () => {
     return <Loader />;
   }
   const location = useLocation();
+  const axiosPublic = useAxiosPublic();
   const { from } = location?.state || { from: { pathname: "/" } };
   const navigate = useNavigate();
   // Create User
@@ -34,11 +35,25 @@ const Register = () => {
   const onSubmit = (data) => {
     console.log(data);
     createUser(data.email, data.password)
-      .then(() => {
+      .then(({ user }) => {
         updateUserProfile(data.name, data?.photoUrl).then((result) => {
+          const userInfo = {
+            Name: user.displayName,
+            Email: user.email,
+            Role: "Admin",
+          };
+
+          axiosPublic
+            .post("/userSave", userInfo)
+            .then((res) => {
+              setLoading(false);
+            })
+            .catch((error) => {
+              toast.error("Failed to save user information. Please try again.");
+            });
           toast.success("Account Create Successful!");
-          navigate(from);
           setLoading(false);
+          navigate(from);
         });
       })
       .catch((error) => {
@@ -50,11 +65,25 @@ const Register = () => {
   // Social Login
   const handlegoogleLogin = () => {
     googleLogin()
-      .then((result) => {
-        console.log(result);
+      .then(({ user }) => {
+        const userInfo = {
+          name: user.displayName,
+          email: user.email,
+          role: "Admin",
+        };
+
+        axiosPublic
+          .post("/userSave", userInfo)
+          .then((res) => {
+            console.log(res);
+          })
+          .catch((error) => {
+            console.log(error);
+            toast.error("Failed to save user information. Please try again.");
+          });
+        toast.success("Google Login successful!");
         setLoading(false);
         navigate(from);
-        toast.success("Google Login successful!");
       })
       .catch((error) => {
         console.error(error);
@@ -126,7 +155,9 @@ const Register = () => {
                 <input
                   type="text"
                   placeholder="Enter your name"
-                  className="input input-bordered w-full rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className={`input  input-bordered w-full rounded-lg focus:ring-2 focus:ring-blue-500  ${
+                    isDarkMode ? "text-textLight" : "text-textLight"
+                  }`}
                   {...register("name", { required: true })}
                 />
                 {errors.name && (
@@ -148,7 +179,9 @@ const Register = () => {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="input input-bordered w-full rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className={`input  input-bordered w-full rounded-lg focus:ring-2 focus:ring-blue-500  ${
+                    isDarkMode ? "text-textLight" : "text-textLight"
+                  }`}
                   {...register("email", {
                     required: "Email is required",
                   })}
@@ -174,7 +207,9 @@ const Register = () => {
                 <input
                   type="password"
                   placeholder="Enter your password"
-                  className="input input-bordered w-full rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className={`input  input-bordered w-full rounded-lg focus:ring-2 focus:ring-blue-500  ${
+                    isDarkMode ? "text-textLight" : "text-textLight"
+                  }`}
                   {...register("password", {
                     required: "Password is required",
                     minLength: {
@@ -204,7 +239,9 @@ const Register = () => {
                 <input
                   type="password"
                   placeholder="Re-enter your password"
-                  className="input input-bordered w-full rounded-lg focus:ring-2 focus:ring-blue-500"
+                  className={`input  input-bordered w-full rounded-lg focus:ring-2 focus:ring-blue-500  ${
+                    isDarkMode ? "text-textLight" : "text-textLight"
+                  }`}
                   {...register("confirmPassword", {
                     required: "Confirm Password is required",
                     minLength: {
