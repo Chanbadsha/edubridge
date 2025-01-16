@@ -20,7 +20,7 @@ const TopScholarShip = () => {
       </div>
 
       {/* Section Body */}
-      <div className="grid gap-3 py-12 grid-cols-3 max-w-7xl mx-auto">
+      <div className="grid px-4 gap-3 py-12 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
         {scholarships.map((scholarship) => (
           <ScholarshipCard scholarship={scholarship}></ScholarshipCard>
         ))}

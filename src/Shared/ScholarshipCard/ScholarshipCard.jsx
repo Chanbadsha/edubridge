@@ -1,58 +1,90 @@
 import React from "react";
+import useAuth from "../../Hooks/useAuth";
+import { BsCalendar2DateFill } from "react-icons/bs";
+import { BiWorld } from "react-icons/bi";
+import { TbCategory } from "react-icons/tb";
+import { FaMoneyBillWave } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const ScholarshipCard = ({ scholarship }) => {
+  const { isDarkMode } = useAuth();
+
   return (
-    <div className="border-r  border-b border-l border-gray-400 lg:border-t lg:border-gray-400 bg-white rounded-b lg:rounded-b-none lg:rounded-r flex flex-col justify-between leading-normal">
-      {/* Img Section */}
-      <div className="flex-1">
+    <div
+      className={`relative shadow-lg border h-full rounded-lg overflow-hidden transition-transform transform hover:-translate-y-2 flex flex-col ${
+        isDarkMode
+          ? "bg-gradient-to-br from-gray-900 to-gray-800 text-gray-200 border-gray-700 shadow-gray-900"
+          : "bg-gradient-to-br from-white to-gray-100 text-gray-900 border-gray-300 shadow-gray-300"
+      }`}
+    >
+      {/* Image Section */}
+      <div className="relative">
         <img
           src={scholarship.university_img}
-          className="w-full h-80 mb-3"
-          alt="Scholarship-related visual"
+          className="w-full h-64 object-cover"
+          alt={`${scholarship.university_name} campus`}
         />
+        <div className="absolute top-3 right-3 flex flex-wrap gap-2">
+          <span className="bg-gradient-to-r from-blue-500 to-indigo-600 px-3 py-1 rounded-full text-xs lg:text-sm text-white font-semibold shadow-md">
+            {scholarship.subject_name}
+          </span>
+        </div>
       </div>
-      {/* Content section */}
-      <div className="flex-1">
-        <div className="p-4 flex  h-full flex-col pt-2">
-          <div className="mb-8 ">
-            <p className="text-sm text-gray-600 flex items-center">
-              <svg
-                className="fill-current text-gray-500 w-3 h-3 mr-2"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-              >
-                <path d="M4 8V6a6 6 0 1 1 12 0v2h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2v-8c0-1.1.9-2 2-2h1zm5 6.73V17h2v-2.27a2 2 0 1 0-2 0zM7 6v2h6V6a3 3 0 0 0-6 0z" />
-              </svg>
-              Members only
-            </p>
-            <a
-              href="#"
-              className="text-gray-900 font-bold text-lg mb-2 hover:text-indigo-600 inline-block"
-            >
-              {scholarship.university_name}
-            </a>
-            <p className="text-gray-700 text-sm">
-              {scholarship.scholarship_description}
-            </p>
+
+      {/* Content Section */}
+      <div className="p-5 flex flex-1 flex-col justify-between space-y-4">
+        {/* Header with Logo and Name */}
+        <div className="flex items-center gap-3">
+          <img
+            src={scholarship.university_logo}
+            alt={`${scholarship.university_name} logo`}
+            className="w-10 h-10 rounded-full object-contain"
+          />
+          <h3 className="text-lg font-bold hover:text-indigo-600 transition-colors">
+            <Link to="/">{scholarship.university_name}</Link>
+          </h3>
+        </div>
+
+        {/* Metadata */}
+        <div className="grid grid-cols-2 gap-y-2 text-sm ">
+          <div className="flex items-center gap-2">
+            <BiWorld />
+            <span>{scholarship.university_location.country}</span>
           </div>
-          <div className="flex items-center  flex-1 ">
-            <a href="#">
-              <img
-                className="w-10 h-10 rounded-full mr-4"
-                src={scholarship.university_logo}
-                alt={`Avatar of ${scholarship.university_name}`}
-              />
-            </a>
-            <div className="text-sm ">
-              <a
-                href="#"
-                className="text-gray-900 font-semibold leading-none hover:text-indigo-600"
-              >
-                {scholarship.university_name}
-              </a>
-              <p className="text-gray-600">Aug 18</p>
-            </div>
+          <div className="flex items-center gap-2">
+            <TbCategory />
+            <span>{scholarship.scholarship_category}</span>
           </div>
+          <div className="flex items-center gap-2">
+            <BsCalendar2DateFill />
+            <span>Deadline: {scholarship.application_deadline}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <FaMoneyBillWave />
+            <span>{scholarship.stipend}</span>
+          </div>
+        </div>
+
+        {/* Description */}
+        <p
+          className={`text-sm leading-relaxed ${
+            isDarkMode ? "text-gray-300" : "text-gray-700"
+          }`}
+        >
+          {scholarship.scholarship_description.slice(0, 120)}...
+        </p>
+
+        <div className="mt-4">
+          <Link
+            to="/"
+            className={`w-full inline-block text-center px-6 py-2 text-sm font-semibold rounded-lg shadow-md transition-all ${
+              isDarkMode
+                ? "bg-indigo-600 hover:bg-indigo-700 text-white"
+                : "bg-blue-500 hover:bg-blue-600 text-white"
+            }`}
+          >
+            View Details
+          </Link>
         </div>
       </div>
     </div>
