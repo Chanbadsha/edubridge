@@ -15,7 +15,8 @@
     "post_date": "2025-01-01",
     "service_charge": "$50",
     "application_fees": "$75",
-    "apply_scholarship_button": "https://apply.harvard.edu"
+    "apply_scholarship_button": "https://apply.harvard.edu",
+    "rating": 5
   },
   {
     "university_name": "London School of Economics and Political Science (LSE)",
@@ -33,7 +34,8 @@
     "post_date": "2025-01-13",
     "service_charge": "$60",
     "application_fees": "$110",
-    "apply_scholarship_button": "https://apply.lse.ac.uk"
+    "apply_scholarship_button": "https://apply.lse.ac.uk",
+    "rating": 4.5
   },
   {
     "university_name": "Massachusetts Institute of Technology (MIT)",
@@ -51,7 +53,8 @@
     "post_date": "2025-01-12",
     "service_charge": "$55",
     "application_fees": "$80",
-    "apply_scholarship_button": "https://apply.mit.edu"
+    "apply_scholarship_button": "https://apply.mit.edu",
+    "rating": 5
   },
   {
     "university_name": "Princeton University",
@@ -69,7 +72,8 @@
     "post_date": "2025-01-11",
     "service_charge": "$40",
     "application_fees": "$70",
-    "apply_scholarship_button": "https://apply.princeton.edu"
+    "apply_scholarship_button": "https://apply.princeton.edu",
+    "rating": 4
   },
   {
     "university_name": "Stanford University",
@@ -87,7 +91,8 @@
     "post_date": "2025-01-10",
     "service_charge": "$40",
     "application_fees": "$100",
-    "apply_scholarship_button": "https://apply.stanford.edu"
+    "apply_scholarship_button": "https://apply.stanford.edu",
+    "rating": 4.5
   },
   {
     "university_name": "University of Melbourne",
@@ -105,7 +110,8 @@
     "post_date": "2025-01-08",
     "service_charge": "$65",
     "application_fees": "$110",
-    "apply_scholarship_button": "https://apply.unimelb.edu.au"
+    "apply_scholarship_button": "https://apply.unimelb.edu.au",
+    "rating": 4
   },
   {
     "university_name": "University of Oxford",
@@ -123,7 +129,8 @@
     "post_date": "2025-01-05",
     "service_charge": "$60",
     "application_fees": "$120",
-    "apply_scholarship_button": "https://apply.ox.ac.uk"
+    "apply_scholarship_button": "https://apply.ox.ac.uk",
+    "rating": 5
   },
   {
     "university_name": "University of Tokyo",
@@ -141,7 +148,8 @@
     "post_date": "2025-01-15",
     "service_charge": "$55",
     "application_fees": "$95",
-    "apply_scholarship_button": "https://apply.u-tokyo.ac.jp"
+    "apply_scholarship_button": "https://apply.u-tokyo.ac.jp",
+    "rating": 4.5
   },
   {
     "university_name": "University of Toronto",
@@ -159,7 +167,8 @@
     "post_date": "2025-01-03",
     "service_charge": "$50",
     "application_fees": "$90",
-    "apply_scholarship_button": "https://apply.utoronto.ca"
+    "apply_scholarship_button": "https://apply.utoronto.ca",
+    "rating": 4
   },
   {
     "university_name": "ETH Zurich",
@@ -177,6 +186,7 @@
     "post_date": "2025-01-06",
     "service_charge": "$50",
     "application_fees": "$85",
-    "apply_scholarship_button": "https://apply.ethz.ch"
+    "apply_scholarship_button": "https://apply.ethz.ch",
+    "rating": 4.5
   }
 ]

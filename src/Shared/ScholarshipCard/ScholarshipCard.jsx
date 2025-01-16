@@ -5,6 +5,7 @@ import { BiWorld } from "react-icons/bi";
 import { TbCategory } from "react-icons/tb";
 import { FaMoneyBillWave } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { AiFillDollarCircle } from "react-icons/ai";
 
 const ScholarshipCard = ({ scholarship }) => {
   const { isDarkMode } = useAuth();
@@ -27,6 +28,11 @@ const ScholarshipCard = ({ scholarship }) => {
         <div className="absolute top-3 right-3 flex flex-wrap gap-2">
           <span className="bg-gradient-to-r from-blue-500 to-indigo-600 px-3 py-1 rounded-full text-xs lg:text-sm text-white font-semibold shadow-md">
             {scholarship.subject_name}
+          </span>
+        </div>
+        <div className="absolute  top-3 left-3 flex flex-wrap gap-2">
+          <span className="bg-gradient-to-r from-teal-400 to-blue-500 px-4 py-2 rounded-full text-xs lg:text-sm text-white font-semibold shadow-lg transform transition-transform duration-300 hover:scale-105  hover:shadow-xl">
+            {scholarship.rating}
           </span>
         </div>
       </div>
@@ -56,12 +62,13 @@ const ScholarshipCard = ({ scholarship }) => {
             <span>{scholarship.scholarship_category}</span>
           </div>
           <div className="flex items-center gap-2">
-            <BsCalendar2DateFill />
-            <span>Deadline: {scholarship.application_deadline}</span>
+            <AiFillDollarCircle />
+
+            <span>Fees: {scholarship.application_fees}</span>
           </div>
           <div className="flex items-center gap-2">
-            <FaMoneyBillWave />
-            <span>{scholarship.stipend}</span>
+            <BsCalendar2DateFill />
+            <span>Deadline: {scholarship.application_deadline}</span>
           </div>
         </div>
 
