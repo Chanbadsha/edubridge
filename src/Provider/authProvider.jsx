@@ -10,6 +10,7 @@ import {
 } from "firebase/auth";
 import auth from "../Firebase/firebase.config";
 import axios from "axios";
+// import ScholarshipData from "../Hooks/ScholarshipData/ScholarshipData";
 
 export const AuthContext = createContext();
 
@@ -53,6 +54,7 @@ const AuthProvider = ({ children }) => {
     setLoading(true);
     return signOut(auth);
   };
+  // const scholarships = ScholarshipData();
 
   // Sync isDarkMode with localStorage
   useEffect(() => {
@@ -64,12 +66,11 @@ const AuthProvider = ({ children }) => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         setUser(currentUser);
-
       } else {
         setUser(null);
       }
       setLoading(false);
-      console.log(currentUser);
+
     });
 
     return () => {

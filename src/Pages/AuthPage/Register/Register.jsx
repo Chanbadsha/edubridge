@@ -33,7 +33,6 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
-    console.log(data);
     createUser(data.email, data.password)
       .then(({ user }) => {
         updateUserProfile(data.name, data?.photoUrl).then((result) => {
@@ -74,9 +73,7 @@ const Register = () => {
 
         axiosPublic
           .post("/userSave", userInfo)
-          .then((res) => {
-            console.log(res);
-          })
+          .then((res) => {})
           .catch((error) => {
             console.log(error);
             toast.error("Failed to save user information. Please try again.");

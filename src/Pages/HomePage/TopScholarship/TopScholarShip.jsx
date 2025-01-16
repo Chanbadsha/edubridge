@@ -2,12 +2,14 @@ import React, { useEffect, useState } from "react";
 import SectionHeader from "../../../Components/SectionHeader/SectionHeader";
 import axios from "axios";
 import ScholarshipCard from "../../../Shared/ScholarshipCard/ScholarshipCard";
+import useAxiosPublic from "../../../Hooks/Axios/AxiosPublic/useAxiosPublic";
 
 const TopScholarShip = () => {
+  const axiosPublic = useAxiosPublic();
   const [scholarships, setScholarships] = useState([]);
 
   useEffect(() => {
-    axios.get("/scholarship.json").then(({ data }) => setScholarships(data));
+    axiosPublic.get("/scholarships").then(({ data }) => setScholarships(data));
   }, []);
   return (
     <div>
