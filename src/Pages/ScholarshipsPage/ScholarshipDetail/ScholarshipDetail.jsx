@@ -1,16 +1,19 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useAxiosPublic from "../../../Hooks/Axios/AxiosPublic/useAxiosPublic";
 import useAuth from "../../../Hooks/useAuth";
 import Loader from "../../../Components/Loader/Loader";
+import useScholarship from "../../../Hooks/ScholarshipData/useScholarship";
 
 const ScholarshipDetail = () => {
   const { loading, isDarkMode } = useAuth();
   const { id } = useParams();
   const axiosPublic = useAxiosPublic();
-
   const [scholarshipData, setScholarshipData] = useState(null);
   const [loadingScholarship, setLoadingScholarship] = useState(true);
+
+  const [scholarship] = useScholarship();
+  console.log(scholarship);
 
   useEffect(() => {
     const fetchScholarshipData = async () => {
@@ -139,14 +142,12 @@ const ScholarshipDetail = () => {
           </div>
 
           {/* Apply Button */}
-          <a
-            href={scholarshipData.apply_scholarship_button}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to="/apply"
             className="inline-block px-8 py-3 text-white bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg shadow-md hover:shadow-lg hover:from-indigo-600 hover:to-blue-500 transition-all"
           >
             Apply Now
-          </a>
+          </Link>
         </div>
 
         {/* Right Section */}

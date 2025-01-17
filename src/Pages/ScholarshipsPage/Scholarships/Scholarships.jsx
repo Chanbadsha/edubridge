@@ -1,17 +1,10 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
 import ScholarshipCard from "../../../Shared/ScholarshipCard/ScholarshipCard";
 import useAuth from "../../../Hooks/useAuth";
-import useAxiosPublic from "../../../Hooks/Axios/AxiosPublic/useAxiosPublic";
+import useScholarship from "../../../Hooks/ScholarshipData/useScholarship";
 
 const Scholarships = () => {
-  const [scholarships, setScholarships] = useState([]);
   const { isDarkMode } = useAuth();
-  const axiosPublic = useAxiosPublic();
-
-  useEffect(() => {
-    axiosPublic.get("/scholarships").then(({ data }) => setScholarships(data));
-  }, []);
+  const [scholarships] = useScholarship();
 
   return (
     <div
