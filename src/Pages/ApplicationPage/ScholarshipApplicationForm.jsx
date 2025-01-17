@@ -4,6 +4,8 @@ import useAuth from "../../Hooks/useAuth";
 import Loader from "../../Components/Loader/Loader";
 import useAxiosPublic from "../../Hooks/Axios/AxiosPublic/useAxiosPublic";
 import { useParams } from "react-router-dom";
+import useAxiosSecret from "../../Hooks/Axios/AxiosSecret/useAxiosSecret";
+import toast from "react-hot-toast";
 
 const ScholarshipApplicationForm = () => {
   const { loading, user } = useAuth();
@@ -11,7 +13,10 @@ const ScholarshipApplicationForm = () => {
   if (loading) {
     return <Loader />;
   }
+  const img_hosting_key = import.meta.env.VITE_IMG_HOSTING_KEY;
+  const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_key}`;
   const axiosPublic = useAxiosPublic();
+  const axiosSecret = useAxiosSecret();
   const [scholarship, setScholarship] = useState([]);
   const [userInfo, setUserInfo] = useState(null);
   useEffect(() => {
@@ -30,8 +35,12 @@ const ScholarshipApplicationForm = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     const { photo, ...applicant_info } = data || {};
+
+    // console.log(photo[0]);
+    const imageFile = { image: photo[0] };
+    // console.log(imageFile);
     const date = new Date();
 
     applicant_info.user_name = userInfo.name;
@@ -39,6 +48,21 @@ const ScholarshipApplicationForm = () => {
     applicant_info.user_id = userInfo._id;
     applicant_info.Scholarship_id = scholarship._id;
     applicant_info.application_date = date;
+
+    const res = await axiosPublic.post(img_hosting_api, imageFile, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
+    applicant_info.user_img = res.data.data.display_url;
+    if (res.data.success) {
+      axiosSecret.post("/application", applicant_info).then((res) => {
+        console.log(res.data.insertedId);
+        if (res.data.insertedId) {
+          toast.success("Your application has been successfully submitted!");
+        }
+      });
+    }
   };
 
   return (
@@ -177,9 +201,9 @@ const ScholarshipApplicationForm = () => {
                 {...register("degree", { required: "Degree is required" })}
               >
                 <option value="">Select Degree</option>
-                <option value="Graduate">Graduate</option>
-                <option value="Undergraduate">Undergraduate</option>
-                <option value="Postgraduate">Postgraduate</option>
+                <option value="Masters">Masters</option>
+                <option value="Bachelors">Bachelors</option>
+                <option value="Diploma">Diploma</option>
               </select>
               {errors.degree && (
                 <p className="text-red-500 text-sm">{errors.degree.message}</p>
