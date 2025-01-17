@@ -12,9 +12,6 @@ const ScholarshipDetail = () => {
   const [scholarshipData, setScholarshipData] = useState(null);
   const [loadingScholarship, setLoadingScholarship] = useState(true);
 
-  const [scholarship] = useScholarship();
-  console.log(scholarship);
-
   useEffect(() => {
     const fetchScholarshipData = async () => {
       try {
@@ -63,7 +60,7 @@ const ScholarshipDetail = () => {
         {/* Left Section */}
         <div className="col-span-2">
           <div>
-            <div className="flex gap-4">
+            <div className="flex flex-col lg:flex-row gap-4">
               <div className="flex-1">
                 <h4 className="text-3xl font-bold mb-4">Scholarship Details</h4>
                 <p className=" mb-2">
@@ -71,6 +68,12 @@ const ScholarshipDetail = () => {
                   <span className="font-medium">
                     {scholarshipData.university_location.city},{" "}
                     {scholarshipData.university_location.country}
+                  </span>
+                </p>
+                <p className=" mb-2">
+                  🗓️ Application Post date:{" "}
+                  <span className="font-medium text-green-500">
+                    {scholarshipData.post_date}
                   </span>
                 </p>
                 <p className=" mb-2">
@@ -82,23 +85,66 @@ const ScholarshipDetail = () => {
               </div>
 
               <div className="flex-1">
-                {/* Rating Info */}
-                <div className="bg-gray-100 p-6 rounded-lg shadow-md mb-6">
-                  <h5
-                    className={`text-xl font-semibold mb-4 ${
-                      isDarkMode ? "text-textLight" : "text-textLight"
-                    }`}
-                  >
-                    Rating
-                  </h5>
-                  <p
-                    className={`mb-2 ${
-                      isDarkMode ? "text-textLight" : "text-textLight"
-                    }`}
-                  >
-                    ⭐ <strong>Rating:</strong>{" "}
-                    {scholarshipData.rating || "Not Rated"}
-                  </p>
+                <div className="bg-gray-100 flex flex-col md:flex-row lg:flex-col lg:items-start gap-4 py-6 px-3 rounded-lg shadow-md mb-6 md:items-center">
+                  {/* Left Section: Scholarship Information */}
+                  <div className="flex-1">
+                    <p
+                      className={` flex gap-1 font-medium ${
+                        isDarkMode ? "text-textLight" : "text-gray-700"
+                      } mb-2 flex`}
+                    >
+                      <span>🎓 Subject:</span>
+                      <span className="font-semibold">
+                        {scholarshipData.subject_name}
+                      </span>
+                    </p>
+                    <p
+                      className={`flex gap-1 font-medium ${
+                        isDarkMode ? "text-textLight" : "text-gray-700"
+                      } mb-2`}
+                    >
+                      📂 Category:{" "}
+                      <span className="font-semibold">
+                        {scholarshipData.scholarship_category}
+                      </span>
+                    </p>
+                  </div>
+
+                  {/* Right Section: Rating */}
+                  <div className="flex  items-center">
+                    <div className="text-center">
+                      <h5
+                        className={`text-lg font-bold ${
+                          isDarkMode ? "text-textLight" : "text-gray-800"
+                        } mb-2`}
+                      >
+                        ⭐ Rating
+                      </h5>
+                      <p
+                        className={`text-lg ${
+                          isDarkMode ? "text-gray-300" : "text-gray-600"
+                        }`}
+                      >
+                        {scholarshipData.rating ? (
+                          <>
+                            <span className="font-bold text-green-500">
+                              {scholarshipData.rating}
+                            </span>{" "}
+                            <span
+                              className={`${
+                                isDarkMode ? "text-textLight" : "text-gray-700"
+                              }`}
+                            >
+                              {" "}
+                              / 5
+                            </span>
+                          </>
+                        ) : (
+                          "Not Rated"
+                        )}
+                      </p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -143,7 +189,7 @@ const ScholarshipDetail = () => {
 
           {/* Apply Button */}
           <Link
-            to="/apply"
+            to={`/apply/${scholarshipData._id}`}
             className="inline-block px-8 py-3 text-white bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg shadow-md hover:shadow-lg hover:from-indigo-600 hover:to-blue-500 transition-all"
           >
             Apply Now

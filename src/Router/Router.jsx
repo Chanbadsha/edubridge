@@ -8,7 +8,8 @@ import Home from "../Pages/HomePage/Home/Home";
 import Dashboard from "../Pages/DashboardPage/Dashboard/Dashboard";
 import Scholarships from "../Pages/ScholarshipsPage/Scholarships/Scholarships";
 import ScholarshipDetail from "../Pages/ScholarshipsPage/ScholarshipDetail/ScholarshipDetail";
-import Application from "../Pages/ApplicationPage/Application";
+
+import ScholarshipApplicationForm from "../Pages/ApplicationPage/ScholarshipApplicationForm";
 
 const router = createBrowserRouter([
   {
@@ -32,10 +33,10 @@ const router = createBrowserRouter([
         element: <ScholarshipDetail></ScholarshipDetail>,
       },
       {
-        path: "/apply",
+        path: "/apply/:id",
         element: (
           <PrivateRoute>
-            <Application></Application>
+            <ScholarshipApplicationForm></ScholarshipApplicationForm>
           </PrivateRoute>
         ),
       },
