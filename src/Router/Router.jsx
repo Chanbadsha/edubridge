@@ -22,15 +22,15 @@ const router = createBrowserRouter([
       },
       {
         path: "scholarships",
-        element: (
-          <PrivateRoute>
-            <Scholarships></Scholarships>
-          </PrivateRoute>
-        ),
+        element: <Scholarships></Scholarships>,
       },
       {
         path: "scholarship/:id",
-        element: <ScholarshipDetail></ScholarshipDetail>,
+        element: (
+          <PrivateRoute>
+            <ScholarshipDetail></ScholarshipDetail>
+          </PrivateRoute>
+        ),
       },
       {
         path: "/apply/:id",

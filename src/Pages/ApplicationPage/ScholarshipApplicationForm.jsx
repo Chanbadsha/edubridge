@@ -35,6 +35,7 @@ const ScholarshipApplicationForm = () => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -56,11 +57,20 @@ const ScholarshipApplicationForm = () => {
     });
     applicant_info.user_img = res.data.data.display_url;
     if (res.data.success) {
-      axiosSecret.post("/application", applicant_info).then((res) => {
-        if (res.data.insertedId) {
-          toast.success("Your application has been successfully submitted!");
-        }
-      });
+      axiosSecret
+        .post("/application", applicant_info)
+        .then((res) => {
+          if (res.data.insertedId) {
+            toast.success("Your application has been successfully submitted!");
+            reset();
+          }
+        })
+        .catch((error) => {
+          if (error.response.status === 409) {
+            return toast.error(error.response.data.message);
+          }
+          toast.error("Application failed, try again");
+        });
     }
   };
 
