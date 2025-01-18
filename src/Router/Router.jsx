@@ -10,6 +10,11 @@ import Scholarships from "../Pages/ScholarshipsPage/Scholarships/Scholarships";
 import ScholarshipDetail from "../Pages/ScholarshipsPage/ScholarshipDetail/ScholarshipDetail";
 
 import ScholarshipApplicationForm from "../Pages/ApplicationPage/ScholarshipApplicationForm";
+import DashboardLayout from "../Layout/DashboardLayout/DashboardLayout";
+import AdminProfile from "../Pages/DashboardPage/AdminPage/AdminProfile/AdminProfile";
+import AdminRoute from "./AdminRoute";
+import ModeratorRoute from "./ModeratorRoute";
+import MyProfile from "../Pages/DashboardPage/ModeratorPage/MyProfile/MyProfile";
 
 const router = createBrowserRouter([
   {
@@ -52,7 +57,30 @@ const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivateRoute>
+        <DashboardLayout></DashboardLayout>
+      </PrivateRoute>
+    ),
+    children: [
+      {
+        path: "/dashboard/admin-profile",
+        element: (
+          <AdminRoute>
+            <AdminProfile></AdminProfile>
+          </AdminRoute>
+        ),
+      },
+      // Moderator Route
+      {
+        path: "/dashboard/moderator/my-profile",
+        element: (
+          <ModeratorRoute>
+            <MyProfile></MyProfile>
+          </ModeratorRoute>
+        ),
+      },
+    ],
   },
 ]);
 

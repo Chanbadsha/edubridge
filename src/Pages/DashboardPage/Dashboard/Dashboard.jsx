@@ -16,11 +16,13 @@ import { HiOutlineChatAlt2, HiOutlineClipboardList } from "react-icons/hi";
 import { BsCardChecklist } from "react-icons/bs";
 import { RiChatCheckLine } from "react-icons/ri";
 import useAuth from "../../../Hooks/useAuth";
+import useUserData from "../../../Hooks/UsersData/useUserData";
 
 const Dashboard = () => {
   const [collapse, setCollapse] = useState(false);
   const { user, isDarkMode } = useAuth();
-
+  const userInfo = useUserData();
+  // console.log(userInfo.role);
   useEffect(() => {
     const updateCollapseState = () => {
       if (window.innerWidth <= 560) {
@@ -41,15 +43,27 @@ const Dashboard = () => {
 
   const handleCollapse = () => setCollapse(!collapse);
 
-  const users = false;
-  const moderators = false;
-  const admin = true;
+  const [users, setUsers] = useState(true);
+  const [moderators, setModerators] = useState(false);
+  const [admin, setAdmin] = useState(false);
+
+  useEffect(() => {
+    if (userInfo.role === "Admin") {
+      setUsers(false);
+      return setAdmin(true);
+    }
+    if (userInfo.role === "Moderator") {
+      setUsers(false);
+      return setModerators(true);
+    }
+    setUsers(true);
+  }, [userInfo]);
 
   return (
-    <div className="min-h-screen max-w-7xl mx-auto flex">
+    <div className="min-h-screen  max-w-7xl mx-auto flex">
       {/* Left Section: Sidebar */}
       <div
-        className={`bg-gray-900 text-white p-4 py-12 transition-all duration-300 shadow-lg ${
+        className={`bg-gray-900   text-white p-4 py-12 transition-all duration-300 shadow-lg ${
           collapse ? "w-20" : "w-64"
         } hidden md:block`}
       >
@@ -87,7 +101,10 @@ const Dashboard = () => {
                 {users && (
                   <>
                     <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                      <Link to="/dashboard" className="flex items-center gap-2">
+                      <Link
+                        to="/dashboard/moderator/my-profile"
+                        className="flex items-center gap-2"
+                      >
                         {collapse ? <FaUser size={28} /> : <FaUser />}
                         {!collapse && <span>My Profile</span>}
                       </Link>
@@ -117,7 +134,10 @@ const Dashboard = () => {
                 {moderators && (
                   <>
                     <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                      <Link to="/dashboard" className="flex items-center gap-2">
+                      <Link
+                        to="/dashboard/moderator/my-profile"
+                        className="flex items-center gap-2"
+                      >
                         {collapse ? <FaUser size={28} /> : <FaUser />}
                         {!collapse && <span>My Profile</span>}
                       </Link>
@@ -167,7 +187,10 @@ const Dashboard = () => {
                 {admin && (
                   <>
                     <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                      <Link to="/dashboard" className="flex items-center gap-2">
+                      <Link
+                        to="/dashboard/admin-profile"
+                        className="flex items-center gap-2"
+                      >
                         {collapse ? <FaUser size={28} /> : <FaUser />}
                         {!collapse && <span>Admin Profile</span>}
                       </Link>
@@ -267,7 +290,7 @@ const Dashboard = () => {
 
       {/* Mobile Sidebar Toggle */}
       <div
-        className={`md:hidden bg-gray-900 text-white p-4 transition-all duration-300 shadow-l ${
+        className={`md:hidden sticky -top-20 left-0 bg-gray-900 text-white p-4 transition-all duration-300 shadow-l ${
           collapse ? "w-20" : "w-44"
         }`}
       >
@@ -457,7 +480,7 @@ const Dashboard = () => {
 
       {/* Right Section: Main Content */}
       <div className="flex-1 bg-gray-100 p-6 py-12">
-        <h2 className="text-xl font-semibold mb-4">Dashboard Content</h2>
+        <h2 className="text-xl hidden font-semibold mb-4">Dashboard Content</h2>
         <Outlet />
       </div>
     </div>

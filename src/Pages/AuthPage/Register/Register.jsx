@@ -37,19 +37,13 @@ const Register = () => {
       .then(({ user }) => {
         updateUserProfile(data.name, data?.photoUrl).then((result) => {
           const userInfo = {
-            Name: user.displayName,
-            Email: user.email,
-            Role: "Admin",
+            name: user.displayName,
+            email: user.email,
+            role: "User",
           };
 
-          axiosPublic
-            .post("/userSave", userInfo)
-            .then((res) => {
-              setLoading(false);
-            })
-            .catch((error) => {
-              toast.error("Failed to save user information. Please try again.");
-            });
+          axiosPublic.post("/userSave", userInfo);
+
           toast.success("Account Create Successful!");
           setLoading(false);
           navigate(from);
@@ -68,16 +62,11 @@ const Register = () => {
         const userInfo = {
           name: user.displayName,
           email: user.email,
-          role: "Admin",
+          role: "User",
         };
 
-        axiosPublic
-          .post("/userSave", userInfo)
-          .then((res) => {})
-          .catch((error) => {
-            console.log(error);
-            toast.error("Failed to save user information. Please try again.");
-          });
+        axiosPublic.post("/userSave", userInfo);
+
         toast.success("Google Login successful!");
         setLoading(false);
         navigate(from);
