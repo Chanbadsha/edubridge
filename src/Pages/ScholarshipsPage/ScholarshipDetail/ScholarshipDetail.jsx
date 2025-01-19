@@ -189,13 +189,7 @@ const ScholarshipDetail = () => {
 
           {/* Apply Button */}
           <Link
-            to={`/apply/${scholarshipData._id}`}
-            className="inline-block px-8 py-3 text-white bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg shadow-md hover:shadow-lg hover:from-indigo-600 hover:to-blue-500 transition-all"
-          >
-            Apply Now
-          </Link>
-          <Link
-            to={`/payment`}
+            to={`/payment/${scholarshipData._id}`}
             className="inline-block px-8 py-3 text-white bg-gradient-to-r from-blue-500 to-indigo-600 rounded-lg shadow-md hover:shadow-lg hover:from-indigo-600 hover:to-blue-500 transition-all"
           >
             Apply Now

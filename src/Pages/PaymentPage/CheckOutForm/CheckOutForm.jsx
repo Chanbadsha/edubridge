@@ -3,21 +3,28 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import useAxiosSecret from "../../../Hooks/Axios/AxiosSecret/useAxiosSecret";
 
 import useUserData from "../../../Hooks/UsersData/useUserData";
-const CheckOutForm = () => {
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import useAuth from "../../../Hooks/useAuth";
+import Loader from "../../../Components/Loader/Loader";
+
+const CheckOutForm = ({ priceInfo }) => {
   const stripe = useStripe();
   const elements = useElements();
+  const { loading } = useAuth();
   const [isProcessing, setIsProcessing] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [paymentSuccess, setPaymentSuccess] = useState(false);
   const [transactionId, setTransactionId] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const axiosSecret = useAxiosSecret();
-
+  const navigate = useNavigate();
   const userInfo = useUserData();
+  console.log(priceInfo.price);
+  if (loading || priceInfo.price < 1) {
+    return <Loader></Loader>;
+  }
 
-  const cartInfo = {
-    price: 106,
-  };
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -60,16 +67,17 @@ const CheckOutForm = () => {
       });
 
     if (confirmError) {
-      //   console.log("Confirm error", confirmError);
+      console.log("Confirm error", confirmError);
       setErrorMessage(confirmError.message);
     } else {
-      //   console.log("PaymentIntent", paymentIntent);
+      console.log("PaymentIntent", paymentIntent);
 
       if (paymentIntent.status === "succeeded") {
         setPaymentSuccess(true);
 
         setTransactionId(paymentIntent.id);
-
+        toast.success(" Payment successful!");
+        navigate(`/apply/${priceInfo.id}`);
         setTimeout(() => {
           setPaymentSuccess(false);
           setTransactionId("");
@@ -80,7 +88,7 @@ const CheckOutForm = () => {
 
   useEffect(() => {
     axiosSecret
-      .post("/create-payment-intent", cartInfo)
+      .post("/create-payment-intent", priceInfo)
       .then((res) => {
         setClientSecret(res.data.clientSecret);
       })
@@ -88,7 +96,7 @@ const CheckOutForm = () => {
         console.log(error);
       });
   }, [axiosSecret]);
-  console.log(clientSecret);
+  //   console.log(clientSecret);
 
   return (
     <div className="max-w-5xl mx-auto p-6">
@@ -110,13 +118,7 @@ const CheckOutForm = () => {
           }}
         />
         {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
-        {paymentSuccess && (
-          <p className="text-green-500 text-sm">
-            Payment successful and your transaction id is{" "}
-            <span className="font-bold text-black">{transactionId}</span> !
-            Thank you for your purchase.
-          </p>
-        )}
+
         <button
           className={`btn btn-outline btn-primary px-6 ${
             isProcessing ? "opacity-50 cursor-not-allowed" : ""
