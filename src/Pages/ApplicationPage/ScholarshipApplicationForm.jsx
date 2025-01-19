@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import useAuth from "../../Hooks/useAuth";
 import Loader from "../../Components/Loader/Loader";
 import useAxiosPublic from "../../Hooks/Axios/AxiosPublic/useAxiosPublic";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import useAxiosSecret from "../../Hooks/Axios/AxiosSecret/useAxiosSecret";
 import toast from "react-hot-toast";
 
@@ -19,6 +19,8 @@ const ScholarshipApplicationForm = () => {
   const axiosSecret = useAxiosSecret();
   const [scholarship, setScholarship] = useState([]);
   const [userInfo, setUserInfo] = useState(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axiosPublic
@@ -41,7 +43,7 @@ const ScholarshipApplicationForm = () => {
 
   const onSubmit = async (data) => {
     const { photo, ...applicant_info } = data || {};
-
+    setIsProcessing(true);
     const imageFile = { image: photo[0] };
     const date = new Date();
     applicant_info.student_name = applicant_info.user_name = userInfo.name;
@@ -49,6 +51,7 @@ const ScholarshipApplicationForm = () => {
     applicant_info.user_id = userInfo._id;
     applicant_info.Scholarship_id = scholarship._id;
     applicant_info.application_date = date;
+    applicant_info.Scholarship_info = scholarship;
 
     const res = await axiosPublic.post(img_hosting_api, imageFile, {
       headers: {
@@ -62,13 +65,18 @@ const ScholarshipApplicationForm = () => {
         .then((res) => {
           if (res.data.insertedId) {
             toast.success("Your application has been successfully submitted!");
+            setIsProcessing(false);
             reset();
+            navigate("/");
           }
         })
         .catch((error) => {
           if (error.response.status === 409) {
+            setIsProcessing(false);
+
             return toast.error(error.response.data.message);
           }
+          setIsProcessing(false);
           toast.error("Application failed, try again");
         });
     }
@@ -285,7 +293,7 @@ const ScholarshipApplicationForm = () => {
               <label className="block font-semibold mb-1">SSC Result</label>
               <input
                 type="number"
-                step="0.1"
+                step="0.01"
                 placeholder="Enter SSC result"
                 className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                   isDarkMode
@@ -315,7 +323,7 @@ const ScholarshipApplicationForm = () => {
               <label className="block font-semibold mb-1">HSC Result</label>
               <input
                 type="number"
-                step="0.1"
+                step="0.01"
                 placeholder="Enter HSC result"
                 className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                   isDarkMode
@@ -416,7 +424,7 @@ const ScholarshipApplicationForm = () => {
               type="submit"
               className="bg-blue-500 text-white py-3 px-8 rounded-full font-semibold shadow-lg transform transition-all duration-300 hover:bg-blue-600"
             >
-              Submit Application
+              {isProcessing ? "Processing" : "Submit Application"}
             </button>
           </div>
         </form>

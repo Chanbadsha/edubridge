@@ -3,8 +3,10 @@ import useAuth from "../../../../Hooks/useAuth";
 import avatar from "../../../../assets/Logo/profile.png";
 import useUserData from "../../../../Hooks/UsersData/useUserData";
 import Loader from "../../../../Components/Loader/Loader";
+import useApplicationInfo from "../../../../Hooks/ApplicationInfo/useApplicationInfo";
 const ProfilePage = ({ role }) => {
   const { user, loading } = useAuth();
+  const [applicationList] = useApplicationInfo();
   if (loading) {
     return <Loader />;
   }

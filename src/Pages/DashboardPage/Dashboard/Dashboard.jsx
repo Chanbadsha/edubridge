@@ -102,7 +102,7 @@ const Dashboard = () => {
                   <>
                     <li className="hover:bg-gray-700 rounded-lg p-2 transition">
                       <Link
-                        to="/dashboard/moderator/my-profile"
+                        to="/dashboard/my-profile"
                         className="flex items-center gap-2"
                       >
                         {collapse ? <FaUser size={28} /> : <FaUser />}
@@ -110,7 +110,10 @@ const Dashboard = () => {
                       </Link>
                     </li>
                     <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                      <Link to="/dashboard" className="flex items-center gap-2">
+                      <Link
+                        to="/dashboard/my-application"
+                        className="flex items-center gap-2"
+                      >
                         {collapse ? (
                           <HiOutlineClipboardList size={28} />
                         ) : (
@@ -120,7 +123,10 @@ const Dashboard = () => {
                       </Link>
                     </li>
                     <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                      <Link to="/dashboard" className="flex items-center gap-2">
+                      <Link
+                        to="/dashboard/my-review"
+                        className="flex items-center gap-2"
+                      >
                         {collapse ? (
                           <HiOutlineChatAlt2 size={28} />
                         ) : (
@@ -309,18 +315,24 @@ const Dashboard = () => {
           )}
         </span>
 
-        <nav className="w-full text-sm">
+        <nav className="w-full">
           <ul className="space-y-4">
             {users && (
               <>
                 <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                  <Link to="/dashboard" className="flex items-center gap-2">
+                  <Link
+                    to="/dashboard/my-profile"
+                    className="flex items-center gap-2"
+                  >
                     {collapse ? <FaUser size={28} /> : <FaUser />}
                     {!collapse && <span>My Profile</span>}
                   </Link>
                 </li>
                 <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                  <Link to="/dashboard" className="flex items-center gap-2">
+                  <Link
+                    to="/dashboard/my-application"
+                    className="flex items-center gap-2"
+                  >
                     {collapse ? (
                       <HiOutlineClipboardList size={28} />
                     ) : (
@@ -330,7 +342,10 @@ const Dashboard = () => {
                   </Link>
                 </li>
                 <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                  <Link to="/dashboard" className="flex items-center gap-2">
+                  <Link
+                    to="/dashboard/my-review"
+                    className="flex items-center gap-2"
+                  >
                     {collapse ? (
                       <HiOutlineChatAlt2 size={28} />
                     ) : (
@@ -344,7 +359,10 @@ const Dashboard = () => {
             {moderators && (
               <>
                 <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                  <Link to="/dashboard" className="flex items-center gap-2">
+                  <Link
+                    to="/dashboard/moderator/my-profile"
+                    className="flex items-center gap-2"
+                  >
                     {collapse ? <FaUser size={28} /> : <FaUser />}
                     {!collapse && <span>My Profile</span>}
                   </Link>
@@ -390,7 +408,10 @@ const Dashboard = () => {
             {admin && (
               <>
                 <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                  <Link to="/dashboard" className="flex items-center gap-2">
+                  <Link
+                    to="/dashboard/admin-profile"
+                    className="flex items-center gap-2"
+                  >
                     {collapse ? <FaUser size={28} /> : <FaUser />}
                     {!collapse && <span>Admin Profile</span>}
                   </Link>
@@ -479,7 +500,7 @@ const Dashboard = () => {
       </div>
 
       {/* Right Section: Main Content */}
-      <div className="flex-1 bg-gray-100 p-6 py-12">
+      <div className="flex-1 bg-gray-100">
         <h2 className="text-xl hidden font-semibold mb-4">Dashboard Content</h2>
         <Outlet />
       </div>

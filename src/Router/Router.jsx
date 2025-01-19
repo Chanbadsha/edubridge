@@ -16,6 +16,9 @@ import AdminRoute from "./AdminRoute";
 import ModeratorRoute from "./ModeratorRoute";
 import MyProfile from "../Pages/DashboardPage/ModeratorPage/MyProfile/MyProfile";
 import Payment from "../Pages/PaymentPage/Payment/Payment";
+import UserApplication from "../Pages/DashboardPage/UserDashboard/UserApplication/UserApplication";
+import UserProfile from "../Pages/DashboardPage/UserDashboard/UserProfile/UserProfile";
+import UserReview from "../Pages/DashboardPage/UserDashboard/UserReview/UserReview";
 
 const router = createBrowserRouter([
   {
@@ -88,6 +91,19 @@ const router = createBrowserRouter([
             <MyProfile></MyProfile>
           </ModeratorRoute>
         ),
+      },
+      // User Route
+      {
+        path: "/dashboard/my-profile",
+        element: <UserProfile></UserProfile>,
+      },
+      {
+        path: "/dashboard/my-application",
+        element: <UserApplication></UserApplication>,
+      },
+      {
+        path: "/dashboard/my-review",
+        element: <UserReview></UserReview>,
       },
     ],
   },
