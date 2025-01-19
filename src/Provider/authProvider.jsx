@@ -20,9 +20,11 @@ const AuthProvider = ({ children }) => {
     return JSON.parse(localStorage.getItem("isDarkMode")) || false;
   });
 
+
   // Authentication State
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [updateScholarId, setUpdateScholarId] = useState("Hello");
 
   // Create User With email and pass
   const createUser = (email, password) => {
@@ -70,7 +72,6 @@ const AuthProvider = ({ children }) => {
         setUser(null);
       }
       setLoading(false);
-
     });
 
     return () => {
@@ -90,6 +91,8 @@ const AuthProvider = ({ children }) => {
     createUser,
     updateUserProfile,
     loginUser,
+    setUpdateScholarId,
+    updateScholarId,
   };
 
   return (

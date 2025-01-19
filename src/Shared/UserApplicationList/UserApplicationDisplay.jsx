@@ -1,6 +1,40 @@
 import { FaEdit, FaTrashAlt, FaEye } from "react-icons/fa";
+import { FcViewDetails } from "react-icons/fc";
+import useAxiosSecret from "../../Hooks/Axios/AxiosSecret/useAxiosSecret";
+import toast from "react-hot-toast";
+import { Link } from "react-router-dom";
+import useAuth from "../../Hooks/useAuth";
 
-const UserApplicationDisplay = ({ applicationInfo, index }) => {
+const UserApplicationDisplay = ({ applicationInfo, index, refetch }) => {
+  const axiosSecret = useAxiosSecret();
+  const { updateScholarId } = useAuth();
+  console.log(updateScholarId);
+  // Delete Function
+  const handleDelete = () => {
+    axiosSecret
+      .delete(`/application/${applicationInfo._id}`)
+      .then((res) => {
+        console.log(res);
+        toast.success("You have successfully deleted this application");
+        refetch();
+      })
+      .catch((error) => {
+        toast.error("Opps Application Deleted Failed");
+
+        console.log(error);
+      });
+  };
+
+  // Edit Function
+  const handleEdit = () => {
+    if (applicationInfo?.Scholarship_info?.application_status === "pending") {
+      toast.success(
+        `Don't try to edit application. Application are ${applicationInfo?.Scholarship_info?.application_status}`
+      );
+      return;
+    }
+    toast.success(`Edit Btn CLicked ${applicationInfo._id}`);
+  };
   return (
     <tr key={index} className="hover:bg-gray-50">
       {/* Index */}
@@ -41,38 +75,61 @@ const UserApplicationDisplay = ({ applicationInfo, index }) => {
       {/* Application Status */}
       <td className="text-center">
         {applicationInfo.Scholarship_info.application_status === "pending" && (
-          <p className="text-yellow-500 font-semibold">Pending</p>
+          <p className="text-yellow-500  font-semibold">Pending</p>
         )}
         {applicationInfo.Scholarship_info.application_status ===
           "processing" && (
-          <p className="text-blue-500 font-semibold">Processing</p>
+          <p className="text-blue-500  font-semibold">Processing</p>
         )}
         {applicationInfo.Scholarship_info.application_status ===
           "completed" && (
-          <p className="text-green-500 font-semibold">Completed</p>
+          <p className="text-green-500  font-semibold">Completed</p>
         )}
         {applicationInfo.Scholarship_info.application_status === "rejected" && (
-          <p className="text-red-500 font-semibold">Rejected</p>
+          <p className="text-red-500  font-semibold">Rejected</p>
         )}
+      </td>
+
+      {/* View Application */}
+      <td className="text-center">
+        <Link
+          to={`/scholarship/${applicationInfo.Scholarship_id}`}
+          className="text-blue-500 text-xl hover:text-blue-700 transition-all duration-200 ease-in-out"
+          aria-label="View Application"
+          title="View Application"
+        >
+          <FcViewDetails />
+        </Link>
       </td>
 
       {/* Edit Application */}
       <td className="text-center">
-        <button className="text-blue-500 hover:text-blue-700">
+        <button
+          onClick={() => document.getElementById("my_modal_1").showModal()}
+          className="text-blue-500  text-xl hover:text-blue-700"
+          title="Edit Application"
+        >
           <FaEdit />
         </button>
       </td>
 
       {/* Cancel Application */}
       <td className="text-center">
-        <button className="text-red-500 hover:text-red-700">
+        <button
+          onClick={handleDelete}
+          className="text-red-500 text-xl hover:text-red-700"
+          title="Cancel Application"
+        >
           <FaTrashAlt />
         </button>
       </td>
 
       {/* Review Application */}
       <td className="text-center">
-        <button className="text-green-500 hover:text-green-700">
+        <button
+          className="text-green-500 text-xl hover:text-green-700"
+          title="Review Application"
+        >
           <FaEye />
         </button>
       </td>

@@ -3,8 +3,16 @@ import React from "react";
 import useAuth from "../../../../Hooks/useAuth";
 import avatar from "../../../../assets/Logo/profile.png";
 import DashboardHeader from "../../../../Components/DashboardHeader/DashboardHeader";
+import useApplicationInfo from "../../../../Hooks/ApplicationInfo/useApplicationInfo";
+import Loader from "../../../../Components/Loader/Loader";
+import useScholarship from "../../../../Hooks/ScholarshipData/useScholarship";
 const UserProfile = () => {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
+  const [applicationList, isLoading] = useApplicationInfo();
+  const [scholarships] = useScholarship();
+  if (isLoading || loading) {
+    return <Loader />;
+  }
   const isModerator = false;
   return (
     <div>
@@ -35,11 +43,15 @@ const UserProfile = () => {
         <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
           <div className="bg-white shadow rounded-lg p-6 text-center">
             <h2 className="text-lg font-semibold">Scholarships</h2>
-            <p className="text-3xl font-bold text-indigo-600">567</p>
+            <p className="text-3xl font-bold text-indigo-600">
+              {scholarships?.length}
+            </p>
           </div>
           <div className="bg-white shadow rounded-lg p-6 text-center">
             <h2 className="text-lg font-semibold">Applications</h2>
-            <p className="text-3xl font-bold text-indigo-600">3,890</p>
+            <p className="text-3xl font-bold text-indigo-600">
+              {applicationList.length}
+            </p>
           </div>
         </section>
 

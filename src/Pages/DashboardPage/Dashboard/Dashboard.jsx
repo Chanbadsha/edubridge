@@ -500,8 +500,7 @@ const Dashboard = () => {
       </div>
 
       {/* Right Section: Main Content */}
-      <div className="flex-1 bg-gray-100">
-        <h2 className="text-xl hidden font-semibold mb-4">Dashboard Content</h2>
+      <div className={`flex-1  bg-gray-100`}>
         <Outlet />
       </div>
     </div>

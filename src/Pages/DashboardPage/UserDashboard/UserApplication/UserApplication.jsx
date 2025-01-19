@@ -7,7 +7,7 @@ import UserApplicationDisplay from "../../../../Shared/UserApplicationList/UserA
 
 const UserApplication = () => {
   const { user, loading } = useAuth();
-  const [applicationList, isLoading] = useApplicationInfo();
+  const [applicationList, isLoading, refetch] = useApplicationInfo();
 
   if (loading || isLoading) {
     return <Loader />;
@@ -21,36 +21,44 @@ const UserApplication = () => {
         subtitle="Stay updated on your scholarship applications and progress."
       />
 
-      {/* Table */}
+      {/* Table Section */}
       <div className="overflow-x-auto mt-6">
-        <table className="table w-full border border-gray-200">
-          {/* Table Head */}
-          <thead className="bg-gray-100">
-            <tr>
-              <th>No.</th>
-              <th>Name</th>
-              <th>Applied Degree</th>
-              <th>Subject Name</th>
-              <th>Application Fee</th>
-              <th>Service Charge</th>
-              <th>Status</th>
-              <th>Edit</th>
-              <th>Cancel</th>
-              <th>Review</th>
-            </tr>
-          </thead>
+        {applicationList && applicationList.length > 0 ? (
+          <table className="table w-full border border-gray-200">
+            {/* Table Head */}
+            <thead className="bg-gray-100">
+              <tr>
+                <th>No.</th>
+                <th>Name</th>
+                <th>Applied Degree</th>
+                <th>Subject Name</th>
+                <th>Application Fee</th>
+                <th>Service Charge</th>
+                <th>Status</th>
+                <th>Details</th>
+                <th>Edit</th>
+                <th>Cancel</th>
+                <th>Review</th>
+              </tr>
+            </thead>
 
-          {/* Table Body */}
-          <tbody>
-            {applicationList.map((applicationInfo, index) => (
-              <UserApplicationDisplay
-                key={index}
-                applicationInfo={applicationInfo}
-                index={index}
-              />
-            ))}
-          </tbody>
-        </table>
+            {/* Table Body */}
+            <tbody>
+              {applicationList.map((applicationInfo, index) => (
+                <UserApplicationDisplay
+                  key={applicationInfo._id || index}
+                  applicationInfo={applicationInfo}
+                  index={index}
+                  refetch={refetch}
+                />
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <div className="text-center mt-10 text-gray-500">
+            No applications found. Start applying to scholarships now!
+          </div>
+        )}
       </div>
     </div>
   );

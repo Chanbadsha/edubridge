@@ -1,9 +1,15 @@
 import React from "react";
 import { CirclesWithBar } from "react-loader-spinner";
+import useAuth from "../../Hooks/useAuth";
 
 const Loader = () => {
+  const { isDarkMode } = useAuth();
   return (
-    <div className="min-h-screen flex justify-center items-center">
+    <div
+      className={`min-h-screen flex justify-center items-center ${
+        isDarkMode ? "bg-gray-900" : "bg-backgroundLight"
+      }`}
+    >
       <CirclesWithBar
         height="100"
         width="100"

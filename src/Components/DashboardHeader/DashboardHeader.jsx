@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const DashboardHeader = ({
   title = "Your Applications",
@@ -16,12 +17,12 @@ const DashboardHeader = ({
         <p className="text-base sm:text-lg md:text-xl font-medium mb-8 opacity-80 hover:opacity-100 transition duration-300 ease-in-out">
           {subtitle}
         </p>
-        <a
-          href="#explore-scholarships"
+        <Link
+          to="/scholarships"
           className="bg-yellow-500 text-gray-800 hover:bg-yellow-400 hover:text-white font-semibold py-4 px-8 rounded-lg shadow-lg transform transition-all duration-300 ease-in-out"
         >
           Explore Scholarships
-        </a>
+        </Link>
       </div>
 
       {/* Background Abstract Animation */}

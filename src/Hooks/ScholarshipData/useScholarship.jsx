@@ -5,14 +5,18 @@ import axios from "axios";
 const useScholarship = () => {
   const axiosPublic = useAxiosPublic();
 
-  const { data: scholarships = [], refetch } = useQuery({
+  const {
+    data: scholarships = [],
+    refetch,
+    isLoading,
+  } = useQuery({
     queryKey: ["scholarships"],
     queryFn: async () => {
       const response = await axiosPublic.get("/scholarships");
       return response.data;
     },
   });
-  return [scholarships, refetch];
+  return [scholarships, refetch, isLoading];
 };
 
 export default useScholarship;
