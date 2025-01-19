@@ -15,6 +15,7 @@ import AdminProfile from "../Pages/DashboardPage/AdminPage/AdminProfile/AdminPro
 import AdminRoute from "./AdminRoute";
 import ModeratorRoute from "./ModeratorRoute";
 import MyProfile from "../Pages/DashboardPage/ModeratorPage/MyProfile/MyProfile";
+import Payment from "../Pages/PaymentPage/Payment/Payment";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +35,14 @@ const router = createBrowserRouter([
         element: (
           <PrivateRoute>
             <ScholarshipDetail></ScholarshipDetail>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "payment",
+        element: (
+          <PrivateRoute>
+            <Payment></Payment>
           </PrivateRoute>
         ),
       },
