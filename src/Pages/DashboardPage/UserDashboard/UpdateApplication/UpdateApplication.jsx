@@ -3,6 +3,7 @@ import useAxiosSecret from "../../../../Hooks/Axios/AxiosSecret/useAxiosSecret";
 import { data, Link, useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import useAuth from "../../../../Hooks/useAuth";
+import toast from "react-hot-toast";
 
 const UpdateApplication = () => {
   const { loading, isDarkMode, updateApplication } = useAuth();
@@ -23,14 +24,16 @@ const UpdateApplication = () => {
       .patch(`/updateApplication/${updateApplication._id}`, data)
       .then((res) => {
         console.log(res);
-        if (res.data.insertedId) {
+        if (res.data) {
+          toast.success("Your application successfully updated");
           setIsProcessing(false);
-          // reset();
-          // navigate("/dashboard/my-application");
+          reset();
+          navigate("/dashboard/my-application");
         }
       })
       .catch(() => {
         setIsProcessing(false);
+        toast.error("Failed to update your application");
       });
   };
 

@@ -34,8 +34,12 @@ const UserApplicationDisplay = ({ applicationInfo, index, refetch }) => {
       return;
     }
     setUpdateApplication(applicationInfo);
-    toast.success(`Edit Btn CLicked ${applicationInfo._id}`);
   };
+  // Review Function
+  const handleReview = () => {
+    setUpdateApplication(applicationInfo);
+  };
+
   return (
     <tr key={index} className="hover:bg-gray-50">
       {/* Index */}
@@ -137,12 +141,14 @@ const UserApplicationDisplay = ({ applicationInfo, index, refetch }) => {
 
       {/* Review Application */}
       <td className="text-center">
-        <button
+        <Link
+          onClick={handleReview}
+          to={`/dashboard/review-application/${applicationInfo._id}`}
           className="text-green-500 text-xl hover:text-green-700"
           title="Review Application"
         >
           <FaEye />
-        </button>
+        </Link>
       </td>
     </tr>
   );
