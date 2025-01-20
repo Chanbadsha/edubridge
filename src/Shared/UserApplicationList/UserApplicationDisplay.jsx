@@ -7,8 +7,8 @@ import useAuth from "../../Hooks/useAuth";
 
 const UserApplicationDisplay = ({ applicationInfo, index, refetch }) => {
   const axiosSecret = useAxiosSecret();
-  const { updateScholarId } = useAuth();
-  console.log(updateScholarId);
+  const { setUpdateApplication, loading } = useAuth();
+  // console.log(updateScholarId);
   // Delete Function
   const handleDelete = () => {
     axiosSecret
@@ -33,6 +33,7 @@ const UserApplicationDisplay = ({ applicationInfo, index, refetch }) => {
       );
       return;
     }
+    setUpdateApplication(applicationInfo);
     toast.success(`Edit Btn CLicked ${applicationInfo._id}`);
   };
   return (
@@ -104,13 +105,23 @@ const UserApplicationDisplay = ({ applicationInfo, index, refetch }) => {
 
       {/* Edit Application */}
       <td className="text-center">
-        <button
-          onClick={() => document.getElementById("my_modal_1").showModal()}
+        <Link
+          onClick={handleEdit}
+          to={`/dashboard/update-application/${applicationInfo._id}`}
           className="text-blue-500  text-xl hover:text-blue-700"
           title="Edit Application"
         >
           <FaEdit />
-        </button>
+        </Link>
+        {/* <button
+          onClick={() => (
+            document.getElementById("my_modal_1").showModal(), handleEdit()
+          )}
+          className="text-blue-500  text-xl hover:text-blue-700"
+          title="Edit Application"
+        >
+          <FaEdit />
+        </button> */}
       </td>
 
       {/* Cancel Application */}

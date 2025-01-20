@@ -24,7 +24,7 @@ const AuthProvider = ({ children }) => {
   // Authentication State
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-  const [updateScholarId, setUpdateScholarId] = useState("Hello");
+  const [updateApplication, setUpdateApplication] = useState({});
 
   // Create User With email and pass
   const createUser = (email, password) => {
@@ -91,8 +91,8 @@ const AuthProvider = ({ children }) => {
     createUser,
     updateUserProfile,
     loginUser,
-    setUpdateScholarId,
-    updateScholarId,
+    setUpdateApplication,
+    updateApplication,
   };
 
   return (
