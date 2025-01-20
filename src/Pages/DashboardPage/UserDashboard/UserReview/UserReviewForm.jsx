@@ -35,6 +35,8 @@ const UserReviewForm = () => {
     const reviewData = {
       reviewer: user?.displayName,
       email: user?.email,
+      scholarship_name: updateApplication?.degree,
+      university_name: updateApplication?.Scholarship_info?.university_name,
       photo: user?.photoURL || "https://i.ibb.co.com/dpsR23y/profile.png",
       review_scholarship_id: updateApplication?.Scholarship_id,
       rating,
