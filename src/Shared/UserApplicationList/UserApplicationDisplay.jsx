@@ -8,7 +8,7 @@ import useAuth from "../../Hooks/useAuth";
 const UserApplicationDisplay = ({ applicationInfo, index, refetch }) => {
   const axiosSecret = useAxiosSecret();
   const { setUpdateApplication, loading } = useAuth();
-  // console.log(updateScholarId);
+
   // Delete Function
   const handleDelete = () => {
     axiosSecret

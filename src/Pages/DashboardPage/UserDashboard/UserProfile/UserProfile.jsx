@@ -7,7 +7,7 @@ import useApplicationInfo from "../../../../Hooks/ApplicationInfo/useApplication
 import Loader from "../../../../Components/Loader/Loader";
 import useScholarship from "../../../../Hooks/ScholarshipData/useScholarship";
 const UserProfile = () => {
-  const { user, loading } = useAuth();
+  const { user, loading, userLogOut } = useAuth();
   const [applicationList, isLoading] = useApplicationInfo();
   const [scholarships] = useScholarship();
   if (isLoading || loading) {
@@ -66,7 +66,10 @@ const UserProfile = () => {
 
         {/* Footer Section */}
         <footer className="mt-6 text-center text-gray-600">
-          <button className="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600">
+          <button
+            onClick={() => userLogOut()}
+            className="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600"
+          >
             Logout
           </button>
         </footer>

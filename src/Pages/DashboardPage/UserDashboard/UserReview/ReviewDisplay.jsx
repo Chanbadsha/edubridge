@@ -1,9 +1,25 @@
 import { FaEdit, FaTrashAlt, FaEye } from "react-icons/fa";
 import { FcViewDetails } from "react-icons/fc";
 import { Link } from "react-router-dom";
+import useAxiosSecret from "../../../../Hooks/Axios/AxiosSecret/useAxiosSecret";
+import toast from "react-hot-toast";
 
-const ReviewDisplay = ({ reviewInfo, index }) => {
-  const handleDelete = () => {};
+const ReviewDisplay = ({ reviewInfo, index, refetch }) => {
+  const axiosSecret = useAxiosSecret();
+  const handleDelete = () => {
+    axiosSecret
+      .delete(`/deleteReview/${reviewInfo._id}`)
+      .then((res) => {
+        console.log(res);
+        toast.success("You have successfully deleted this review");
+        refetch();
+      })
+      .catch((error) => {
+        toast.error("Opps Application Deleted Failed");
+
+        console.log(error);
+      });
+  };
   // Review Edit Function
   const handleEdit = () => {};
 

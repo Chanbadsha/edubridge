@@ -21,6 +21,7 @@ import UserProfile from "../Pages/DashboardPage/UserDashboard/UserProfile/UserPr
 import UserReview from "../Pages/DashboardPage/UserDashboard/UserReview/UserReview";
 import UpdateApplication from "../Pages/DashboardPage/UserDashboard/UpdateApplication/UpdateApplication";
 import UserReviewForm from "../Pages/DashboardPage/UserDashboard/UserReview/UserReviewForm";
+import UserReviewEditForm from "../Pages/DashboardPage/UserDashboard/UserReview/UserReviewEditForm";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -113,6 +114,10 @@ const router = createBrowserRouter([
       {
         path: "/dashboard/review-application/:id",
         element: <UserReviewForm></UserReviewForm>,
+      },
+      {
+        path: "/dashboard/update-review/:id",
+        element: <UserReviewEditForm></UserReviewEditForm>,
       },
     ],
   },

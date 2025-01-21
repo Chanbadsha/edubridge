@@ -3,16 +3,29 @@ import DashboardHeader from "../../../../Components/DashboardHeader/DashboardHea
 import useAuth from "../../../../Hooks/useAuth";
 import useAxiosSecret from "../../../../Hooks/Axios/AxiosSecret/useAxiosSecret";
 import ReviewDisplay from "./ReviewDisplay";
+import { useQuery } from "@tanstack/react-query";
 
 const UserReview = () => {
   const { user, loading } = useAuth();
   const axiosSecret = useAxiosSecret();
-  const [reviews, setReviews] = useState([]);
-  useEffect(() => {
-    axiosSecret
-      .get(`/getReview?email=${user.email}`)
-      .then((res) => setReviews(res.data));
-  }, []);
+  // const [reviews, setReviews] = useState([]);
+
+  const {
+    data: reviews = [],
+    refetch,
+    isLoading,
+  } = useQuery({
+    queryKey: ["allReview", user.email],
+    queryFn: async () => {
+      const response = await axiosSecret.get(`/getReview?email=${user.email}`);
+      return response.data;
+    },
+  });
+  // useEffect(() => {
+  //   axiosSecret
+  //     .get(`/getReview?email=${user.email}`)
+  //     .then((res) => setReviews(res.data));
+  // }, []);
   return (
     <div>
       <DashboardHeader
@@ -45,6 +58,7 @@ const UserReview = () => {
                   reviewInfo={review}
                   index={index}
                   key={index}
+                  refetch={refetch}
                 ></ReviewDisplay>
               ))}
             </tbody>
