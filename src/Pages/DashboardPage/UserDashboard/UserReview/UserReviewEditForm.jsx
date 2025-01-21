@@ -72,18 +72,21 @@ const UserReviewEditForm = () => {
   return (
     <div
       className={`
-       "bg-backgroundLight text-textLight"
+       "bg-backgroundLight min-h-screen flex justify-center items-center text-textLight"
       `}
     >
       <main className="container mx-auto px-4 py-8">
         <form
-          className={`max-w-3xl mx-auto p-6 rounded-lg shadow-xl  "bg-gray-100"
-          `}
+          className={`max-w-3xl mx-auto p-6 rounded-lg shadow-xl bg-gray-100`}
           onSubmit={onSubmit}
         >
-          <h2 className="text-3xl font-bold mb-8 text-center text-blue-500">
-            Update Your Review
+          <h2 className="text-3xl font-bold mb-4 text-center text-blue-500">
+            Update Your Feedback
           </h2>
+          <p className="text-lg text-center text-gray-600 mb-8">
+            Enhance your previous review by updating your rating and comments.
+            Your opinion helps us improve and guide others!
+          </p>
 
           {/* Rating */}
           <div className="mb-6">
@@ -109,8 +112,7 @@ const UserReviewEditForm = () => {
               rows="4"
               defaultValue={review?.reviewComment}
               placeholder="Write your review here..."
-              className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 "bg-white"
-              `}
+              className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white`}
             />
           </div>
 
@@ -121,7 +123,7 @@ const UserReviewEditForm = () => {
               className="bg-blue-500 text-white py-3 px-8 rounded-full font-semibold shadow-lg hover:bg-blue-600 transition-all duration-300"
               disabled={isProcessing}
             >
-              {isProcessing ? "Submitting..." : "Submit Review"}
+              {isProcessing ? "Submitting..." : "Update Review"}
             </button>
           </div>
         </form>

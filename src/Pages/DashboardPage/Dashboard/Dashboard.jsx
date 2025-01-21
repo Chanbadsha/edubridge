@@ -84,14 +84,6 @@ const Dashboard = () => {
                 </span>
               )}
             </h2>
-            {!collapse && (
-              <div className="text-center mb-8">
-                <h1 className="text-lg font-semibold">Your Workspace</h1>
-                <p className="text-sm text-gray-400">
-                  Access your tools, tasks, and updates in one organized space.
-                </p>
-              </div>
-            )}
           </div>
 
           {/* Navigation Menu */}
@@ -141,7 +133,7 @@ const Dashboard = () => {
                   <>
                     <li className="hover:bg-gray-700 rounded-lg p-2 transition">
                       <Link
-                        to="/dashboard/moderator/my-profile"
+                        to="/dashboard/moderator-profile"
                         className="flex items-center gap-2"
                       >
                         {collapse ? <FaUser size={28} /> : <FaUser />}

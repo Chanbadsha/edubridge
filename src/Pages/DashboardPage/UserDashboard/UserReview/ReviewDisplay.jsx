@@ -3,22 +3,39 @@ import { FcViewDetails } from "react-icons/fc";
 import { Link } from "react-router-dom";
 import useAxiosSecret from "../../../../Hooks/Axios/AxiosSecret/useAxiosSecret";
 import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const ReviewDisplay = ({ reviewInfo, index, refetch }) => {
   const axiosSecret = useAxiosSecret();
   const handleDelete = () => {
-    axiosSecret
-      .delete(`/deleteReview/${reviewInfo._id}`)
-      .then((res) => {
-        console.log(res);
-        toast.success("You have successfully deleted this review");
-        refetch();
-      })
-      .catch((error) => {
-        toast.error("Opps Application Deleted Failed");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecret
+          .delete(`/deleteReview/${reviewInfo._id}`)
+          .then((res) => {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your review has been deleted.",
+              icon: "success",
+            });
 
-        console.log(error);
-      });
+            refetch();
+          })
+          .catch((error) => {
+            toast.error("Opps Application Deleted Failed");
+
+            console.log(error);
+          });
+      }
+    });
   };
   // Review Edit Function
   const handleEdit = () => {};

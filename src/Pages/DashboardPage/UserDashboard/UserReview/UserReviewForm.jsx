@@ -46,7 +46,7 @@ const UserReviewForm = () => {
 
     setIsProcessing(true);
 
-    console.log(reviewData);
+    // console.log(reviewData);
     axiosSecret
       .post(`/addReview`, reviewData)
       .then((res) => {
@@ -74,22 +74,22 @@ const UserReviewForm = () => {
 
   return (
     <div
-      className={`${
-        isDarkMode
-          ? "bg-gray-900 text-textBlack"
-          : "bg-backgroundLight text-textLight"
-      }`}
+      className={`"bg-backgroundLight min-h-screen flex justify-center items-center text-textLight"
+      `}
     >
-      <main className="container mx-auto px-4 py-8">
+      <main className="container    mx-auto px-4 py-8">
         <form
-          className={`max-w-3xl mx-auto p-6 rounded-lg shadow-xl ${
-            isDarkMode ? "bg-backgroundBlack" : "bg-gray-100"
-          }`}
+          className={`max-w-3xl mx-auto p-6 rounded-lg shadow-xl "bg-gray-100"
+          `}
           onSubmit={onSubmit}
         >
-          <h2 className="text-3xl font-bold mb-8 text-center text-blue-500">
-            Add Your Review
+          <h2 className="text-3xl font-bold mb-4 text-center text-blue-500">
+            Share Your Experience
           </h2>
+          <p className="text-lg text-center text-gray-600 mb-8">
+            Your feedback matters! Rate your experience and leave a comment to
+            help us improve and guide others.
+          </p>
 
           {/* Rating */}
           <div className="mb-6">
@@ -114,9 +114,8 @@ const UserReviewForm = () => {
               name="reviewComment"
               rows="4"
               placeholder="Write your review here..."
-              className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                isDarkMode ? "bg-backgroundBlack text-textBlack" : "bg-white"
-              }`}
+              className={`w-full px-4 py-3 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"bg-white"
+              `}
             />
           </div>
 

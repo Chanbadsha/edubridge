@@ -52,6 +52,7 @@ const ScholarshipApplicationForm = () => {
     applicant_info.Scholarship_id = scholarship._id;
     applicant_info.application_date = date;
     applicant_info.Scholarship_info = scholarship;
+    applicant_info.application_status = "pending";
 
     const res = await axiosPublic.post(img_hosting_api, imageFile, {
       headers: {

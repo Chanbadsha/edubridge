@@ -8,7 +8,7 @@ import { useQuery } from "@tanstack/react-query";
 const UserReview = () => {
   const { user, loading } = useAuth();
   const axiosSecret = useAxiosSecret();
-  // const [reviews, setReviews] = useState([]);
+
 
   const {
     data: reviews = [],
@@ -21,11 +21,7 @@ const UserReview = () => {
       return response.data;
     },
   });
-  // useEffect(() => {
-  //   axiosSecret
-  //     .get(`/getReview?email=${user.email}`)
-  //     .then((res) => setReviews(res.data));
-  // }, []);
+
   return (
     <div>
       <DashboardHeader

@@ -4,6 +4,8 @@ import logoAvatar from "../../assets/Logo/profile.png";
 import useAuth from "../../Hooks/useAuth";
 import { Link, NavLink } from "react-router-dom";
 import toast from "react-hot-toast";
+import useUserData from "../../Hooks/UsersData/useUserData";
+import Loader from "../../Components/Loader/Loader";
 
 const HeaderNav = () => {
   // State for dark mode
@@ -11,6 +13,11 @@ const HeaderNav = () => {
   const toggleTheme = () => {
     setIsDarkMode((prevMode) => !prevMode); // Toggle between light/dark mode
   };
+  const userInfo = useUserData();
+  console.log(userInfo?.role);
+  // if (!userInfo) {
+  //   return <Loader></Loader>;
+  // }
   const NavLinkStyles = isDarkMode
     ? "text-textBlack font-bold hover:text-accentLight text-[17px]  bg-backgroundBlack"
     : "text-textLight font-bold hover:text-accentLight hover:bg-transparent text-[17px] bg-backgroundLight";
@@ -28,11 +35,22 @@ const HeaderNav = () => {
           Scholarships
         </NavLink>
       </li>
-      <li className="list-none">
-        <NavLink to="/universities" className={`${NavLinkStyles}`}>
-          Universities
-        </NavLink>
-      </li>
+      {user && (
+        <li className="list-none">
+          <NavLink
+            to={`/dashboard/${
+              userInfo.role === "Moderator"
+                ? "moderator-profile"
+                : `${
+                    userInfo.role === "Admin" ? "admin-profile" : "my-profile"
+                  }`
+            }`}
+            className={`${NavLinkStyles}`}
+          >
+            Dashboard
+          </NavLink>
+        </li>
+      )}
       {/* <li>
         <NavLink
           to="/dashboard"
@@ -192,7 +210,7 @@ const HeaderNav = () => {
               <>
                 {" "}
                 <Link
-                  to="/register"
+                  to="/login"
                   className={`btn btn-outline ${
                     isDarkMode
                       ? "bg-backgroundBlack text-textBlack"

@@ -4,6 +4,7 @@ import useAxiosSecret from "../../Hooks/Axios/AxiosSecret/useAxiosSecret";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import useAuth from "../../Hooks/useAuth";
+import Swal from "sweetalert2";
 
 const UserApplicationDisplay = ({ applicationInfo, index, refetch }) => {
   const axiosSecret = useAxiosSecret();
@@ -11,30 +12,46 @@ const UserApplicationDisplay = ({ applicationInfo, index, refetch }) => {
 
   // Delete Function
   const handleDelete = () => {
-    axiosSecret
-      .delete(`/application/${applicationInfo._id}`)
-      .then((res) => {
-        console.log(res);
-        toast.success("You have successfully deleted this application");
-        refetch();
-      })
-      .catch((error) => {
-        toast.error("Opps Application Deleted Failed");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axiosSecret
+          .delete(`/application/${applicationInfo._id}`)
+          .then((res) => {
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your file has been deleted.",
+              icon: "success",
+            });
+            refetch();
+          })
+          .catch((error) => {
+            toast.error("Opps Application Deleted Failed");
 
-        console.log(error);
-      });
+            console.log(error);
+          });
+      }
+    });
   };
 
   // Edit Function
   const handleEdit = () => {
-    if (applicationInfo?.Scholarship_info?.application_status === "pending") {
-      toast.success(
-        `Don't try to edit application. Application are ${applicationInfo?.Scholarship_info?.application_status}`
+    if (applicationInfo?.application_status !== "pending") {
+      toast.error(
+        `You cannot edit the application.  Application are ${applicationInfo?.application_status}.`
       );
       return;
     }
     setUpdateApplication(applicationInfo);
   };
+
   // Review Function
   const handleReview = () => {
     setUpdateApplication(applicationInfo);
@@ -79,18 +96,16 @@ const UserApplicationDisplay = ({ applicationInfo, index, refetch }) => {
 
       {/* Application Status */}
       <td className="text-center">
-        {applicationInfo.Scholarship_info.application_status === "pending" && (
+        {applicationInfo?.application_status === "pending" && (
           <p className="text-yellow-500  font-semibold">Pending</p>
         )}
-        {applicationInfo.Scholarship_info.application_status ===
-          "processing" && (
+        {applicationInfo?.application_status === "processing" && (
           <p className="text-blue-500  font-semibold">Processing</p>
         )}
-        {applicationInfo.Scholarship_info.application_status ===
-          "completed" && (
+        {applicationInfo?.application_status === "completed" && (
           <p className="text-green-500  font-semibold">Completed</p>
         )}
-        {applicationInfo.Scholarship_info.application_status === "rejected" && (
+        {applicationInfo?.application_status === "rejected" && (
           <p className="text-red-500  font-semibold">Rejected</p>
         )}
       </td>
@@ -109,23 +124,30 @@ const UserApplicationDisplay = ({ applicationInfo, index, refetch }) => {
 
       {/* Edit Application */}
       <td className="text-center">
-        <Link
-          onClick={handleEdit}
-          to={`/dashboard/update-application/${applicationInfo._id}`}
-          className="text-blue-500  text-xl hover:text-blue-700"
-          title="Edit Application"
-        >
-          <FaEdit />
-        </Link>
-        {/* <button
-          onClick={() => (
-            document.getElementById("my_modal_1").showModal(), handleEdit()
-          )}
-          className="text-blue-500  text-xl hover:text-blue-700"
-          title="Edit Application"
-        >
-          <FaEdit />
-        </button> */}
+        {applicationInfo?.application_status === "pending" ? (
+          <>
+            {" "}
+            <Link
+              onClick={handleEdit}
+              to={`/dashboard/update-application/${applicationInfo._id}`}
+              className="text-blue-500  text-xl hover:text-blue-700"
+              title="Edit Application"
+            >
+              <FaEdit />
+            </Link>
+          </>
+        ) : (
+          <>
+            {" "}
+            <button
+              onClick={handleEdit}
+              className="text-blue-500  text-xl hover:text-blue-700"
+              title="Edit Application"
+            >
+              <FaEdit />
+            </button>
+          </>
+        )}
       </td>
 
       {/* Cancel Application */}

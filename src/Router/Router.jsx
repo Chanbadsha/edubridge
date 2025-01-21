@@ -14,7 +14,7 @@ import DashboardLayout from "../Layout/DashboardLayout/DashboardLayout";
 import AdminProfile from "../Pages/DashboardPage/AdminPage/AdminProfile/AdminProfile";
 import AdminRoute from "./AdminRoute";
 import ModeratorRoute from "./ModeratorRoute";
-import MyProfile from "../Pages/DashboardPage/ModeratorPage/MyProfile/MyProfile";
+import MyProfile from "../Pages/DashboardPage/ModeratorPage/MyProfile/ModeratorProfile";
 import Payment from "../Pages/PaymentPage/Payment/Payment";
 import UserApplication from "../Pages/DashboardPage/UserDashboard/UserApplication/UserApplication";
 import UserProfile from "../Pages/DashboardPage/UserDashboard/UserProfile/UserProfile";
@@ -87,7 +87,7 @@ const router = createBrowserRouter([
       },
       // Moderator Route
       {
-        path: "/dashboard/moderator/my-profile",
+        path: "/dashboard/moderator-profile",
         element: (
           <ModeratorRoute>
             <MyProfile></MyProfile>
