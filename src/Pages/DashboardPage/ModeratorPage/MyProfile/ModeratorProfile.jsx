@@ -15,7 +15,8 @@ const ModeratorProfile = () => {
   const [getAllApplication] = AllApplicationList();
   const [scholarships] = useScholarship();
   const [users] = useAllUser();
-  const userInfo = useUserData();
+  const [usersInfo] = useUserData();
+  console.log(usersInfo);
   if (loading) {
     return <Loader />;
   }
@@ -36,10 +37,10 @@ const ModeratorProfile = () => {
               {/* Role Badge */}
               <span
                 className={`text-sm text-white px-2 py-1 rounded-full ${
-                  userInfo?.role === "Admin" ? "bg-red-500" : "bg-blue-500"
+                  usersInfo?.role === "Admin" ? "bg-red-500" : "bg-blue-500"
                 }`}
               >
-                {userInfo?.role || "Moderator"}
+                {usersInfo?.role || "Moderator"}
               </span>
             </h1>
             <p className="text-gray-600">

@@ -3,10 +3,9 @@ import useUserData from "../../../../Hooks/UsersData/useUserData";
 import useAuth from "../../../../Hooks/useAuth";
 import Loader from "../../../../Components/Loader/Loader";
 
-const AdminProfile = ({ role }) => {
+const AdminProfile = () => {
   const { user, loading } = useAuth();
-  const userInfo = useUserData();
-  const userData = userInfo[0];
+
   if (loading) {
     return <Loader />;
   }

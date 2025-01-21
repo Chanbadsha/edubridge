@@ -3,9 +3,16 @@ import HeaderNav from "../../Shared/Header/HeaderNav";
 import Footer from "../../Shared/Footer/Footer";
 import useAuth from "../../Hooks/useAuth";
 import { Toaster } from "react-hot-toast";
+import useUserData from "../../Hooks/UsersData/useUserData";
+import Loader from "../../Components/Loader/Loader";
 
 const MainLayout = () => {
-  const { isDarkMode } = useAuth();
+  const { isDarkMode, loading } = useAuth();
+  // const [isLoading] = useUserData();
+
+  if (loading) {
+    return <Loader />;
+  }
   return (
     <div>
       <HeaderNav />

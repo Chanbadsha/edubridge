@@ -19,7 +19,7 @@ const CheckOutForm = ({ priceInfo }) => {
   const [clientSecret, setClientSecret] = useState("");
   const axiosSecret = useAxiosSecret();
   const navigate = useNavigate();
-  const userInfo = useUserData();
+  const [usersInfo] = useUserData();
   console.log(priceInfo.price);
   if (loading || priceInfo.price < 1) {
     return <Loader></Loader>;
@@ -60,8 +60,8 @@ const CheckOutForm = ({ priceInfo }) => {
         payment_method: {
           card: card,
           billing_details: {
-            name: userInfo.name,
-            email: userInfo.email,
+            name: usersInfo.name,
+            email: usersInfo.email,
           },
         },
       });

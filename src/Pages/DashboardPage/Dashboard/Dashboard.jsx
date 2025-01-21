@@ -21,8 +21,8 @@ import useUserData from "../../../Hooks/UsersData/useUserData";
 const Dashboard = () => {
   const [collapse, setCollapse] = useState(false);
   const { user, isDarkMode } = useAuth();
-  const userInfo = useUserData();
-  // console.log(userInfo.role);
+  const [usersInfo] = useUserData();
+  // console.log(usersInfo.role);
   useEffect(() => {
     const updateCollapseState = () => {
       if (window.innerWidth <= 560) {
@@ -48,16 +48,16 @@ const Dashboard = () => {
   const [admin, setAdmin] = useState(false);
 
   useEffect(() => {
-    if (userInfo.role === "Admin") {
+    if (usersInfo.role === "Admin") {
       setUsers(false);
       return setAdmin(true);
     }
-    if (userInfo.role === "Moderator") {
+    if (usersInfo.role === "Moderator") {
       setUsers(false);
       return setModerators(true);
     }
     setUsers(true);
-  }, [userInfo]);
+  }, [usersInfo]);
 
   return (
     <div className="min-h-screen  max-w-7xl mx-auto flex">
@@ -352,7 +352,7 @@ const Dashboard = () => {
               <>
                 <li className="hover:bg-gray-700 rounded-lg p-2 transition">
                   <Link
-                    to="/dashboard/moderator/my-profile"
+                    to="/dashboard/moderator-profile"
                     className="flex items-center gap-2"
                   >
                     {collapse ? <FaUser size={28} /> : <FaUser />}

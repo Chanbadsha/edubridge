@@ -4,14 +4,15 @@ import Loader from "../Components/Loader/Loader";
 import useUserData from "../Hooks/UsersData/useUserData";
 
 const ModeratorRoute = ({ children }) => {
-  const { user, loading } = useAuth();
-  const userInfo = useUserData();
+  const { user, loading, userLogOut } = useAuth();
+  const [usersInfo, isLoading] = useUserData();
   const location = useLocation();
-  if (loading) {
+  if (loading || isLoading) {
     return <Loader />;
   }
-  if (!user || userInfo.role === "Moderator") {
-    return <Navigate to="/login" state={{ from: location }} replace={true} />;
+  if (!user || usersInfo?.role !== "Moderator") {
+    userLogOut();
+    return <Navigate to="/" state={{ from: location }} replace={true} />;
   }
   return children;
 };

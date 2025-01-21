@@ -7,17 +7,20 @@ import toast from "react-hot-toast";
 import useUserData from "../../Hooks/UsersData/useUserData";
 import Loader from "../../Components/Loader/Loader";
 
+
+
 const HeaderNav = () => {
   // State for dark mode
-  const { isDarkMode, setIsDarkMode, user, userLogOut } = useAuth();
+  const { isDarkMode, setIsDarkMode, user, userLogOut, loading } = useAuth();
   const toggleTheme = () => {
     setIsDarkMode((prevMode) => !prevMode); // Toggle between light/dark mode
   };
-  const userInfo = useUserData();
-  console.log(userInfo?.role);
-  // if (!userInfo) {
-  //   return <Loader></Loader>;
-  // }
+  if (loading) {
+    return <Loader />;
+  }
+
+  const [usersInfo] = useUserData();
+
   const NavLinkStyles = isDarkMode
     ? "text-textBlack font-bold hover:text-accentLight text-[17px]  bg-backgroundBlack"
     : "text-textLight font-bold hover:text-accentLight hover:bg-transparent text-[17px] bg-backgroundLight";
@@ -39,10 +42,10 @@ const HeaderNav = () => {
         <li className="list-none">
           <NavLink
             to={`/dashboard/${
-              userInfo.role === "Moderator"
+              usersInfo?.role === "Moderator"
                 ? "moderator-profile"
                 : `${
-                    userInfo.role === "Admin" ? "admin-profile" : "my-profile"
+                    usersInfo?.role === "Admin" ? "admin-profile" : "my-profile"
                   }`
             }`}
             className={`${NavLinkStyles}`}
@@ -198,7 +201,19 @@ const HeaderNav = () => {
                     }`}
                   >
                     <li>
-                      <Link to="/dashboard">Dashboard</Link>
+                      <Link
+                        to={`/dashboard/${
+                          usersInfo?.role === "Moderator"
+                            ? "moderator-profile"
+                            : `${
+                                usersInfo?.role === "Admin"
+                                  ? "admin-profile"
+                                  : "my-profile"
+                              }`
+                        }`}
+                      >
+                        Dashboard
+                      </Link>
                     </li>
                     <li>
                       <a onClick={handleLogOut}>Logout</a>
