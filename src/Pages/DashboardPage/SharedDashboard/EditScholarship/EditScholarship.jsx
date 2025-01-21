@@ -5,6 +5,7 @@ import useAxiosSecret from "../../../../Hooks/Axios/AxiosSecret/useAxiosSecret";
 import useAuth from "../../../../Hooks/useAuth";
 import { useNavigate, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
 
 const EditScholarship = () => {
   const { loading, user, isDarkMode } = useAuth();
@@ -18,15 +19,15 @@ const EditScholarship = () => {
   const axiosPublic = useAxiosPublic();
   const axiosSecret = useAxiosSecret();
   const [scholarship, setScholarship] = useState([]);
-  const [userInfo, setUserInfo] = useState(null);
+  //   const [userInfo, setUserInfo] = useState(null);
   const [isProcessing, setIsProcessing] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    axiosPublic
-      .get(`/users?email=${user.email}`)
-      .then((res) => setUserInfo(res.data));
-  }, []);
+  //   useEffect(() => {
+  //     axiosPublic
+  //       .get(`/users?email=${user.email}`)
+  //       .then((res) => setUserInfo(res.data));
+  //   }, []);
 
   useEffect(() => {
     axiosPublic.get(`/scholarships/${id}`).then((res) => {
@@ -42,45 +43,33 @@ const EditScholarship = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    const { photo, ...applicant_info } = data || {};
+    const { city, country, ...ScholarshipInfo } = data || {};
     setIsProcessing(true);
-    const imageFile = { image: photo[0] };
-    const date = new Date();
-    applicant_info.student_name = applicant_info.user_name = userInfo.name;
-    applicant_info.user_email = userInfo.email;
-    applicant_info.user_id = userInfo._id;
-    applicant_info.Scholarship_id = scholarship._id;
-    applicant_info.application_date = date;
-    applicant_info.Scholarship_info = scholarship;
-    applicant_info.application_status = "pending";
 
-    const res = await axiosPublic.post(img_hosting_api, imageFile, {
-      headers: {
-        "content-type": "multipart/form-data",
-      },
-    });
-    applicant_info.user_img = res.data.data.display_url;
-    if (res.data.success) {
-      axiosSecret
-        .post("/application", applicant_info)
-        .then((res) => {
-          if (res.data.insertedId) {
-            toast.success("Your application has been successfully submitted!");
-            setIsProcessing(false);
-            reset();
-            navigate("/");
-          }
-        })
-        .catch((error) => {
-          if (error.response.status === 409) {
-            setIsProcessing(false);
+    const university_location = {
+      city: data?.city,
+      country: data?.city || scholarship?.university_location?.city,
+    };
+    ScholarshipInfo.university_location = university_location;
+    // console.log(university_location);
+    console.log(ScholarshipInfo);
 
-            return toast.error(error.response.data.message);
-          }
+    axiosSecret
+      .patch(`/updateScholarship/${scholarship._id}`, ScholarshipInfo)
+      .then((res) => {
+        if (res.data) {
+          toast.success("Scholarship has been successfully updated!");
           setIsProcessing(false);
-          toast.error("Application failed, try again");
-        });
-    }
+
+          reset();
+          navigate("/dashboard/shared/manage-scholarship");
+        }
+      })
+      .catch((error) => {
+        setIsProcessing(false);
+
+        toast.error("Application failed, try again");
+      });
   };
 
   return (
@@ -113,33 +102,35 @@ const EditScholarship = () => {
                   ? "bg-backgroundBlack text-textBlack"
                   : "text-textLight bg-backgroundLight"
               }`}
-              //   defaultValue={scholarship?.university_name}
+              defaultValue={scholarship?.university_name}
               {...register("university_name")}
             />
           </div>
 
           <div className="flex flex-col md:flex-row md:gap-4">
-            {/* Phone Number */}
+            {/* Subject Name */}
             <div className="mb-4 flex-1">
-              <label className="block font-semibold mb-1">Phone Number</label>
+              <label className="block font-semibold mb-1">Subject Name</label>
               <input
                 type="text"
-                placeholder="Enter Schloarship Category"
+                placeholder="Enter subject name"
+                defaultValue={scholarship?.subject_name}
                 className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                   isDarkMode
                     ? "bg-backgroundBlack text-textBlack"
                     : "text-textLight bg-backgroundLight"
                 }`}
-                {...register("scholarship_category")}
+                {...register("subject_name")}
               />
             </div>
 
-            {/* Gender */}
+            {/*  Scholarship Category */}
             <div className="mb-4 flex-1">
               <label className="block font-semibold mb-1">
                 Scholarship Category
               </label>
               <select
+                defaultValue={scholarship?.scholarship_category}
                 className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                   isDarkMode
                     ? "bg-backgroundBlack text-textBlack"
@@ -158,203 +149,109 @@ const EditScholarship = () => {
             </div>
           </div>
 
-          {/* Photo */}
-          <div className="mb-4">
-            <label className="block font-semibold mb-1">Upload Photo</label>
-            <input
-              type="file"
-              className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500"
-              {...register("photo", { required: "Photo is required" })}
-            />
-            {errors.photo && (
-              <p className="text-red-500 text-sm">{errors.photo.message}</p>
-            )}
-          </div>
-
           {/* Address */}
           <div className="mb-4 space-y-2">
             <label className="block font-semibold mb-1">
               University Address
             </label>
+
             <input
               type="text"
-              placeholder="Country"
+              placeholder="City"
+              defaultValue={scholarship?.university_location?.city}
               className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                 isDarkMode
                   ? "bg-backgroundBlack text-textBlack"
                   : "text-textLight bg-backgroundLight"
               }`}
-              {...register("university_location.country")}
-            />
-            <input
-              type="text"
-              placeholder="Ciy"
-              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                isDarkMode
-                  ? "bg-backgroundBlack text-textBlack"
-                  : "text-textLight bg-backgroundLight"
-              }`}
-              {...register("address.district")}
+              {...register("city")}
             />
             <input
               type="text"
               placeholder="Country"
+              defaultValue={scholarship?.university_location?.country}
               className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                 isDarkMode
                   ? "bg-backgroundBlack text-textBlack"
                   : "text-textLight bg-backgroundLight"
               }`}
-              {...register("address.country", {
-                required: "Country is required",
-              })}
+              {...register("country")}
             />
-            {errors.address && (
-              <p className="text-red-500 text-sm">
-                Address fields are required
-              </p>
-            )}
           </div>
 
-          {/* Degree and Study Gap */}
-          {/* <div className="flex flex-col md:flex-row md:gap-4">
-            <div className="mb-4 flex-1">
-              <label className="block font-semibold mb-1">
-                Applying Degree
-              </label>
-              <select
-                className={`w-full  px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                  isDarkMode
-                    ? "bg-backgroundBlack text-textBlack"
-                    : "text-textLight bg-backgroundLight"
-                }`}
-                {...register("degree", { required: "Degree is required" })}
-              >
-                <option value="">Select Degree</option>
-                <option value="Masters">Masters</option>
-                <option value="Bachelors">Bachelors</option>
-                <option value="Diploma">Diploma</option>
-              </select>
-              {errors.degree && (
-                <p className="text-red-500 text-sm">{errors.degree.message}</p>
-              )}
-            </div>
-            <div className="mb-4 flex-1">
-              <label className="block font-semibold mb-1">Study Gap</label>
-              <select
-                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                  isDarkMode
-                    ? "bg-backgroundBlack text-textBlack"
-                    : "text-textLight bg-backgroundLight"
-                }`}
-                {...register("studyGap")}
-              >
-                <option value="">No Gap</option>
-                <option value="1 Year">1 Year</option>
-                <option value="2 Years">2 Years</option>
-                <option value="3+ Years">3+ Years</option>
-              </select>
-            </div>
-          </div> */}
-
-          {/* SSC and HSC Result */}
+          {/*     Application Deadline And Stipend */}
           <div className="flex flex-col md:flex-row md:gap-4">
             <div className="mb-4 flex-1">
-              <label className="block font-semibold mb-1">SSC Result</label>
+              <label className="block font-semibold mb-1">
+                Application Deadline
+              </label>
               <input
-                type="number"
-                step="0.01"
-                placeholder="Enter SSC result"
+                type="date"
+                defaultValue={scholarship?.application_deadline}
                 className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                   isDarkMode
                     ? "bg-backgroundBlack text-textBlack"
                     : "text-textLight bg-backgroundLight"
                 }`}
-                {...register("sscResult", {
-                  required: "SSC Result is required",
-                  min: {
-                    value: 0,
-                    message: "SSC Result cannot be less than 0",
-                  },
-                  max: {
-                    value: 5,
-                    message: "SSC Result cannot be greater than 5",
-                  },
-                })}
+                {...register("application_deadline")}
               />
-              {errors.sscResult && (
-                <p className="text-red-500 text-sm">
-                  {errors.sscResult.message}
-                </p>
-              )}
             </div>
 
             <div className="mb-4 flex-1">
-              <label className="block font-semibold mb-1">HSC Result</label>
+              <label className="block font-semibold mb-1">
+                Stipend (If have)
+              </label>
               <input
-                type="number"
-                step="0.01"
-                placeholder="Enter HSC result"
+                type="text"
+                placeholder="Enter stipend (if have)"
+                defaultValue={scholarship?.stipend}
                 className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                   isDarkMode
                     ? "bg-backgroundBlack text-textBlack"
                     : "text-textLight bg-backgroundLight"
                 }`}
-                {...register("hscResult", {
-                  required: "HSC Result is required",
-                  min: {
-                    value: 0,
-                    message: "HSC Result cannot be less than 0",
-                  },
-                  max: {
-                    value: 5,
-                    message: "HSC Result cannot be greater than 5",
-                  },
-                })}
+                {...register("stipend")}
               />
-
-              {errors.hscResult && (
-                <p className="text-red-500 text-sm">
-                  {errors.hscResult.message}
-                </p>
-              )}
             </div>
           </div>
 
-          {/* Read-Only Fields */}
           <div className="flex flex-col md:flex-row md:gap-4">
             {" "}
             <div className="mb-4 flex-1">
               <label className="block font-semibold mb-1">
-                University Name
+                Application Fees ($)
               </label>
               <input
                 type="text"
+                placeholder="Enter application fees"
+                defaultValue={scholarship?.application_fees}
                 className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                   isDarkMode
                     ? "bg-backgroundBlack text-textBlack"
                     : "text-textLight bg-backgroundLight"
                 }`}
-                value={`${scholarship.university_name}`}
-                readOnly
+                {...register("application_fees")}
               />
             </div>
             <div className="mb-4 flex-1">
               <label className="block font-semibold mb-1">
-                Subject Category
+                Service Charge ($)
               </label>
+
               <input
                 type="text"
+                placeholder="Enter service charge"
+                defaultValue={scholarship?.service_charge}
                 className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                   isDarkMode
                     ? "bg-backgroundBlack text-textBlack"
                     : "text-textLight bg-backgroundLight"
                 }`}
-                value={`${scholarship.subject_name}`}
-                readOnly
+                {...register("service_charge")}
               />
             </div>
           </div>
-
+          {/* 
           <div className="flex flex-col md:flex-row md:gap-4">
             <div className="mb-4 flex-1">
               <label className="block font-semibold mb-1">
@@ -385,6 +282,23 @@ const EditScholarship = () => {
                 readOnly
               />
             </div>
+          </div> */}
+          <div className="mb-4 flex-1">
+            <label className="block font-semibold mb-1">
+              Scholarship Description
+            </label>
+            <textarea
+              type="text"
+              rows={8}
+              placeholder="Enter scholarship description"
+              defaultValue={scholarship?.scholarship_description}
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                isDarkMode
+                  ? "bg-backgroundBlack text-textBlack"
+                  : "text-textLight bg-backgroundLight"
+              }`}
+              {...register("scholarship_description")}
+            />
           </div>
 
           {/* Submit Button */}
