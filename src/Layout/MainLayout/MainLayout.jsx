@@ -11,12 +11,22 @@ const MainLayout = () => {
   // const [isLoading] = useUserData();
 
   if (loading) {
-    return <Loader />;
+    // return <Loader />;
   }
   return (
     <div>
       <HeaderNav />
-      <Toaster></Toaster>
+      <Toaster
+        toastOptions={{
+          duration: 5000,
+          position: "top-center",
+          style: {
+            background: "#333",
+            color: "#fff",
+          },
+        }}
+      ></Toaster>
+
       <div
         className={`mt-[82px] min-h-[calc(100vh-306px)] ${
           isDarkMode

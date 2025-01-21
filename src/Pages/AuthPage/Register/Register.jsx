@@ -8,6 +8,7 @@ import bgImg from "../../../assets/Auth/authentication.png";
 import Loader from "../../../Components/Loader/Loader";
 import toast from "react-hot-toast";
 import useAxiosPublic from "../../../Hooks/Axios/AxiosPublic/useAxiosPublic";
+import Swal from "sweetalert2";
 const Register = () => {
   const {
     isDarkMode,
@@ -68,6 +69,13 @@ const Register = () => {
         axiosPublic.post("/userSave", userInfo);
 
         toast.success("Google Login successful!");
+        // Swal.fire({
+        //   position: "top-center",
+        //   icon: "success",
+        //   title: "Google Login successful!",
+        //   showConfirmButton: false,
+        //   timer: 2500,
+        // });
         setLoading(false);
         navigate(from);
       })
@@ -75,6 +83,13 @@ const Register = () => {
         console.error(error);
         setLoading(false);
         toast.error("Google Login failed. Please try again.");
+        // Swal.fire({
+        //   position: "top-center",
+        //   icon: "error",
+        //   title: "Google Login failed. Please try again.",
+        //   showConfirmButton: false,
+        //   timer: 2500,
+        // });
       });
   };
 

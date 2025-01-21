@@ -71,7 +71,7 @@ const Dashboard = () => {
           className={`flex flex-col h-full ${collapse ? "items-center" : ""}`}
         >
           {/* Sidebar Header */}
-          <div className="h-1/6">
+          <div className="h-36">
             <h2
               className="text-xl font-bold mb-6 cursor-pointer flex items-center gap-2"
               onClick={handleCollapse}
@@ -141,7 +141,10 @@ const Dashboard = () => {
                       </Link>
                     </li>
                     <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                      <Link to="/dashboard" className="flex items-center gap-2">
+                      <Link
+                        to="/dashboard/shared/manage-scholarship"
+                        className="flex items-center gap-2"
+                      >
                         {collapse ? (
                           <BsCardChecklist size={28} />
                         ) : (
@@ -204,7 +207,10 @@ const Dashboard = () => {
                       </Link>
                     </li>
                     <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                      <Link to="/dashboard" className="flex items-center gap-2">
+                      <Link
+                        to="/dashboard/shared/manage-scholarship"
+                        className="flex items-center gap-2"
+                      >
                         {collapse ? (
                           <BsCardChecklist size={28} />
                         ) : (

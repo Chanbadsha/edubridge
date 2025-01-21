@@ -7,16 +7,18 @@ import { FaFacebook, FaGithub, FaGoogle, FaTwitter } from "react-icons/fa";
 import bgImg from "../../../assets/Auth/authentication.png";
 import toast from "react-hot-toast";
 import Loader from "../../../Components/Loader/Loader";
+import useAxiosPublic from "../../../Hooks/Axios/AxiosPublic/useAxiosPublic";
 
 const Login = () => {
   const { isDarkMode, googleLogin, setLoading, loading, loginUser } = useAuth();
+  const axiosPublic = useAxiosPublic();
   if (loading) {
     return <Loader />;
   }
   const navigate = useNavigate();
   const location = useLocation();
   const { from } = location?.state || { from: { pathname: "/" } };
-
+  console.log(from.pathname);
   const {
     register,
     handleSubmit,
@@ -37,10 +39,18 @@ const Login = () => {
   };
   const handlegoogleLogin = () => {
     googleLogin()
-      .then(() => {
+      .then(({ user }) => {
+        const userInfo = {
+          name: user.displayName,
+          email: user.email,
+          role: "User",
+        };
+
+        axiosPublic.post("/userSave", userInfo);
+
+        toast.success("Google Login successful!");
         setLoading(false);
         navigate(from);
-        toast.success("Google Login successful!");
       })
       .catch((error) => {
         console.error(error);

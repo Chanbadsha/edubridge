@@ -6,8 +6,7 @@ import { Link, NavLink } from "react-router-dom";
 import toast from "react-hot-toast";
 import useUserData from "../../Hooks/UsersData/useUserData";
 import Loader from "../../Components/Loader/Loader";
-
-
+import Swal from "sweetalert2";
 
 const HeaderNav = () => {
   // State for dark mode
@@ -54,16 +53,6 @@ const HeaderNav = () => {
           </NavLink>
         </li>
       )}
-      {/* <li>
-        <NavLink
-          to="/dashboard"
-          className={`text-${isDarkMode ? "textBlack" : "textLight"} bg-${
-            isDarkMode ? "backgroundBlack" : "backgroundLight"
-          }`}
-        >
-          Dashboard
-        </NavLink>
-      </li> */}
 
       <li className="list-none">
         <NavLink to="/about" className={`${NavLinkStyles}`}>
@@ -83,6 +72,13 @@ const HeaderNav = () => {
   const handleLogOut = () => {
     userLogOut().then(() => {
       toast.success("Successfully Log Out");
+      // Swal.fire({
+      //   position: "top-center",
+      //   icon: "success",
+      //   title: "Successfully Log Out",
+      //   showConfirmButton: false,
+      //   timer: 2500,
+      // });
     });
   };
   return (

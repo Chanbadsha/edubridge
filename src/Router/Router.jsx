@@ -23,6 +23,9 @@ import UpdateApplication from "../Pages/DashboardPage/UserDashboard/UpdateApplic
 import UserReviewForm from "../Pages/DashboardPage/UserDashboard/UserReview/UserReviewForm";
 import UserReviewEditForm from "../Pages/DashboardPage/UserDashboard/UserReview/UserReviewEditForm";
 import UserRoute from "./UserRoute";
+import ManageScholarship from "../Pages/DashboardPage/SharedDashboard/ManageScholarship/ManageScholarship";
+import EditScholarship from "../Pages/DashboardPage/SharedDashboard/EditScholarship/EditScholarship";
+import SharedRouter from "./SharedRouter";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -78,6 +81,24 @@ const router = createBrowserRouter([
       </PrivateRoute>
     ),
     children: [
+      // Shared Admin And Moderator Route
+      {
+        path: "/dashboard/shared/manage-scholarship",
+        element: (
+          <SharedRouter>
+            <ManageScholarship></ManageScholarship>
+          </SharedRouter>
+        ),
+      },
+      {
+        path: "/dashboard//shared/edit-scholarship/:id",
+        element: (
+          <SharedRouter>
+            <EditScholarship></EditScholarship>
+          </SharedRouter>
+        ),
+      },
+      // Admin Route
       {
         path: "/dashboard/admin-profile",
         element: (
@@ -86,6 +107,7 @@ const router = createBrowserRouter([
           </AdminRoute>
         ),
       },
+
       // Moderator Route
       {
         path: "/dashboard/moderator-profile",
@@ -95,6 +117,7 @@ const router = createBrowserRouter([
           </ModeratorRoute>
         ),
       },
+
       // User Route
       {
         path: "/dashboard/my-profile",
