@@ -23,6 +23,8 @@ const Register = () => {
     return <Loader />;
   }
   const location = useLocation();
+  const img_hosting_key = import.meta.env.VITE_IMG_HOSTING_KEY;
+  const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_key}`;
   const axiosPublic = useAxiosPublic();
   const { from } = location?.state || { from: { pathname: "/" } };
   const navigate = useNavigate();
@@ -33,27 +35,43 @@ const Register = () => {
     watch,
     formState: { errors },
   } = useForm();
-  const onSubmit = (data) => {
-    createUser(data.email, data.password)
-      .then(({ user }) => {
-        updateUserProfile(data.name, data?.photoUrl).then((result) => {
-          const userInfo = {
-            name: user.displayName,
-            email: user.email,
-            role: "User",
-          };
+  const onSubmit = async (data) => {
+    const { photoURL, ...newUserInfo } = data || {};
+    const imageFile = { image: photoURL[0] };
 
-          axiosPublic.post("/userSave", userInfo);
+    const res = await axiosPublic.post(img_hosting_api, imageFile, {
+      headers: {
+        "content-type": "multipart/form-data",
+      },
+    });
 
-          toast.success("Account Create Successful!");
+    newUserInfo.photoURL = res.data.data.display_url;
+
+    if (res?.data?.success) {
+      createUser(data.email, data.password)
+        .then(({ user }) => {
+          updateUserProfile(data?.name, newUserInfo?.photoURL).then(
+            (result) => {
+              const userInfo = {
+                name: user.displayName,
+                email: user.email,
+                role: "User",
+                photoURL: res?.data?.data?.display_url,
+              };
+
+              axiosPublic.post("/userSave", userInfo);
+
+              toast.success("Account Create Successful!");
+              setLoading(false);
+              navigate(from);
+            }
+          );
+        })
+        .catch((error) => {
           setLoading(false);
-          navigate(from);
+          toast.error(error.message);
         });
-      })
-      .catch((error) => {
-        setLoading(false);
-        toast.error(error.message);
-      });
+    }
   };
 
   // Social Login
@@ -61,21 +79,16 @@ const Register = () => {
     googleLogin()
       .then(({ user }) => {
         const userInfo = {
-          name: user.displayName,
-          email: user.email,
+          name: user?.displayName,
+          email: user?.email,
           role: "User",
+          photoURL: user?.photoURL,
         };
 
         axiosPublic.post("/userSave", userInfo);
 
         toast.success("Google Login successful!");
-        // Swal.fire({
-        //   position: "top-center",
-        //   icon: "success",
-        //   title: "Google Login successful!",
-        //   showConfirmButton: false,
-        //   timer: 2500,
-        // });
+
         setLoading(false);
         navigate(from);
       })
@@ -83,13 +96,6 @@ const Register = () => {
         console.error(error);
         setLoading(false);
         toast.error("Google Login failed. Please try again.");
-        // Swal.fire({
-        //   position: "top-center",
-        //   icon: "error",
-        //   title: "Google Login failed. Please try again.",
-        //   showConfirmButton: false,
-        //   timer: 2500,
-        // });
       });
   };
 
@@ -190,6 +196,25 @@ const Register = () => {
                 {errors.email && (
                   <p className="text-red-500 text-sm mt-1">
                     {errors.email.message}
+                  </p>
+                )}
+              </div>
+
+              {/* Photo */}
+              <div className="mb-4">
+                <label className="block font-semibold mb-1">
+                  Upload Your Photo
+                </label>
+                <input
+                  type="file"
+                  className="w-full px-3 py-2 border rounded-md focus:ring-2 focus:ring-blue-500"
+                  {...register("photoURL", {
+                    required: "A photo is required",
+                  })}
+                />
+                {errors.photoURL && (
+                  <p className="text-red-500 text-sm">
+                    {errors.photoURL.message}
                   </p>
                 )}
               </div>

@@ -8,7 +8,7 @@ import bgImg from "../../../assets/Auth/authentication.png";
 import toast from "react-hot-toast";
 import Loader from "../../../Components/Loader/Loader";
 import useAxiosPublic from "../../../Hooks/Axios/AxiosPublic/useAxiosPublic";
-
+import avatar from "../../../assets/Logo/profile.png";
 const Login = () => {
   const { isDarkMode, googleLogin, setLoading, loading, loginUser } = useAuth();
   const axiosPublic = useAxiosPublic();
@@ -18,7 +18,7 @@ const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { from } = location?.state || { from: { pathname: "/" } };
-  console.log(from.pathname);
+
   const {
     register,
     handleSubmit,
@@ -27,6 +27,15 @@ const Login = () => {
   const onSubmit = (data) => {
     loginUser(data.email, data.password)
       .then(() => {
+        const userInfo = {
+          name: "User",
+          email: data?.email,
+          role: "User",
+          photoURL: avatar,
+        };
+
+        axiosPublic.post("/userSave", userInfo);
+
         navigate(from);
         toast.success("Login successful!");
         setLoading(false);
@@ -44,6 +53,7 @@ const Login = () => {
           name: user.displayName,
           email: user.email,
           role: "User",
+          photoURL: user.photoURL,
         };
 
         axiosPublic.post("/userSave", userInfo);

@@ -18,7 +18,7 @@ const MainLayout = () => {
       <HeaderNav />
       <Toaster
         toastOptions={{
-          duration: 5000,
+          duration: 1500,
           position: "top-center",
           style: {
             background: "#333",

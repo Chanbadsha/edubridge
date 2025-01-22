@@ -236,7 +236,10 @@ const Dashboard = () => {
                       </Link>
                     </li>
                     <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                      <Link to="/dashboard" className="flex items-center gap-2">
+                      <Link
+                        to="/dashboard/admin/manage-user"
+                        className="flex items-center gap-2"
+                      >
                         {collapse ? <FaUsers size={28} /> : <FaUsers />}
                         {!collapse && <span>Manage Users</span>}
                       </Link>

@@ -2,31 +2,48 @@ import React from "react";
 import useUserData from "../../../../Hooks/UsersData/useUserData";
 import useAuth from "../../../../Hooks/useAuth";
 import Loader from "../../../../Components/Loader/Loader";
-
+import useScholarship from "../../../../Hooks/ScholarshipData/useScholarship";
+import useAllUser from "../../../../Hooks/AllUserInfo/useAllUser";
+import AllApplicationList from "../../../../Hooks/ApplicationInfo/AllApplicationList";
+import PendingApplication from "../../../../Hooks/ApplicationInfo/PendingApplication";
+import avatar from "../../../../assets/Logo/profile.png";
+import { Link } from "react-router-dom";
 const AdminProfile = () => {
-  const { user, loading } = useAuth();
-
+  const { user, loading, userLogOut } = useAuth();
+  const [usersInfo] = useUserData();
+  const [getAllApplication] = AllApplicationList();
+  const [getAllPendingApplication] = PendingApplication();
+  const [users] = useAllUser();
+  const [scholarships] = useScholarship();
   if (loading) {
     return <Loader />;
   }
-  const isAdmin = true;
 
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       {/* Header Section */}
       <header className="bg-white shadow rounded-lg p-6 mb-6">
-        <div className="flex items-center flex-col md:flex-row justify-center text-center space-y-5 md:space-y-0 space-x-4">
+        <div className="flex items-center space-x-4">
           <img
-            src={user.photoURL}
+            src={user?.photoURL || avatar}
             alt="Profile"
             className="w-24 h-24 rounded-full"
           />
           <div>
-            <h1 className="text-2xl font-bold">{user.displayName}</h1>
+            <h1 className="text-2xl font-bold flex items-center gap-2">
+              {user?.displayName || "Administrator"}
+              {/* Role Badge */}
+              <span
+                className={`text-sm text-white px-2 py-1 rounded-full ${
+                  usersInfo?.role === "Admin" ? "bg-red-500" : "bg-blue-500"
+                }`}
+              >
+                {usersInfo?.role || "Admin"}
+              </span>
+            </h1>
             <p className="text-gray-600">
-              {isAdmin
-                ? "Oversees platform operations and ensures a seamless experience for all users."
-                : "Facilitates scholarship approvals and maintains platform standards."}
+              {user?.bio ||
+                "Empowering the platform by overseeing operations and ensuring smooth functionality."}
             </p>
           </div>
         </div>
@@ -34,33 +51,72 @@ const AdminProfile = () => {
 
       {/* Dashboard Overview */}
       <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-        <div className="bg-white shadow rounded-lg p-6 text-center">
-          <h2 className="text-lg font-semibold">Total Users</h2>
-          <p className="text-3xl font-bold text-indigo-600">1,234</p>
-        </div>
+        {/* Scholarships Card */}
         <div className="bg-white shadow rounded-lg p-6 text-center">
           <h2 className="text-lg font-semibold">Scholarships</h2>
-          <p className="text-3xl font-bold text-indigo-600">567</p>
+          <p className="text-3xl font-bold text-indigo-600">
+            {scholarships?.length || "20+"}
+          </p>
         </div>
+
+        {/* Total Users Card */}
         <div className="bg-white shadow rounded-lg p-6 text-center">
-          <h2 className="text-lg font-semibold">Applications</h2>
-          <p className="text-3xl font-bold text-indigo-600">3,890</p>
+          <h2 className="text-lg font-semibold">Total Users</h2>
+          <p className="text-3xl font-bold text-indigo-600">
+            {users?.length || "10+"}
+          </p>
         </div>
+
+        {/* Total Applications Card */}
+        <div className="bg-white shadow rounded-lg p-6 text-center">
+          <h2 className="text-lg font-semibold">Total Applications</h2>
+          <p className="text-3xl font-bold text-indigo-600">
+            {getAllApplication?.length || 0}
+          </p>
+        </div>
+
+        {/* Pending Approvals Card */}
         <div className="bg-white shadow rounded-lg p-6 text-center">
           <h2 className="text-lg font-semibold">Pending Approvals</h2>
-          <p className="text-3xl font-bold text-indigo-600">45</p>
+          <p className="text-3xl font-bold text-indigo-600">
+            {getAllPendingApplication?.length || 0}
+          </p>
         </div>
       </section>
 
-      {/* Functionalities Section */}
+      {/* Admin Functionalities Section */}
       <section className="bg-white shadow rounded-lg p-6">
         <h2 className="text-xl font-semibold mb-4">Admin Functionalities</h2>
-        <p>Coming Soon...</p>
+        <ul className="list-disc pl-6 mb-4">
+          <li>Approve or reject pending applications</li>
+          <li>Manage all user roles (Admin, Moderator, User)</li>
+          <li>Delete or edit scholarships</li>
+          <li>Generate platform-wide reports</li>
+          <li>Monitor activity logs for suspicious behavior</li>
+          <li>Add or remove moderators</li>
+        </ul>
+        <div className="flex gap-4 mt-4">
+          <Link
+            to="/dashboard/shared/add-scholarship"
+            className="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600 transition duration-300"
+          >
+            Create Scholarship
+          </Link>
+          <button
+            className="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600 transition duration-300"
+            onClick={() => generateReport()}
+          >
+            Generate Report
+          </button>
+        </div>
       </section>
 
       {/* Footer Section */}
       <footer className="mt-6 text-center text-gray-600">
-        <button className="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600">
+        <button
+          className="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600 transition duration-300"
+          onClick={() => userLogOut()}
+        >
           Logout
         </button>
       </footer>

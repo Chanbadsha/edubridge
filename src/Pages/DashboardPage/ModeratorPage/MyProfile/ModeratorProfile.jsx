@@ -16,7 +16,7 @@ const ModeratorProfile = () => {
   const [scholarships] = useScholarship();
   const [users] = useAllUser();
   const [usersInfo] = useUserData();
-  console.log(usersInfo);
+
   if (loading) {
     return <Loader />;
   }

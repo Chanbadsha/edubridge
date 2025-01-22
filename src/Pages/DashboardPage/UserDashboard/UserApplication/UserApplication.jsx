@@ -6,7 +6,7 @@ import useApplicationInfo from "../../../../Hooks/ApplicationInfo/useApplication
 import UserApplicationDisplay from "../../../../Shared/UserApplicationList/UserApplicationDisplay";
 
 const UserApplication = () => {
-  const { user, loading } = useAuth();
+  const { loading } = useAuth();
   const [applicationList, isLoading, refetch] = useApplicationInfo();
 
   if (loading || isLoading) {
