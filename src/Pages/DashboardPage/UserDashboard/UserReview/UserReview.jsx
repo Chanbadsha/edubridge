@@ -38,9 +38,9 @@ const UserReview = () => {
               <tr>
                 <th>No.</th>
                 <th>University Name</th>
-                <th>Scholarship Degree</th>
+                <th>Scholarship Name</th>
 
-                <th>Review comments</th>
+                <th className="">Review comments</th>
                 <th>Review Date</th>
                 <th>Edit</th>
                 <th>Delete</th>

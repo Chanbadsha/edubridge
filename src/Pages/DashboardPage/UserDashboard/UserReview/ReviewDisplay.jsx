@@ -47,18 +47,20 @@ const ReviewDisplay = ({ reviewInfo, index, refetch }) => {
 
       {/* University Name  */}
 
-      <td className="text-center">{reviewInfo?.university_name}</td>
+      <td className="text-left">{reviewInfo?.university_name}</td>
       {/* Scholarship Degree */}
-      <td className="text-center">{reviewInfo?.scholarship_name}</td>
+      <td className="text-left">{reviewInfo?.scholarship_name}</td>
 
       {/* Review*/}
-      <td className="text-center">{reviewInfo?.reviewComment}</td>
+      <td className="text-left max-w-6">
+        {reviewInfo?.reviewComment.slice(0, 40)}....
+      </td>
 
       {/* Review Date */}
-      <td className="text-center">{reviewInfo?.reviewDate}</td>
+      <td className="text-left">{reviewInfo?.reviewDate}</td>
 
       {/* Edit Review */}
-      <td className="text-center">
+      <td className="text-right">
         <Link
           onClick={handleEdit}
           to={`/dashboard/update-review/${reviewInfo._id}`}
