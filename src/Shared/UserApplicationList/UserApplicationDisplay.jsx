@@ -76,7 +76,7 @@ const UserApplicationDisplay = ({ applicationInfo, index, refetch }) => {
 
       {/* Applied Degree */}
       <td className="text-center">
-        {applicationInfo.Scholarship_info.scholarship_category}
+        {applicationInfo.Scholarship_info.scholarship_degree}
       </td>
 
       {/* Subject Name */}

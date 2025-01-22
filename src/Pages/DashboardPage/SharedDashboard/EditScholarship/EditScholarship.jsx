@@ -92,7 +92,22 @@ const EditScholarship = () => {
             Scholarship Edit Form
           </h2>
 
-          {/* Name */}
+          {/*Scholarship Name */}
+          <div className="mb-4">
+            <label className="block font-semibold mb-1">Scholarship Name</label>
+            <input
+              type="text"
+              className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                isDarkMode
+                  ? "bg-backgroundBlack text-textBlack"
+                  : "text-textLight bg-backgroundLight"
+              }`}
+              defaultValue={scholarship?.university_name}
+              {...register("scholarship_name")}
+            />
+          </div>
+
+          {/* University Name */}
           <div className="mb-4">
             <label className="block font-semibold mb-1">University Name</label>
             <input
@@ -127,25 +142,22 @@ const EditScholarship = () => {
             {/*  Scholarship Category */}
             <div className="mb-4 flex-1">
               <label className="block font-semibold mb-1">
-                Scholarship Category
+                Scholarship Degree
               </label>
               <select
-                defaultValue={scholarship?.scholarship_category}
+                defaultValue={scholarship?.scholarship_degree}
                 className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                   isDarkMode
                     ? "bg-backgroundBlack text-textBlack"
                     : "text-textLight bg-backgroundLight"
                 }`}
-                {...register("scholarship_category")}
+                {...register("scholarship_degree")}
               >
-                <option value="">Select Category</option>
+                <option value="">Select Degree</option>
                 <option value="Bachelor">Bachelor</option>
                 <option value="Diploma">Diploma</option>
                 <option value="Masters">Masters</option>
               </select>
-              {errors.gender && (
-                <p className="text-red-500 text-sm">{errors.gender.message}</p>
-              )}
             </div>
           </div>
 

@@ -174,7 +174,10 @@ const Dashboard = () => {
                       </Link>
                     </li>
                     <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                      <Link to="/dashboard" className="flex items-center gap-2">
+                      <Link
+                        to="/dashboard/shared/add-scholarship"
+                        className="flex items-center gap-2"
+                      >
                         {collapse ? (
                           <FaPlusCircle size={28} />
                         ) : (
@@ -197,7 +200,10 @@ const Dashboard = () => {
                       </Link>
                     </li>
                     <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                      <Link to="/dashboard" className="flex items-center gap-2">
+                      <Link
+                        to="/dashboard/shared/add-scholarship"
+                        className="flex items-center gap-2"
+                      >
                         {collapse ? (
                           <FaPlusCircle size={28} />
                         ) : (

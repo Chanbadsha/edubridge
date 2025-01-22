@@ -26,6 +26,7 @@ import UserRoute from "./UserRoute";
 import ManageScholarship from "../Pages/DashboardPage/SharedDashboard/ManageScholarship/ManageScholarship";
 import EditScholarship from "../Pages/DashboardPage/SharedDashboard/EditScholarship/EditScholarship";
 import SharedRouter from "./SharedRouter";
+import AddScholarship from "../Pages/DashboardPage/SharedDashboard/AddScholarship/AddScholarship";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -95,6 +96,14 @@ const router = createBrowserRouter([
         element: (
           <SharedRouter>
             <EditScholarship></EditScholarship>
+          </SharedRouter>
+        ),
+      },
+      {
+        path: "/dashboard//shared/add-scholarship",
+        element: (
+          <SharedRouter>
+            <AddScholarship></AddScholarship>
           </SharedRouter>
         ),
       },

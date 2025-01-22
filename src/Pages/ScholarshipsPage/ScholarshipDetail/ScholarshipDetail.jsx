@@ -73,7 +73,7 @@ const ScholarshipDetail = () => {
                 <p className=" mb-2">
                   🗓️ Application Post date:{" "}
                   <span className="font-medium text-green-500">
-                    {scholarshipData.post_date}
+                    {scholarshipData.scholarship_post_date}
                   </span>
                 </p>
                 <p className=" mb-2">
@@ -105,7 +105,7 @@ const ScholarshipDetail = () => {
                     >
                       📂 Category:{" "}
                       <span className="font-semibold">
-                        {scholarshipData.scholarship_category}
+                        {scholarshipData.scholarship_degree}
                       </span>
                     </p>
                   </div>
@@ -167,7 +167,7 @@ const ScholarshipDetail = () => {
                 isDarkMode ? "text-textLight" : "text-textLight"
               }`}
             >
-              💰 <strong>Stipend:</strong> {scholarshipData.stipend}
+              💰 <strong>Stipend:</strong> ${scholarshipData.stipend} per year
             </p>
             <p
               className={`mb-2 ${

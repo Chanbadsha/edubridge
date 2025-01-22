@@ -59,7 +59,7 @@ return (
         </div>
         <div className="flex items-center gap-2">
           <TbCategory />
-          <span>{scholarship.scholarship_category}</span>
+          <span>{scholarship.scholarship_degree}</span>
         </div>
         <div className="flex items-center gap-2">
           <AiFillDollarCircle />
