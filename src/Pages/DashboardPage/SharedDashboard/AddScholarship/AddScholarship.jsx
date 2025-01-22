@@ -38,6 +38,7 @@ const AddScholarship = () => {
       city,
       country,
     };
+
     const posted_user_info = {
       posted_user_name: user?.displayName,
       posted_user_email: user?.email,
@@ -45,6 +46,9 @@ const AddScholarship = () => {
     };
     ScholarshipInfo.university_location = university_location;
     ScholarshipInfo.posted_user_info = posted_user_info;
+    ScholarshipInfo.rating = 5;
+    ScholarshipInfo.university_logo =
+      "https://i.ibb.co.com/cvBjQzM/university-Logo.jpg";
 
     const res = await axiosPublic.post(img_hosting_api, imageFile, {
       headers: {
@@ -52,7 +56,7 @@ const AddScholarship = () => {
       },
     });
     ScholarshipInfo.university_img = res.data.data.display_url;
-    console.log(ScholarshipInfo);
+
     if (res.data.success) {
       axiosSecret
         .post("/addScholarship", ScholarshipInfo)
@@ -67,11 +71,12 @@ const AddScholarship = () => {
         .catch((error) => {
           if (error.response.status === 409) {
             setIsProcessing(false);
-
+            console.log(error);
             return toast.error(error.response.data.message);
           }
           setIsProcessing(false);
           toast.error("Scholarship add failed, try again");
+          console.log(error);
         });
     }
   };
@@ -82,7 +87,7 @@ const AddScholarship = () => {
         isDarkMode
           ? "bg-gray-900 text-textBlack"
           : "bg-backgroundLight text-textLight"
-      }`}
+      } flex justify-center items-center min-h-screen`}
     >
       {/* Main Content */}
       <main className={`container mx-auto px-4 py-8`}>
@@ -160,8 +165,15 @@ const AddScholarship = () => {
                     ? "bg-backgroundBlack text-textBlack"
                     : "text-textLight bg-backgroundLight"
                 }`}
-                {...register("subject_name")}
+                {...register("subject_name", {
+                  required: "Subject name is required",
+                })}
               />
+              {errors.subject_name && (
+                <p className="text-red-500 text-sm">
+                  {errors.subject_name.message}
+                </p>
+              )}
             </div>
 
             {/*  Scholarship Degree */}
@@ -175,15 +187,19 @@ const AddScholarship = () => {
                     ? "bg-backgroundBlack text-textBlack"
                     : "text-textLight bg-backgroundLight"
                 }`}
-                {...register("scholarship_degree")}
+                {...register("scholarship_degree", {
+                  required: "Scholarship degree is required",
+                })}
               >
                 <option value="">Select Degree</option>
                 <option value="Bachelor">Bachelor</option>
                 <option value="Diploma">Diploma</option>
                 <option value="Masters">Masters</option>
               </select>
-              {errors.gender && (
-                <p className="text-red-500 text-sm">{errors.gender.message}</p>
+              {errors.scholarship_degree && (
+                <p className="text-red-500 text-sm">
+                  {errors.scholarship_degree.message}
+                </p>
               )}
             </div>
           </div>
@@ -269,32 +285,38 @@ const AddScholarship = () => {
               University Address
             </label>
             <div className="flex md:flex-row flex-col gap-4">
-              <input
-                type="text"
-                placeholder="City"
-                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                  isDarkMode
-                    ? "bg-backgroundBlack text-textBlack"
-                    : "text-textLight bg-backgroundLight"
-                }`}
-                {...register("city", { required: "City is required" })}
-              />
-              {errors.city && (
-                <p className="text-red-500 text-sm">{errors.city.message}</p>
-              )}
-              <input
-                type="text"
-                placeholder="Country"
-                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                  isDarkMode
-                    ? "bg-backgroundBlack text-textBlack"
-                    : "text-textLight bg-backgroundLight"
-                }`}
-                {...register("country", { required: "Country is required" })}
-              />
-              {errors.country && (
-                <p className="text-red-500 text-sm">{errors.country.message}</p>
-              )}
+              <div className="flex flex-col flex-1 w-full">
+                <input
+                  type="text"
+                  placeholder="City"
+                  className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    isDarkMode
+                      ? "bg-backgroundBlack text-textBlack"
+                      : "text-textLight bg-backgroundLight"
+                  }`}
+                  {...register("city", { required: "City is required" })}
+                />
+                {errors.city && (
+                  <p className="text-red-500 text-sm">{errors.city.message}</p>
+                )}
+              </div>
+              <div className="flex flex-col flex-1">
+                <input
+                  type="text"
+                  placeholder="Country"
+                  className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                    isDarkMode
+                      ? "bg-backgroundBlack text-textBlack"
+                      : "text-textLight bg-backgroundLight"
+                  }`}
+                  {...register("country", { required: "Country is required" })}
+                />
+                {errors.country && (
+                  <p className="text-red-500 text-sm">
+                    {errors.country.message}
+                  </p>
+                )}
+              </div>
             </div>
           </div>
 
@@ -348,7 +370,7 @@ const AddScholarship = () => {
               )}
             </div>
           </div>
-          {/* Tuition Fees And Stipend */}
+          {/* Tuition Fees , world rank And Stipend */}
           <div className="flex flex-col lg:flex-row md:gap-4">
             {/*University Rank */}
             <div className="mb-4 flex-1">
@@ -426,8 +448,15 @@ const AddScholarship = () => {
                     ? "bg-backgroundBlack text-textBlack"
                     : "text-textLight bg-backgroundLight"
                 }`}
-                {...register("application_fees")}
+                {...register("application_fees", {
+                  required: "Application fees is required",
+                })}
               />
+              {errors.application_fees && (
+                <p className="text-red-500 text-sm">
+                  {errors.application_fees.message}
+                </p>
+              )}
             </div>
 
             {/* service_charge */}
@@ -441,8 +470,15 @@ const AddScholarship = () => {
                     ? "bg-backgroundBlack text-textBlack"
                     : "text-textLight bg-backgroundLight"
                 }`}
-                {...register("service_charge")}
+                {...register("service_charge", {
+                  required: "Service charge is required",
+                })}
               />
+              {errors.service_charge && (
+                <p className="text-red-500 text-sm">
+                  {errors.service_charge.message}
+                </p>
+              )}
             </div>
           </div>
 
@@ -481,7 +517,7 @@ const AddScholarship = () => {
               type="submit"
               className="bg-blue-500 text-white py-3 px-8 rounded-full font-semibold shadow-lg transform transition-all duration-300 hover:bg-blue-600"
             >
-              {isProcessing ? "Processing" : "Edit Scholarship"}
+              {isProcessing ? "Processing" : "Add Scholarship"}
             </button>
           </div>
         </form>

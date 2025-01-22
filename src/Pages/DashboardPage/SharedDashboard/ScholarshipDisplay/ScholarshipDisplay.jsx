@@ -4,10 +4,10 @@ import useAuth from "../../../../Hooks/useAuth";
 import useAxiosSecret from "../../../../Hooks/Axios/AxiosSecret/useAxiosSecret";
 import { Link } from "react-router-dom";
 import { FcViewDetails } from "react-icons/fc";
+import toast from "react-hot-toast";
 
 const ScholarshipDisplay = ({ scholarship, index, refetch }) => {
   const axiosSecret = useAxiosSecret();
-  const { setUpdateScholarship, loading } = useAuth();
 
   // Delete Function
   const handleDelete = () => {
@@ -21,20 +21,20 @@ const ScholarshipDisplay = ({ scholarship, index, refetch }) => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        // axiosSecret
-        //   .delete(`/application/${scholarship._id}`)
-        //   .then((res) => {
-        //     Swal.fire({
-        //       title: "Deleted!",
-        //       text: "Your file has been deleted.",
-        //       icon: "success",
-        //     });
-        //     refetch();
-        //   })
-        //   .catch((error) => {
-        //     toast.error("Opps Application Deleted Failed");
-        //     console.log(error);
-        //   });
+        axiosSecret
+          .delete(`/deleteScholarship/${scholarship._id}`)
+          .then((res) => {
+            Swal.fire({
+              title: "Deleted!",
+              text: "This scholarship has been deleted.",
+              icon: "success",
+            });
+            refetch();
+          })
+          .catch((error) => {
+            toast.error("Opps Scholarship Deleted Failed");
+            console.log(error);
+          });
       }
     });
   };

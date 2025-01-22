@@ -8,26 +8,19 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
 const EditScholarship = () => {
-  const { loading, user, isDarkMode } = useAuth();
+  const { loading, isDarkMode } = useAuth();
 
   const { id } = useParams();
   if (loading) {
     return <Loader />;
   }
-  const img_hosting_key = import.meta.env.VITE_IMG_HOSTING_KEY;
-  const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_key}`;
+
   const axiosPublic = useAxiosPublic();
   const axiosSecret = useAxiosSecret();
   const [scholarship, setScholarship] = useState([]);
-  //   const [userInfo, setUserInfo] = useState(null);
+
   const [isProcessing, setIsProcessing] = useState(false);
   const navigate = useNavigate();
-
-  //   useEffect(() => {
-  //     axiosPublic
-  //       .get(`/users?email=${user.email}`)
-  //       .then((res) => setUserInfo(res.data));
-  //   }, []);
 
   useEffect(() => {
     axiosPublic.get(`/scholarships/${id}`).then((res) => {
@@ -97,12 +90,13 @@ const EditScholarship = () => {
             <label className="block font-semibold mb-1">Scholarship Name</label>
             <input
               type="text"
+              placeholder="Enter Scholarship Name"
               className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                 isDarkMode
                   ? "bg-backgroundBlack text-textBlack"
                   : "text-textLight bg-backgroundLight"
               }`}
-              defaultValue={scholarship?.university_name}
+              defaultValue={scholarship?.scholarship_name}
               {...register("scholarship_name")}
             />
           </div>
@@ -139,7 +133,7 @@ const EditScholarship = () => {
               />
             </div>
 
-            {/*  Scholarship Category */}
+            {/*  Scholarship Degree */}
             <div className="mb-4 flex-1">
               <label className="block font-semibold mb-1">
                 Scholarship Degree
@@ -157,6 +151,52 @@ const EditScholarship = () => {
                 <option value="Bachelor">Bachelor</option>
                 <option value="Diploma">Diploma</option>
                 <option value="Masters">Masters</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Scholarship And Subject Category */}
+
+          <div className="flex flex-col md:flex-row md:gap-4">
+            {/* subject_category */}
+            <div className="mb-4 flex-1">
+              <label className="block font-semibold mb-1">
+                Subject Category
+              </label>
+              <select
+                defaultValue={scholarship?.subject_category}
+                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  isDarkMode
+                    ? "bg-backgroundBlack text-textBlack"
+                    : "text-textLight bg-backgroundLight"
+                }`}
+                {...register("subject_category")}
+              >
+                <option value="">Select Subject Category</option>
+                <option value="Engineering">Engineering</option>
+                <option value="Doctor">Doctor</option>
+                <option value="Agriculture">Agriculture</option>
+              </select>
+            </div>
+
+            {/* Scholarship Category */}
+            <div className="mb-4 flex-1">
+              <label className="block font-semibold mb-1">
+                Scholarship Category
+              </label>
+              <select
+                defaultValue={scholarship?.scholarship_category}
+                className={`w-full  px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
+                  isDarkMode
+                    ? "bg-backgroundBlack text-textBlack"
+                    : "text-textLight bg-backgroundLight"
+                }`}
+                {...register("scholarship_category")}
+              >
+                <option value="">Select Category</option>
+                <option value="Full fund">Full fund</option>
+                <option value="Partial fund">Partial fund</option>
+                <option value="Self fund">Self-fund</option>
               </select>
             </div>
           </div>
@@ -199,6 +239,7 @@ const EditScholarship = () => {
               </label>
               <input
                 type="date"
+                min={new Date().toISOString().split("T")[0]}
                 defaultValue={scholarship?.application_deadline}
                 className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
                   isDarkMode
@@ -263,38 +304,7 @@ const EditScholarship = () => {
               />
             </div>
           </div>
-          {/* 
-          <div className="flex flex-col md:flex-row md:gap-4">
-            <div className="mb-4 flex-1">
-              <label className="block font-semibold mb-1">
-                Scholarship Category
-              </label>
-              <input
-                type="text"
-                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                  isDarkMode
-                    ? "bg-backgroundBlack text-textBlack"
-                    : "text-textLight bg-backgroundLight"
-                }`}
-                value="Full Scholarship"
-                readOnly
-              />
-            </div>
 
-            <div className="mb-4 flex-1">
-              <label className="block font-semibold mb-1">Eligibility</label>
-              <input
-                type="text"
-                className={`w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500 ${
-                  isDarkMode
-                    ? "bg-backgroundBlack text-textBlack"
-                    : "text-textLight bg-backgroundLight"
-                }`}
-                value="Eligible students with excellent academic records"
-                readOnly
-              />
-            </div>
-          </div> */}
           <div className="mb-4 flex-1">
             <label className="block font-semibold mb-1">
               Scholarship Description

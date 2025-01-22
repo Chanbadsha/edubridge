@@ -7,8 +7,8 @@ const useScholarship = () => {
 
   const {
     data: scholarships = [],
-    refetch,
     isLoading,
+    refetch,
   } = useQuery({
     queryKey: ["scholarships"],
     queryFn: async () => {
@@ -16,7 +16,7 @@ const useScholarship = () => {
       return response.data;
     },
   });
-  return [scholarships, refetch, isLoading];
+  return [scholarships, isLoading, refetch];
 };
 
 export default useScholarship;
