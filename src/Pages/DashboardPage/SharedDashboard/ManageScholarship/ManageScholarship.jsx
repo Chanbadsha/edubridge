@@ -1,9 +1,7 @@
 import DashboardHeader from "../../../../Components/DashboardHeader/DashboardHeader";
-import AllApplicationList from "../../../../Hooks/ApplicationInfo/AllApplicationList";
 import useScholarship from "../../../../Hooks/ScholarshipData/useScholarship";
 import ScholarshipDisplay from "../ScholarshipDisplay/ScholarshipDisplay";
 const ManageScholarship = () => {
-  // const [getAllApplication, isLoading, refetch] = AllApplicationList();
   const [scholarships, isLoading, refetch] = useScholarship();
   return (
     <div>

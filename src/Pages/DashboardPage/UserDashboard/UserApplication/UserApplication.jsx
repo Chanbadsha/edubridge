@@ -35,6 +35,7 @@ const UserApplication = () => {
                 <th>Application Fee</th>
                 <th>Service Charge</th>
                 <th>Status</th>
+                <th>Feedback</th>
                 <th>Details</th>
                 <th>Edit</th>
                 <th>Cancel</th>

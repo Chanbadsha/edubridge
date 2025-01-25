@@ -58,13 +58,13 @@ const UserApplicationDisplay = ({ applicationInfo, index, refetch }) => {
   };
 
   return (
-    <tr key={index} className="hover:bg-gray-50">
+    <tr key={index} className=" hover:bg-gray-50">
       {/* Index */}
       <td className="text-center">{index + 1}</td>
 
       {/* University Name and Location */}
       <td>
-        <div className="flex flex-col">
+        <div className="flex w-40 flex-col">
           <span className="font-semibold">
             {applicationInfo.Scholarship_info.university_name}
           </span>
@@ -109,6 +109,9 @@ const UserApplicationDisplay = ({ applicationInfo, index, refetch }) => {
           <p className="text-red-500  font-semibold">Rejected</p>
         )}
       </td>
+
+      {/* Service Charge */}
+      <td className="text-center">${applicationInfo?.feedbackComment}</td>
 
       {/* View Application */}
       <td className="text-center">

@@ -4,6 +4,8 @@ import useAxiosPublic from "../../../Hooks/Axios/AxiosPublic/useAxiosPublic";
 import useAuth from "../../../Hooks/useAuth";
 import Loader from "../../../Components/Loader/Loader";
 import useScholarship from "../../../Hooks/ScholarshipData/useScholarship";
+import { GiOpenBook } from "react-icons/gi";
+import { BiSolidCategory } from "react-icons/bi";
 
 const ScholarshipDetail = () => {
   const { loading, isDarkMode } = useAuth();
@@ -62,24 +64,27 @@ const ScholarshipDetail = () => {
           <div>
             <div className="flex flex-col lg:flex-row gap-4">
               <div className="flex-1">
-                <h4 className="text-3xl font-bold mb-4">Scholarship Details</h4>
+                <h4 className="text-3xl font-bold mb-4">
+                  {scholarshipData?.scholarship_name}
+                </h4>
+                <h4 className="text-xl font-bold mb-4">Scholarship Details:</h4>
                 <p className=" mb-2">
                   📍 Location:{" "}
                   <span className="font-medium">
-                    {scholarshipData.university_location.city},{" "}
-                    {scholarshipData.university_location.country}
+                    {scholarshipData?.university_location.city},{" "}
+                    {scholarshipData?.university_location.country}
                   </span>
                 </p>
                 <p className=" mb-2">
                   🗓️ Application Post date:{" "}
                   <span className="font-medium text-green-500">
-                    {scholarshipData.scholarship_post_date}
+                    {scholarshipData?.scholarship_post_date}
                   </span>
                 </p>
                 <p className=" mb-2">
                   🗓️ Application Deadline:{" "}
                   <span className="font-medium text-red-500">
-                    {scholarshipData.application_deadline}
+                    {scholarshipData?.application_deadline}
                   </span>
                 </p>
               </div>
@@ -88,26 +93,47 @@ const ScholarshipDetail = () => {
                 <div className="bg-gray-100 flex flex-col md:flex-row lg:flex-col lg:items-start gap-4 py-6 px-3 rounded-lg shadow-md mb-6 md:items-center">
                   {/* Left Section: Scholarship Information */}
                   <div className="flex-1">
-                    <p
-                      className={` flex gap-1 font-medium ${
-                        isDarkMode ? "text-textLight" : "text-gray-700"
-                      } mb-2 flex`}
-                    >
-                      <span>🎓 Subject:</span>
-                      <span className="font-semibold">
-                        {scholarshipData.subject_name}
-                      </span>
-                    </p>
-                    <p
-                      className={`flex gap-1 font-medium ${
-                        isDarkMode ? "text-textLight" : "text-gray-700"
-                      } mb-2`}
-                    >
-                      📂 Category:{" "}
-                      <span className="font-semibold">
-                        {scholarshipData.scholarship_degree}
-                      </span>
-                    </p>
+                    <div className="flex justify-self-start md:gap-4 flex-col md:flex-row">
+                      <p
+                        className={` flex gap-1 font-medium ${
+                          isDarkMode ? "text-textLight" : "text-gray-700"
+                        } mb-2 flex justify-center items-center`}
+                      >
+                        <span>
+                          <GiOpenBook />
+                        </span>
+                        :
+                        <span className="font-semibold">
+                          {scholarshipData?.subject_name}
+                        </span>
+                      </p>
+
+                      <p
+                        className={` flex gap-1 font-medium ${
+                          isDarkMode ? "text-textLight" : "text-gray-700"
+                        } mb-2 flex  items-center`}
+                      >
+                        <span>
+                          <BiSolidCategory />
+                        </span>
+                        :
+                        <span className="font-semibold">
+                          {scholarshipData?.subject_category}
+                        </span>
+                      </p>
+                    </div>
+                    <div>
+                      <p
+                        className={`flex gap-1 font-medium ${
+                          isDarkMode ? "text-textLight" : "text-gray-700"
+                        } mb-2`}
+                      >
+                        📂 :{" "}
+                        <span className="font-semibold capitalize">
+                          {scholarshipData?.scholarship_category}
+                        </span>
+                      </p>
+                    </div>
                   </div>
 
                   {/* Right Section: Rating */}
@@ -125,10 +151,10 @@ const ScholarshipDetail = () => {
                           isDarkMode ? "text-gray-300" : "text-gray-600"
                         }`}
                       >
-                        {scholarshipData.rating ? (
+                        {scholarshipData?.rating ? (
                           <>
                             <span className="font-bold text-green-500">
-                              {scholarshipData.rating}
+                              {scholarshipData?.rating}
                             </span>{" "}
                             <span
                               className={`${
@@ -174,7 +200,7 @@ const ScholarshipDetail = () => {
                 isDarkMode ? "text-textLight" : "text-textLight"
               }`}
             >
-              🔧 <strong>Service Charge:</strong>{" "}
+              🔧 <strong>Service Charge:</strong> $
               {scholarshipData.service_charge}
             </p>
             <p
@@ -182,7 +208,7 @@ const ScholarshipDetail = () => {
                 isDarkMode ? "text-textLight" : "text-textLight"
               }`}
             >
-              💵 <strong>Application Fees:</strong>{" "}
+              💵 <strong>Application Fees:</strong> $
               {scholarshipData.application_fees}
             </p>
           </div>

@@ -18,12 +18,12 @@ const UpdateApplication = () => {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = async (data) => {
-    console.log(data);
+    // console.log(data);
     setIsProcessing(true);
     axiosSecret
       .patch(`/updateApplication/${updateApplication._id}`, data)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         if (res.data) {
           toast.success("Your application successfully updated");
           setIsProcessing(false);

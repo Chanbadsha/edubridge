@@ -58,7 +58,9 @@ const DisplayUserReview = ({ review, index, refetch }) => {
       </td>
       <td className="text-xs">{review?.subject_category}</td>
       <td className="text-xs">{review?.reviewDate}</td>
-      <td className="max-w-5 ">{review?.reviewComment.slice(0, 30)}....</td>
+      <td title={review?.reviewComment} className="max-w-5 ">
+        {review?.reviewComment.slice(0, 30)}....
+      </td>
       <td className="text-center">{review?.rating}</td>
 
       {/* Delete Scholarship */}

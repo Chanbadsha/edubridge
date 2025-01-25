@@ -154,7 +154,10 @@ const Dashboard = () => {
                       </Link>
                     </li>
                     <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                      <Link to="/dashboard" className="flex items-center gap-2">
+                      <Link
+                        to="/dashboard/shared/manage-review"
+                        className="flex items-center gap-2"
+                      >
                         {collapse ? (
                           <RiChatCheckLine size={28} />
                         ) : (
@@ -164,7 +167,10 @@ const Dashboard = () => {
                       </Link>
                     </li>
                     <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                      <Link to="/dashboard" className="flex items-center gap-2">
+                      <Link
+                        to="/dashboard/shared/manage-application"
+                        className="flex items-center gap-2"
+                      >
                         {collapse ? (
                           <FaClipboardList size={28} />
                         ) : (
@@ -226,7 +232,10 @@ const Dashboard = () => {
                       </Link>
                     </li>
                     <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                      <Link to="/dashboard" className="flex items-center gap-2">
+                      <Link
+                        to="/dashboard/shared/manage-application"
+                        className="flex items-center gap-2"
+                      >
                         {collapse ? (
                           <FaClipboardList size={28} />
                         ) : (

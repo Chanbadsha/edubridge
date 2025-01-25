@@ -43,7 +43,7 @@ const UserReviewEditForm = () => {
 
     setIsProcessing(true);
 
-    console.log(reviewData);
+    // console.log(reviewData);
     axiosSecret
       .patch(`/updateReview/${id}`, reviewData)
       .then((res) => {

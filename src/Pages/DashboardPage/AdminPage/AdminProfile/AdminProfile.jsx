@@ -8,6 +8,7 @@ import AllApplicationList from "../../../../Hooks/ApplicationInfo/AllApplication
 import PendingApplication from "../../../../Hooks/ApplicationInfo/PendingApplication";
 import avatar from "../../../../assets/Logo/profile.png";
 import { Link } from "react-router-dom";
+import DashboardHeader from "../../../../Components/DashboardHeader/DashboardHeader";
 const AdminProfile = () => {
   const { user, loading, userLogOut } = useAuth();
   const [usersInfo] = useUserData();
@@ -20,7 +21,13 @@ const AdminProfile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="min-h-screen bg-gray-100 ">
+      {/* Dashboard Header */}
+      <DashboardHeader
+        title="Account Overview"
+        subtitle="View and update your personal information, application status, and preferences."
+      />
+
       {/* Header Section */}
       <header className="bg-white shadow rounded-lg p-6 mb-6">
         <div className="flex items-center space-x-4">

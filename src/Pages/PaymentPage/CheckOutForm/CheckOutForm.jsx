@@ -20,7 +20,7 @@ const CheckOutForm = ({ priceInfo }) => {
   const axiosSecret = useAxiosSecret();
   const navigate = useNavigate();
   const [usersInfo] = useUserData();
-  console.log(priceInfo.price);
+
   if (loading || priceInfo.price < 1) {
     return <Loader></Loader>;
   }

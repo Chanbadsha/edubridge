@@ -29,6 +29,8 @@ import SharedRouter from "./SharedRouter";
 import AddScholarship from "../Pages/DashboardPage/SharedDashboard/AddScholarship/AddScholarship";
 import ManageUser from "../Pages/DashboardPage/SharedDashboard/ManageUser/ManageUser";
 import ManageUserReview from "../Pages/DashboardPage/SharedDashboard/ManageUserReview/ManageUserReview";
+import ManageUserApplication from "../Pages/DashboardPage/SharedDashboard/ManageUserApplication/ManageUserApplication";
+import UserApplicationFeedback from "../Pages/DashboardPage/SharedDashboard/ManageUserApplication/UserApplicationFeedback";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -122,6 +124,22 @@ const router = createBrowserRouter([
         element: (
           <SharedRouter>
             <ManageUserReview></ManageUserReview>
+          </SharedRouter>
+        ),
+      },
+      {
+        path: "/dashboard//shared/manage-application",
+        element: (
+          <SharedRouter>
+            <ManageUserApplication></ManageUserApplication>
+          </SharedRouter>
+        ),
+      },
+      {
+        path: "/dashboard/shared/application-feedback/:id",
+        element: (
+          <SharedRouter>
+            <UserApplicationFeedback></UserApplicationFeedback>
           </SharedRouter>
         ),
       },

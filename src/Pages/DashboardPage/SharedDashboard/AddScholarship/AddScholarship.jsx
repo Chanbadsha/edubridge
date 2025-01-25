@@ -18,7 +18,7 @@ const AddScholarship = () => {
   const img_hosting_api = `https://api.imgbb.com/1/upload?key=${img_hosting_key}`;
   const axiosPublic = useAxiosPublic();
   const axiosSecret = useAxiosSecret();
-console.log(user);
+  // console.log(user);
   const [isProcessing, setIsProcessing] = useState(false);
   const navigate = useNavigate();
 
