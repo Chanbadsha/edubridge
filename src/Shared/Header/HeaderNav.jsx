@@ -116,12 +116,12 @@ const HeaderNav = () => {
           <a className="btn btn-ghost px-2 py-2 h-auto text-xl">
             <div className="flex justify-center items-center gap-2">
               <img
-                className="w-12 rounded-full h-12"
+                className="w-12 hidden md:block rounded-full h-12"
                 src={logo}
                 alt="EduBridge"
               />
               <h1
-                className={`text-3xl ${
+                className={`md:text-3xl text-2xl  ${
                   isDarkMode ? "text-textBlack" : "text-textLight"
                 }`}
               >

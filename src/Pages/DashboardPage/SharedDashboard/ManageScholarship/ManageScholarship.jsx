@@ -19,13 +19,12 @@ const ManageScholarship = () => {
           <table className="table w-full border border-gray-200">
             {/* Table Head */}
             <thead className="bg-gray-100">
-              <tr>
+              <tr className="">
                 <th>No.</th>
-                <th>University Name</th>
+                <th className="md:min-w-64">University Name</th>
                 <th>Degree</th>
                 <th>Subject Name</th>
                 <th>Application Fee</th>
-
                 <th>Details</th>
                 <th>Edit</th>
                 <th>Delete</th>

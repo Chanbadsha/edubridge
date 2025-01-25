@@ -43,7 +43,9 @@ const ManageUserApplication = () => {
             </tbody>
           </table>
         ) : (
-          <div className="text-center mt-10 text-gray-500">No users found.</div>
+          <div className="text-center mt-10 text-gray-500">
+            No applications found.
+          </div>
         )}
       </div>
     </div>

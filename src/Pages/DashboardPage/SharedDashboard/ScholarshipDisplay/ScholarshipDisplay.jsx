@@ -45,7 +45,7 @@ const ScholarshipDisplay = ({ scholarship, index, refetch }) => {
       <td className="text-center">{index + 1}</td>
 
       {/* University Name  */}
-      <td className="text-left max-w-20">{scholarship?.university_name}</td>
+      <td>{scholarship?.university_name}</td>
 
       {/*  Degree */}
       <td className="text-left">{scholarship?.scholarship_degree}</td>
@@ -54,7 +54,7 @@ const ScholarshipDisplay = ({ scholarship, index, refetch }) => {
       <td className="text-left">{scholarship?.subject_name}</td>
 
       {/* Application Fee */}
-      <td className="text-center pr-12">${scholarship?.application_fees}</td>
+      <td className="text-center">${scholarship?.application_fees}</td>
 
       {/* View Scholarship */}
       <td className="text-center">

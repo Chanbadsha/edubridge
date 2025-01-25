@@ -46,12 +46,12 @@ const ScholarshipDetail = () => {
       {/* University Image */}
       <div className="relative w-full overflow-hidden rounded-xl shadow-lg">
         <img
-          className="w-full h-[500px] object-cover"
+          className="w-full h-auto sm:h-[400px] lg:h-[500px] object-cover"
           src={scholarshipData.university_img}
           alt={`${scholarshipData.university_name} campus`}
         />
         <div className="absolute bottom-0 w-full bg-gradient-to-t from-black via-transparent to-transparent p-6 text-white">
-          <h2 className="text-4xl font-bold">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold">
             {scholarshipData.university_name}
           </h2>
         </div>
@@ -60,11 +60,11 @@ const ScholarshipDetail = () => {
       {/* Content Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-8">
         {/* Left Section */}
-        <div className="col-span-2">
+        <div className="col-span-1 lg:col-span-2">
           <div>
             <div className="flex flex-col lg:flex-row gap-4">
               <div className="flex-1">
-                <h4 className="text-3xl font-bold mb-4">
+                <h4 className="text-2xl sm:text-3xl font-bold mb-4">
                   {scholarshipData?.scholarship_name}
                 </h4>
                 <h4 className="text-xl font-bold mb-4">Scholarship Details:</h4>
