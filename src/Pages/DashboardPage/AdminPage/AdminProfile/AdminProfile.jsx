@@ -21,7 +21,7 @@ const AdminProfile = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 ">
+    <div className="min-h-screen bg-gray-100 mb-6">
       {/* Dashboard Header */}
       <DashboardHeader
         title="Account Overview"
@@ -30,14 +30,14 @@ const AdminProfile = () => {
 
       {/* Header Section */}
       <header className="bg-white shadow rounded-lg p-6 mb-6">
-        <div className="flex items-center space-x-4">
+        <div className="flex flex-col md:flex-row items-center space-x-4">
           <img
             src={user?.photoURL || avatar}
             alt="Profile"
             className="w-24 h-24 rounded-full"
           />
-          <div>
-            <h1 className="text-2xl font-bold flex items-center gap-2">
+          <div className="spy4">
+            <h1 className="text-2xl font-bold  flex flex-col md:flex-row items-center gap-2">
               {user?.displayName || "Administrator"}
               {/* Role Badge */}
               <span
@@ -48,7 +48,7 @@ const AdminProfile = () => {
                 {usersInfo?.role || "Admin"}
               </span>
             </h1>
-            <p className="text-gray-600">
+            <p className="text-gray-600 text-center md:text-start">
               {user?.bio ||
                 "Empowering the platform by overseeing operations and ensuring smooth functionality."}
             </p>

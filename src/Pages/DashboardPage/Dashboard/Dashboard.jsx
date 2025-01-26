@@ -281,12 +281,7 @@ const Dashboard = () => {
                     {!collapse && <span>Scholarships</span>}
                   </Link>
                 </li>
-                <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                  <Link to="/dashboard" className="flex items-center gap-2">
-                    {collapse ? <FaUniversity size={28} /> : <FaUniversity />}
-                    {!collapse && <span>Universities</span>}
-                  </Link>
-                </li>
+
                 <li className="hover:bg-gray-700 rounded-lg p-2 transition">
                   <Link to="/dashboard" className="flex items-center gap-2">
                     {collapse ? (
@@ -326,14 +321,13 @@ const Dashboard = () => {
           }`}
         >
           {collapse ? (
-            <FaBars size={28} />
+            <FaBars size={20} />
           ) : (
             <>
-              <FaBars size={28} /> EduBridge
+              <FaBars size={20} /> EduBridge
             </>
           )}
         </span>
-
         <nav className="w-full">
           <ul className="space-y-4">
             {users && (
@@ -343,7 +337,7 @@ const Dashboard = () => {
                     to="/dashboard/my-profile"
                     className="flex items-center gap-2"
                   >
-                    {collapse ? <FaUser size={28} /> : <FaUser />}
+                    {collapse ? <FaUser size={20} /> : <FaUser />}
                     {!collapse && <span>My Profile</span>}
                   </Link>
                 </li>
@@ -353,7 +347,7 @@ const Dashboard = () => {
                     className="flex items-center gap-2"
                   >
                     {collapse ? (
-                      <HiOutlineClipboardList size={28} />
+                      <HiOutlineClipboardList size={20} />
                     ) : (
                       <HiOutlineClipboardList />
                     )}
@@ -366,7 +360,7 @@ const Dashboard = () => {
                     className="flex items-center gap-2"
                   >
                     {collapse ? (
-                      <HiOutlineChatAlt2 size={28} />
+                      <HiOutlineChatAlt2 size={20} />
                     ) : (
                       <HiOutlineChatAlt2 />
                     )}
@@ -382,14 +376,17 @@ const Dashboard = () => {
                     to="/dashboard/moderator-profile"
                     className="flex items-center gap-2"
                   >
-                    {collapse ? <FaUser size={28} /> : <FaUser />}
+                    {collapse ? <FaUser size={20} /> : <FaUser />}
                     {!collapse && <span>My Profile</span>}
                   </Link>
                 </li>
                 <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                  <Link to="/dashboard" className="flex items-center gap-2">
+                  <Link
+                    to="/dashboard/shared/manage-scholarship"
+                    className="flex items-center gap-2"
+                  >
                     {collapse ? (
-                      <BsCardChecklist size={28} />
+                      <BsCardChecklist size={20} />
                     ) : (
                       <BsCardChecklist />
                     )}
@@ -397,9 +394,12 @@ const Dashboard = () => {
                   </Link>
                 </li>
                 <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                  <Link to="/dashboard" className="flex items-center gap-2">
+                  <Link
+                    to="/dashboard/shared/manage-review"
+                    className="flex items-center gap-2"
+                  >
                     {collapse ? (
-                      <RiChatCheckLine size={28} />
+                      <RiChatCheckLine size={20} />
                     ) : (
                       <RiChatCheckLine />
                     )}
@@ -407,9 +407,12 @@ const Dashboard = () => {
                   </Link>
                 </li>
                 <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                  <Link to="/dashboard" className="flex items-center gap-2">
+                  <Link
+                    to="/dashboard/shared/manage-application"
+                    className="flex items-center gap-2"
+                  >
                     {collapse ? (
-                      <FaClipboardList size={28} />
+                      <FaClipboardList size={20} />
                     ) : (
                       <FaClipboardList />
                     )}
@@ -417,8 +420,11 @@ const Dashboard = () => {
                   </Link>
                 </li>
                 <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                  <Link to="/dashboard" className="flex items-center gap-2">
-                    {collapse ? <FaPlusCircle size={28} /> : <FaPlusCircle />}
+                  <Link
+                    to="/dashboard/shared/add-scholarship"
+                    className="flex items-center gap-2"
+                  >
+                    {collapse ? <FaPlusCircle size={20} /> : <FaPlusCircle />}
                     {!collapse && <span>Add Scholarship</span>}
                   </Link>
                 </li>
@@ -431,20 +437,26 @@ const Dashboard = () => {
                     to="/dashboard/admin-profile"
                     className="flex items-center gap-2"
                   >
-                    {collapse ? <FaUser size={28} /> : <FaUser />}
+                    {collapse ? <FaUser size={20} /> : <FaUser />}
                     {!collapse && <span>Admin Profile</span>}
                   </Link>
                 </li>
                 <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                  <Link to="/dashboard" className="flex items-center gap-2">
-                    {collapse ? <FaPlusCircle size={28} /> : <FaPlusCircle />}
+                  <Link
+                    to="/dashboard/shared/add-scholarship"
+                    className="flex items-center gap-2"
+                  >
+                    {collapse ? <FaPlusCircle size={20} /> : <FaPlusCircle />}
                     {!collapse && <span>Add Scholarship</span>}
                   </Link>
                 </li>
                 <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                  <Link to="/dashboard" className="flex items-center gap-2">
+                  <Link
+                    to="/dashboard/shared/manage-scholarship"
+                    className="flex items-center gap-2"
+                  >
                     {collapse ? (
-                      <BsCardChecklist size={28} />
+                      <BsCardChecklist size={20} />
                     ) : (
                       <BsCardChecklist />
                     )}
@@ -452,9 +464,12 @@ const Dashboard = () => {
                   </Link>
                 </li>
                 <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                  <Link to="/dashboard" className="flex items-center gap-2">
+                  <Link
+                    to="/dashboard/shared/manage-application"
+                    className="flex items-center gap-2"
+                  >
                     {collapse ? (
-                      <FaClipboardList size={28} />
+                      <FaClipboardList size={20} />
                     ) : (
                       <FaClipboardList />
                     )}
@@ -462,8 +477,11 @@ const Dashboard = () => {
                   </Link>
                 </li>
                 <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                  <Link to="/dashboard" className="flex items-center gap-2">
-                    {collapse ? <FaUsers size={28} /> : <FaUsers />}
+                  <Link
+                    to="/dashboard/admin/manage-user"
+                    className="flex items-center gap-2"
+                  >
+                    {collapse ? <FaUsers size={20} /> : <FaUsers />}
                     {!collapse && <span>Manage Users</span>}
                   </Link>
                 </li>
@@ -473,7 +491,7 @@ const Dashboard = () => {
                     className="flex items-center gap-2"
                   >
                     {collapse ? (
-                      <HiOutlineChatAlt2 size={28} />
+                      <HiOutlineChatAlt2 size={20} />
                     ) : (
                       <HiOutlineChatAlt2 />
                     )}
@@ -485,26 +503,21 @@ const Dashboard = () => {
             <div className="divider bg-white w-full h-[1px]" />
             <li className="hover:bg-gray-700 rounded-lg p-2 transition">
               <Link to="/" className="flex items-center gap-2">
-                {collapse ? <FaHome size={28} /> : <FaHome />}
+                {collapse ? <FaHome size={20} /> : <FaHome />}
                 {!collapse && <span>Home</span>}
               </Link>
             </li>
             <li className="hover:bg-gray-700 rounded-lg p-2 transition">
               <Link to="/scholarships" className="flex items-center gap-2">
-                {collapse ? <IoSchool size={28} /> : <IoSchool />}
+                {collapse ? <IoSchool size={20} /> : <IoSchool />}
                 {!collapse && <span>Scholarships</span>}
               </Link>
             </li>
-            <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-              <Link to="/dashboard" className="flex items-center gap-2">
-                {collapse ? <FaUniversity size={28} /> : <FaUniversity />}
-                {!collapse && <span>Universities</span>}
-              </Link>
-            </li>
+
             <li className="hover:bg-gray-700 rounded-lg p-2 transition">
               <Link to="/dashboard" className="flex items-center gap-2">
                 {collapse ? (
-                  <BiSolidUserDetail size={28} />
+                  <BiSolidUserDetail size={20} />
                 ) : (
                   <BiSolidUserDetail />
                 )}
@@ -513,7 +526,7 @@ const Dashboard = () => {
             </li>
             <li className="hover:bg-gray-700 rounded-lg p-2 transition">
               <Link to="/dashboard" className="flex items-center gap-2">
-                {collapse ? <MdWifiCalling3 size={28} /> : <MdWifiCalling3 />}
+                {collapse ? <MdWifiCalling3 size={20} /> : <MdWifiCalling3 />}
                 {!collapse && <span>Contact Us</span>}
               </Link>
             </li>

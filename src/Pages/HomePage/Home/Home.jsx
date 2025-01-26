@@ -1,3 +1,4 @@
+import ChooseUs from "../ChooseUs/ChooseUs";
 import Hero from "../Hero/Hero";
 import TopScholarShip from "../TopScholarship/TopScholarShip";
 
@@ -6,7 +7,7 @@ const Home = () => {
     <div>
       <Hero />
       <TopScholarShip />
-      {/* <ScholarshipDetail /> */}
+      <ChooseUs />
     </div>
   );
 };
