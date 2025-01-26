@@ -8,10 +8,10 @@ const NewsLetter = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (!e.target.email.value) {
-      return toast.error("Please input a email first");
+      return toast.error("Please input an email first");
     }
-    toast.success("Thanks for subscribe our newsletter");
-    e.target.reset(); // Fixed reset function to actually reset the form
+    toast.success("Thanks for subscribing to our newsletter");
+    e.target.reset();
   };
 
   return (
@@ -23,10 +23,10 @@ const NewsLetter = () => {
         } transition-all duration-300`}
       >
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-semibold mb-4">
+          <h2 className="text-2xl lg:text-4xl font-semibold mb-4">
             Stay Updated with EduBridge
           </h2>
-          <p className="text-lg mb-6">
+          <p className="text-base  md:text-xl mb-6">
             Never miss out on the latest scholarships, opportunities, and news.
             Subscribe to our newsletter and receive tailored recommendations
             directly to your inbox.
@@ -45,15 +45,15 @@ const NewsLetter = () => {
               />
               <button
                 type="submit"
-                className={`py-3 px-6 rounded-lg text-white hover:bg-blue-700 transition ${
+                className={`px-6 py-3 rounded-lg text-white hover:bg-blue-700 transition ${
                   isDarkMode ? "bg-blue-500" : "bg-blue-600"
                 }`}
               >
-                Subscribe Now
+                Subscribe
               </button>
             </div>
           </form>
-          <p className="mt-4 text-sm text-gray-200">
+          <p className="mt-4 text-xs sm:text-sm text-gray-200">
             We value your privacy. You can unsubscribe at any time, and we
             promise never to share your information.
           </p>
