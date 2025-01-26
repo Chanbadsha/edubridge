@@ -5,6 +5,7 @@ import useAuth from "../../Hooks/useAuth";
 import { Toaster } from "react-hot-toast";
 import useUserData from "../../Hooks/UsersData/useUserData";
 import Loader from "../../Components/Loader/Loader";
+import { Helmet } from "react-helmet-async";
 
 const MainLayout = () => {
   const { isDarkMode, loading } = useAuth();
@@ -15,6 +16,9 @@ const MainLayout = () => {
   }
   return (
     <div>
+      <Helmet>
+        <title>Edubrige || Home</title>
+      </Helmet>
       <HeaderNav />
       <Toaster
         toastOptions={{

@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import useUserData from "../../Hooks/UsersData/useUserData";
 import Loader from "../../Components/Loader/Loader";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 
 const HeaderNav = () => {
   // State for dark mode
@@ -87,6 +88,9 @@ const HeaderNav = () => {
         isDarkMode ? "backgroundBlack" : "backgroundLight"
       } text-${isDarkMode ? "textBlack" : "textLight"}`}
     >
+      <Helmet>
+        <title>Edubrige || Home</title>
+      </Helmet>
       <div className="navbar max-w-7xl mx-auto">
         <div className="navbar-start">
           <div className="dropdown">

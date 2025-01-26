@@ -17,6 +17,7 @@ import { BsCardChecklist } from "react-icons/bs";
 import { RiChatCheckLine } from "react-icons/ri";
 import useAuth from "../../../Hooks/useAuth";
 import useUserData from "../../../Hooks/UsersData/useUserData";
+import { Helmet } from "react-helmet-async";
 
 const Dashboard = () => {
   const [collapse, setCollapse] = useState(false);
@@ -61,6 +62,9 @@ const Dashboard = () => {
 
   return (
     <div className="min-h-screen  max-w-7xl mx-auto flex">
+      <Helmet>
+        <title>Edubrige || Dashboard</title>
+      </Helmet>
       {/* Left Section: Sidebar */}
       <div
         className={`bg-gray-900   text-white p-4 py-12 transition-all duration-300 shadow-lg ${
@@ -283,7 +287,7 @@ const Dashboard = () => {
                 </li>
 
                 <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                  <Link to="/dashboard" className="flex items-center gap-2">
+                  <Link to="/about" className="flex items-center gap-2">
                     {collapse ? (
                       <BiSolidUserDetail size={28} />
                     ) : (
@@ -293,7 +297,7 @@ const Dashboard = () => {
                   </Link>
                 </li>
                 <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-                  <Link to="/dashboard" className="flex items-center gap-2">
+                  <Link to="/contact" className="flex items-center gap-2">
                     {collapse ? (
                       <MdWifiCalling3 size={28} />
                     ) : (
@@ -515,7 +519,7 @@ const Dashboard = () => {
             </li>
 
             <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-              <Link to="/dashboard" className="flex items-center gap-2">
+              <Link to="/about" className="flex items-center gap-2">
                 {collapse ? (
                   <BiSolidUserDetail size={20} />
                 ) : (
@@ -525,7 +529,7 @@ const Dashboard = () => {
               </Link>
             </li>
             <li className="hover:bg-gray-700 rounded-lg p-2 transition">
-              <Link to="/dashboard" className="flex items-center gap-2">
+              <Link to="/contact" className="flex items-center gap-2">
                 {collapse ? <MdWifiCalling3 size={20} /> : <MdWifiCalling3 />}
                 {!collapse && <span>Contact Us</span>}
               </Link>

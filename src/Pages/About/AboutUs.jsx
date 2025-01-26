@@ -2,6 +2,7 @@ import img1 from "../../assets/blog/static04.jpg";
 import img2 from "../../assets/blog/static05.jpg";
 import img3 from "../../assets/blog/image.png";
 import useAuth from "../../Hooks/useAuth";
+import { Helmet } from "react-helmet-async";
 
 const AboutUs = () => {
   const { isDarkMode } = useAuth();

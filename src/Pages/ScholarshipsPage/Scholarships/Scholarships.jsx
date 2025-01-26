@@ -3,6 +3,7 @@ import ScholarshipCard from "../../../Shared/ScholarshipCard/ScholarshipCard";
 import useAuth from "../../../Hooks/useAuth";
 import useScholarship from "../../../Hooks/ScholarshipData/useScholarship";
 import Loader from "../../../Components/Loader/Loader";
+import { Helmet } from "react-helmet-async";
 
 const Scholarships = () => {
   const { isDarkMode, loading } = useAuth();
@@ -28,6 +29,9 @@ const Scholarships = () => {
         isDarkMode ? "bg-gray-900 text-textLight" : "bg-gray-200 text-textBlack"
       }`}
     >
+      <Helmet>
+        <title>Edubrige || Scholarships</title>
+      </Helmet>
       {/* Section Header */}
       <section className="text-center py-12 px-4">
         <h2

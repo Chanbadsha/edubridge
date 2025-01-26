@@ -3,6 +3,7 @@ import useAuth from "../../Hooks/useAuth";
 import { FaPhoneAlt, FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";
 import { IoIosTimer } from "react-icons/io";
+import { Helmet } from "react-helmet-async";
 
 const Contact = () => {
   const { isDarkMode } = useAuth();
@@ -41,6 +42,9 @@ const Contact = () => {
         isDarkMode ? "bg-gray-900 text-white" : "bg-gray-50 text-black"
       }`}
     >
+      <Helmet>
+        <title>Edubrige || Contact</title>
+      </Helmet>
       <div
         className={`container mx-auto py-16 px-8 ${
           isDarkMode ? "bg-gray-900" : "bg-gray-100"

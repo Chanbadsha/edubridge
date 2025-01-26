@@ -11,6 +11,7 @@ import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 const Hero = () => {
   const [sliderData, setSliderData] = useState([]);
@@ -22,6 +23,9 @@ const Hero = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Edubrige || Home</title>
+      </Helmet>
       <Swiper
         spaceBetween={30}
         centeredSlides={true}
