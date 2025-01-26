@@ -28,7 +28,7 @@ const MainLayout = () => {
       ></Toaster>
 
       <div
-        className={`mt-[82px] min-h-[calc(100vh-306px)] ${
+        className={`mt-[70px] lg:mt-[82px] min-h-[calc(100vh-306px)] ${
           isDarkMode
             ? "bg-gray-900 text-textBlack"
             : "bg-[#dcdde1] text-textLight"

@@ -113,7 +113,7 @@ const HeaderNav = () => {
               {navOptions}
             </ul>
           </div>
-          <a className="btn btn-ghost px-2 py-2 h-auto text-xl">
+          <Link to="/" className="btn btn-ghost px-2 py-2 h-auto text-xl">
             <div className="flex justify-center items-center gap-2">
               <img
                 className="w-12 hidden md:block rounded-full h-12"
@@ -128,7 +128,7 @@ const HeaderNav = () => {
                 EduBridge
               </h1>
             </div>
-          </a>
+          </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal space-x-2 px-1">{navOptions}</ul>

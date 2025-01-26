@@ -34,10 +34,17 @@ import UserApplicationFeedback from "../Pages/DashboardPage/SharedDashboard/Mana
 import AboutUs from "../Pages/About/AboutUs";
 import AboutPage from "../Pages/About/AboutPage";
 import ContactPage from "../Pages/ContactPage/ContactPage";
+import ScrollToTop from "../Components/ScrollToTop/ScrollToTop";
+import NotFoundPage from "../Pages/NotFoundPage/NotFoundPage";
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <MainLayout></MainLayout>,
+    element: (
+      <>
+        <ScrollToTop />
+        <MainLayout></MainLayout>
+      </>
+    ),
     children: [
       {
         path: "/",
@@ -88,6 +95,7 @@ const router = createBrowserRouter([
         element: <Register></Register>,
       },
     ],
+    errorElement: <NotFoundPage></NotFoundPage>,
   },
   {
     path: "/dashboard",
