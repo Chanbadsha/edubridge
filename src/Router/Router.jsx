@@ -31,6 +31,7 @@ import ManageUser from "../Pages/DashboardPage/SharedDashboard/ManageUser/Manage
 import ManageUserReview from "../Pages/DashboardPage/SharedDashboard/ManageUserReview/ManageUserReview";
 import ManageUserApplication from "../Pages/DashboardPage/SharedDashboard/ManageUserApplication/ManageUserApplication";
 import UserApplicationFeedback from "../Pages/DashboardPage/SharedDashboard/ManageUserApplication/UserApplicationFeedback";
+import AboutUs from "../Pages/About/AboutUs";
 const router = createBrowserRouter([
   {
     path: "/",
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
       {
         path: "scholarships",
         element: <Scholarships></Scholarships>,
+      },
+      {
+        path: "about",
+        element: <AboutUs></AboutUs>,
       },
       {
         path: "scholarship/:id",

@@ -3,9 +3,11 @@ import { Link, useParams } from "react-router-dom";
 import useAxiosPublic from "../../../Hooks/Axios/AxiosPublic/useAxiosPublic";
 import useAuth from "../../../Hooks/useAuth";
 import Loader from "../../../Components/Loader/Loader";
-import useScholarship from "../../../Hooks/ScholarshipData/useScholarship";
+
 import { GiOpenBook } from "react-icons/gi";
 import { BiSolidCategory } from "react-icons/bi";
+import useSingeScholarReview from "../../../Hooks/ReviewInfo/useSingeScholarReview";
+import useScholarship from "../../../Hooks/ScholarshipData/useScholarship";
 
 const ScholarshipDetail = () => {
   const { loading, isDarkMode } = useAuth();
@@ -13,6 +15,8 @@ const ScholarshipDetail = () => {
   const axiosPublic = useAxiosPublic();
   const [scholarshipData, setScholarshipData] = useState(null);
   const [loadingScholarship, setLoadingScholarship] = useState(true);
+  const [singleScholarshipReview, isLoading] = useSingeScholarReview(id);
+  const [scholarships] = useScholarship();
 
   useEffect(() => {
     const fetchScholarshipData = async () => {
@@ -29,9 +33,10 @@ const ScholarshipDetail = () => {
     fetchScholarshipData();
   }, [id, axiosPublic]);
 
-  if (loading || loadingScholarship) {
+  if (loading || loadingScholarship || isLoading) {
     return <Loader />;
   }
+  console.log(singleScholarshipReview);
 
   if (!scholarshipData) {
     return (
@@ -40,6 +45,10 @@ const ScholarshipDetail = () => {
       </div>
     );
   }
+
+  const sortedReview = singleScholarshipReview.sort(
+    (a, b) => b.rating - a.rating
+  );
 
   return (
     <div className="max-w-7xl mx-auto p-6">
@@ -239,6 +248,64 @@ const ScholarshipDetail = () => {
               🌟 Coming Soon
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* User Reviews Section */}
+      <div className="mt-16 flex-1  w-full ">
+        <h3 className="text-2xl font-bold w-full mb-6">
+          What our client's say
+        </h3>
+        <div className="grid w-full gap-4 px-6 grid-cols-1 lg:grid-cols-2">
+          {sortedReview.slice(0, 4).map((review) => (
+            <div
+              key={review.id}
+              className="flex w-full items-start mb-6 p-6 bg-gray-100 rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300"
+            >
+              <img
+                src={review.photo}
+                alt={`${review.reviewer}'s avatar`}
+                className="w-14 h-14 rounded-full object-cover mr-6"
+              />
+              <div className="flex-1">
+                <p className="text-xl font-semibold text-gray-800">
+                  {review.reviewer}
+                </p>
+
+                {/* Star Rating */}
+                <div className="flex items-center mt-2">
+                  {Array.from({ length: 5 }, (_, index) => {
+                    const fullStar = index < Math.floor(review.rating);
+                    const halfStar =
+                      index === Math.floor(review.rating) &&
+                      review.rating % 1 >= 0.5;
+
+                    return (
+                      <svg
+                        key={index}
+                        className={`w-5 h-5 ${
+                          fullStar
+                            ? "text-yellow-500"
+                            : halfStar
+                            ? "text-yellow-300"
+                            : "text-gray-300"
+                        }`}
+                        fill="currentColor"
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                      >
+                        <path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
+                      </svg>
+                    );
+                  })}
+                </div>
+
+                <p className="text-gray-600 mt-2">{review.reviewComment}</p>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </div>
