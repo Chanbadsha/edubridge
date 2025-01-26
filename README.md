@@ -91,4 +91,4 @@ To get started with the project locally, follow the steps below.
 ### 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/edubridge.git
+git clone https://github.com/chanbadsha/edubridge.git
