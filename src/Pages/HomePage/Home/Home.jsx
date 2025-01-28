@@ -4,6 +4,7 @@ import NewsLetter from "../../About/NewsLetter";
 import ChooseUs from "../ChooseUs/ChooseUs";
 import Hero from "../Hero/Hero";
 import TopScholarShip from "../TopScholarship/TopScholarShip";
+import Contact from "../../ContactPage/Contact";
 
 const Home = () => {
   return (
@@ -15,6 +16,7 @@ const Home = () => {
       <TopScholarShip />
       <ChooseUs />
       <AboutUs />
+      <Contact />
       <NewsLetter />
     </div>
   );
