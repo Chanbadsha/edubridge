@@ -26,7 +26,6 @@ const Login = () => {
     password: "",
   });
 
- 
 
   const {
     register,
@@ -80,6 +79,12 @@ const Login = () => {
       });
   };
 
+   {/* Function to show toast for unused buttons */}
+const handleUnusedLogin = (provider) => {
+  toast.error(`Login with ${provider} is not available right now.`);
+};
+
+
   // Function to autofill demo credentials
   const fillDemoCredentials = async(role) => {
     
@@ -97,9 +102,9 @@ const Login = () => {
         email = "user@demo.com";
         password = "User123";
     }
-    await setValue("email", email);
-   await setValue("password", password);
-   await setDemoCredentials({ email, password });
+     setValue("email", email);
+    setValue("password", password);
+ setDemoCredentials({ email, password });
   };
 
   return (
@@ -137,7 +142,7 @@ const Login = () => {
                 <input
                   type="email"
                   placeholder="Enter your email"
-                  className="input input-bordered w-full rounded-lg"
+                  className="input text-black input-bordered w-full rounded-lg"
                   {...register("email", { required: "Email is required" })}
                 />
                 {errors.email && (
@@ -152,7 +157,7 @@ const Login = () => {
                 <input
                   type="password"
                   placeholder="Enter your password"
-                  className="input input-bordered w-full rounded-lg"
+                  className="input text-black input-bordered w-full rounded-lg"
                   {...register("password", {
                     required: "Password is required",
                     minLength: { value: 6, message: "Must be at least 6 characters" },
@@ -210,24 +215,55 @@ const Login = () => {
               </div>
             </form>
 
-            {/* Social Login */}
-            <div className="flex flex-col items-center mt-6">
-              <div className="divider text-sm text-gray-500">OR</div>
-              <div className="flex justify-center space-x-4">
-                <button onClick={handleGoogleLogin} className="btn btn-outline rounded-full">
-                  <FaGoogle size={20} />
-                </button>
-                <button className="btn btn-outline rounded-full">
-                  <FaFacebook size={20} />
-                </button>
-                <button className="btn btn-outline rounded-full">
-                  <FaGithub size={20} />
-                </button>
-                <button className="btn btn-outline rounded-full">
-                  <FaTwitter size={20} />
-                </button>
-              </div>
-            </div>
+    {/* Social Login */}
+<div className="flex flex-col items-center mt-6">
+  <div className={`divider text-sm ${isDarkMode ? "text-gray-400" : "text-gray-600"}`}>
+    OR
+  </div>
+  <div className="flex justify-center space-x-4">
+    <button
+      onClick={handleGoogleLogin}
+      className={`btn rounded-full transition duration-300 ${
+        isDarkMode
+          ? "bg-gray-800 text-white hover:bg-gray-700"
+          : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+      }`}
+    >
+      <FaGoogle size={20} />
+    </button>
+    <button
+      onClick={() => handleUnusedLogin("Facebook")}
+      className={`btn rounded-full transition duration-300 ${
+        isDarkMode
+          ? "bg-blue-700 text-white hover:bg-blue-600"
+          : "bg-blue-200 text-blue-700 hover:bg-blue-300"
+      }`}
+    >
+      <FaFacebook size={20} />
+    </button>
+    <button
+      onClick={() => handleUnusedLogin("GitHub")}
+      className={`btn rounded-full transition duration-300 ${
+        isDarkMode
+          ? "bg-gray-700 text-white hover:bg-gray-600"
+          : "bg-gray-200 text-gray-700 hover:bg-gray-300"
+      }`}
+    >
+      <FaGithub size={20} />
+    </button>
+    <button
+      onClick={() => handleUnusedLogin("Twitter")}
+      className={`btn rounded-full transition duration-300 ${
+        isDarkMode
+          ? "bg-blue-500 text-white hover:bg-blue-400"
+          : "bg-blue-200 text-blue-600 hover:bg-blue-300"
+      }`}
+    >
+      <FaTwitter size={20} />
+    </button>
+  </div>
+</div>
+
           </div>
         </div>
       </div>

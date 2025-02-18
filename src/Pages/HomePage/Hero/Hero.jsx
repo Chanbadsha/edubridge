@@ -21,6 +21,8 @@ const Hero = () => {
     });
   }, []);
 
+  
+
   return (
     <div>
       <Helmet>
