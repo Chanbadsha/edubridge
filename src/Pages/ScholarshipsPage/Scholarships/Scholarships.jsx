@@ -13,7 +13,9 @@ const Scholarships = () => {
   const [scholarships] = useScholarship();
 
   const [searchQuery, setSearchQuery] = useState("");
+  const [sortType, setSortType] = useState(""); // Sorting state
 
+  // Filtered Scholarships
   const filteredScholarships = scholarships.filter((scholarship) => {
     const query = searchQuery.toLowerCase();
     return (
@@ -23,6 +25,17 @@ const Scholarships = () => {
     );
   });
 
+  // Sorting Functionality
+  const sortedScholarships = [...filteredScholarships].sort((a, b) => {
+    if (sortType === "latest_post") {
+      return new Date(b.scholarship_post_date) - new Date(a.scholarship_post_date);
+    }
+    if (sortType === "earliest_deadline") {
+      return new Date(a.application_deadline) - new Date(b.application_deadline);
+    }
+    return 0;
+  });
+
   return (
     <div
       className={`${
@@ -30,8 +43,9 @@ const Scholarships = () => {
       }`}
     >
       <Helmet>
-        <title>Edubrige || Scholarships</title>
+        <title>EduBridge || Scholarships</title>
       </Helmet>
+
       {/* Section Header */}
       <section className="text-center py-12 px-4">
         <h2
@@ -53,15 +67,16 @@ const Scholarships = () => {
         </p>
       </section>
 
-      {/* Search Bar */}
-      <section className="text-center mb-8 px-4">
-        <div className="max-w-4xl mx-auto flex items-center gap-4">
+      {/* Search & Sort Section */}
+      <section className="mb-8 px-4">
+        <div className="max-w-6xl mx-auto flex flex-wrap items-center gap-4">
+          {/* Search Input */}
           <input
             type="text"
             placeholder="Search by Scholarship Name, University, or Degree"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className={`w-full px-4 py-2 border rounded-lg text-lg ${
+            className={`flex-grow px-4 py-2 border rounded-lg text-lg ${
               isDarkMode
                 ? "bg-gray-800 text-gray-200 border-gray-600"
                 : "bg-white text-gray-700 border-gray-300"
@@ -73,15 +88,33 @@ const Scholarships = () => {
           >
             Clear
           </button>
+
+          {/* Sorting Dropdown */}
+          <select
+            onChange={(e) => setSortType(e.target.value)}
+            className={`px-4 py-2 border rounded-lg text-lg ${
+              isDarkMode
+                ? "bg-gray-800 text-gray-200 border-gray-600"
+                : "bg-white text-gray-700 border-gray-300"
+            } focus:outline-none focus:ring-2 focus:ring-blue-400`}
+          >
+            <option value="">Sort By</option>
+            <option value="latest_post">Latest Post Date</option>
+            <option value="earliest_deadline">Earliest Deadline</option>
+          </select>
         </div>
       </section>
 
-      {/* Card Section */}
-      <section className="py-10 px-4">
-        {filteredScholarships.length > 0 ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3  container mx-auto">
-            {filteredScholarships.map((scholarship) => (
-              <ScholarshipCard key={scholarship.id} scholarship={scholarship} />
+      {/* Scholarship Cards */}
+      <section className="lg:py-6 px-4">
+        {sortedScholarships.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 container mx-auto">
+            {sortedScholarships.map((scholarship) => (
+              <ScholarshipCard
+                key={scholarship.id}
+                scholarship={scholarship}
+                className="min-h-[350px] flex flex-col"
+              />
             ))}
           </div>
         ) : (
