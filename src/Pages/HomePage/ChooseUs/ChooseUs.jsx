@@ -128,7 +128,7 @@ const ChooseUs = () => {
 
           {/* Stats Section */}
           {/* <div className="bg-blue-600 shadow py-12 mt-10">
-            <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-white">
+            <div className="container mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 text-white">
               {stats.map((stat, index) => (
                 <div
                   key={index}

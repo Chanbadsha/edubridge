@@ -22,8 +22,8 @@ const HeaderNav = () => {
   const [usersInfo] = useUserData();
 
   const NavLinkStyles = isDarkMode
-    ? "text-textBlack font-bold hover:text-accentLight text-[17px]  bg-backgroundBlack"
-    : "text-textLight font-bold hover:text-accentLight hover:bg-transparent text-[17px] bg-backgroundLight";
+    ? "text-textBlack font-bold hover:text-accentLight xl:text-[17px]  bg-backgroundBlack"
+    : "text-textLight font-bold hover:text-accentLight hover:bg-transparent xl:text-[17px] bg-backgroundLight";
 
   const navOptions = (
     <>
@@ -91,7 +91,7 @@ const HeaderNav = () => {
       <Helmet>
         <title>Edubrige || Home</title>
       </Helmet>
-      <div className="navbar max-w-7xl mx-auto">
+      <div className="navbar container mx-auto">
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -135,7 +135,7 @@ const HeaderNav = () => {
           </Link>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal space-x-2 px-1">{navOptions}</ul>
+          <ul className="menu menu-horizontal space-x-2 px-1 ">{navOptions}</ul>
         </div>
         <div className="navbar-end space-x-4 items-center">
           {/* Theme Controller */}

@@ -28,8 +28,8 @@ const TopScholarShip = () => {
       </div>
 
       {/* Section Body */}
-      <div className="grid px-4 gap-6 py-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl mx-auto">
-        {sortedScholarships.slice(0, 6).map((scholarship) => (
+      <div className="grid px-4 gap-3 py-8 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 container mx-auto">
+        {sortedScholarships.slice(0, 8).map((scholarship) => (
           <ScholarshipCard key={scholarship.id} scholarship={scholarship} />
         ))}
       </div>

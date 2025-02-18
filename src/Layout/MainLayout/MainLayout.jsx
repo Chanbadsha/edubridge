@@ -40,7 +40,7 @@ const MainLayout = () => {
       >
         <Outlet />
       </div>
-      <Footer />
+{!loading && <Footer />}
     </div>
   );
 };

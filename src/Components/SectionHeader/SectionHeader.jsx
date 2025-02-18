@@ -10,7 +10,7 @@ const SectionHeader = ({ title, subtitle }) => {
         isDarkMode ? "bg-gray-900 text-gray-100" : "bg-gray-100 text-gray-900"
       }`}
     >
-      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+      <div className="container mx-auto py-12 px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
         {/* Left Side */}
         <div className="w-full md:w-1/2 text-center md:text-left">
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold leading-snug">

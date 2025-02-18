@@ -81,7 +81,7 @@ const Login = () => {
       {/* Login Card */}
       <div
         style={{ backgroundImage: `url(${bgImg})` }}
-        className="relative bg-opacity-80 z-10 hero max-w-7xl w-full shadow-lg lg:rounded-lg"
+        className="relative bg-opacity-80 z-10 hero container w-full shadow-lg lg:rounded-lg"
       >
         <div className="hero-content flex-col lg:flex-row-reverse">
           {/* Lottie Animation */}
@@ -176,7 +176,7 @@ const Login = () => {
               </div>
 
               {/* Confirm Password */}
-              <div className="form-control">
+              {/* <div className="form-control">
                 <label className="label">
                   <span
                     className={`label-text  font-medium ${
@@ -192,7 +192,7 @@ const Login = () => {
                   className="input text-textLight input-bordered w-full rounded-lg focus:ring-2 focus:ring-blue-500"
                   {...register("confirmPassword", { required: true })}
                 />
-              </div>
+              </div> */}
 
               {/* Register Button */}
               <div className="form-control mt-6">

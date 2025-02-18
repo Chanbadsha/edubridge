@@ -36,6 +36,7 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const onSubmit = async (data) => {
+   
     const { photoURL, ...newUserInfo } = data || {};
     const imageFile = { image: photoURL[0] };
 
@@ -68,10 +69,12 @@ const Register = () => {
           );
         })
         .catch((error) => {
+          console.log(error)
           setLoading(false);
           toast.error(error.message);
         });
     }
+  
   };
 
   // Social Login
@@ -111,7 +114,7 @@ const Register = () => {
       {/* Login Card */}
       <div
         style={{ backgroundImage: `url(${bgImg})` }}
-        className="relative bg-opacity-80 z-10 hero max-w-7xl w-full shadow-lg lg:rounded-lg"
+        className="relative bg-opacity-80 z-10 hero container w-full shadow-lg lg:rounded-lg"
       >
         <div className="hero-content flex-col lg:flex-row-reverse">
           {/* Lottie Animation */}

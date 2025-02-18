@@ -5,7 +5,7 @@ import {
   FaClipboardList,
   FaHome,
   FaPlusCircle,
-  FaUniversity,
+ 
   FaUser,
   FaUsers,
 } from "react-icons/fa";
@@ -61,7 +61,7 @@ const Dashboard = () => {
   }, [usersInfo]);
 
   return (
-    <div className="min-h-screen  max-w-7xl mx-auto flex">
+    <div className="min-h-screen  container mx-auto flex">
       <Helmet>
         <title>Edubrige || Dashboard</title>
       </Helmet>

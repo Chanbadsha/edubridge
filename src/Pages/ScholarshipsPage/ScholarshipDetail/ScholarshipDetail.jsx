@@ -57,7 +57,7 @@ const ScholarshipDetail = () => {
   const topScholarShip = scholarships.sort((a, b) => b.rating - a.rating);
 
   return (
-    <div className="max-w-7xl mx-auto p-6">
+    <div className="container mx-auto p-6">
       {/* University Image */}
       <div className="relative w-full overflow-hidden rounded-xl shadow-lg">
         <img

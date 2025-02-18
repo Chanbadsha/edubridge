@@ -68,7 +68,7 @@ return (
         </div>
         <div className="flex items-center gap-2">
           <BsCalendar2DateFill />
-          <span>Deadline: {scholarship.application_deadline}</span>
+          <span className="text-xs">Deadline: {scholarship.application_deadline}</span>
         </div>
       </div>
 

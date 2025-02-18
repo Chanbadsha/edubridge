@@ -10,7 +10,7 @@ const DashboardHeader = ({
     <header
       className={`${bgColor} text-white py-16 px-4 sm:py-20 sm:px-6 lg:py-24 relative overflow-hidden`}
     >
-      <div className="max-w-7xl mx-auto text-center relative z-10">
+      <div className="container mx-auto text-center relative z-10">
         <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-4 transition duration-300 ease-in-out transform hover:scale-105 hover:text-yellow-300">
           {title}
         </h1>

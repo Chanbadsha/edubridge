@@ -13,7 +13,7 @@ const AboutUs = () => {
         isDarkMode ? "bg-gray-900 text-gray-100" : "bg-gray-50 text-gray-800"
       }`}
     >
-      <div className="max-w-7xl px-4 mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="container px-4 mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Image Section */}
         <section className="lg:col-span-5 flex gap-4">
           <div className="space-y-4">

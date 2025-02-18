@@ -44,7 +44,7 @@ const Payment = () => {
 
   return (
     <div className="bg-gray-50 text-gray-800 min-h-[calc(100vh-306px)] py-12">
-      <div className="max-w-7xl mx-auto text-center px-6">
+      <div className="container mx-auto text-center px-6">
         {/* Page Header */}
         <h1
           className="text-4xl font-extrabold text-gray-800 mb-4"
