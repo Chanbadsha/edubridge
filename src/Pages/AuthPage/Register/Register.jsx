@@ -9,6 +9,7 @@ import Loader from "../../../Components/Loader/Loader";
 import toast from "react-hot-toast";
 import useAxiosPublic from "../../../Hooks/Axios/AxiosPublic/useAxiosPublic";
 import Swal from "sweetalert2";
+import { Helmet } from "react-helmet-async";
 const Register = () => {
   const {
     isDarkMode,
@@ -103,6 +104,10 @@ const Register = () => {
   };
 
   return (
+    <>
+     <Helmet>
+          <title>Edubrige || Register</title>
+        </Helmet>
     <div
       className={`relative py-12 min-h-[calc(100vh-306px)] flex justify-center items-center ${
         isDarkMode ? "bg-gray-900" : "bg-backgroundLight"
@@ -362,6 +367,7 @@ const Register = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

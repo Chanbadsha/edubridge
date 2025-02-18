@@ -10,6 +10,7 @@ import Loader from "../../../Components/Loader/Loader";
 import useAxiosPublic from "../../../Hooks/Axios/AxiosPublic/useAxiosPublic";
 import avatar from "../../../assets/Logo/profile.png";
 import { useState } from "react";
+import { Helmet } from "react-helmet-async";
 
 const Login = () => {
   const { isDarkMode, googleLogin, setLoading, loading, loginUser } = useAuth();
@@ -108,6 +109,10 @@ const handleUnusedLogin = (provider) => {
   };
 
   return (
+    <>
+<Helmet>
+  <title>Edubrige || Login</title>
+</Helmet>
     <div
       className={`relative py-12 min-h-[calc(100vh-306px)] flex justify-center items-center ${
         isDarkMode ? "bg-gray-900" : "bg-backgroundLight"
@@ -268,6 +273,7 @@ const handleUnusedLogin = (provider) => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 
