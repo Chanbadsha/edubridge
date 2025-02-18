@@ -10,7 +10,7 @@ const DashboardLayout = () => {
   return (
     <div className={`${isDarkMode ? "bg-gray-900 " : "bg-backgroundLight"}`}>
       <Toaster></Toaster>
-      <Dashboard></Dashboard>;
+      <Dashboard></Dashboard>
     </div>
   );
 };

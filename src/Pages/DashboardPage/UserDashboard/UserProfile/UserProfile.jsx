@@ -78,14 +78,14 @@ const UserProfile = () => {
         </section>
 
         {/* Footer Section */}
-        <footer className="mt-6 text-center text-gray-600">
+        {/* <footer className="mt-6 text-center text-gray-600">
           <button
             onClick={userLogOut}
             className="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600 transition duration-300"
           >
             Logout
           </button>
-        </footer>
+        </footer> */}
       </div>
     </div>
   );
